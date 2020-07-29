@@ -1,0 +1,11 @@
+---
+kind: "ExternalDB"
+apiVersion: "entando.org/v1"
+metadata:
+  name: "my-external-db"
+spec:
+  dbms: "postgresql"
+  host: "10.1.1.65"
+  port: 5432
+  databaseName: "testdb"
+  secretName: "test-secret"
