@@ -31,3 +31,4 @@ echo "File \"$D/manifest\" copied"
 tar cfz "$D/qs/custom-resources.tar.gz" "$D/crd"
 echo "File \"$D/crd\" built"
 
+echo "# Distribution files for the original quickstart documentaton" > "$D/qs/QS_README.md"
