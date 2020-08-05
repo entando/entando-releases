@@ -24,7 +24,7 @@ metadata:
 apiVersion: v1
 data:
   ca.crt: >-
-    
+
 kind: Secret
 metadata:
   name: entando-ca-cert-secret
@@ -35,9 +35,9 @@ type: Opaque
 apiVersion: v1
 data:
   tls.crt: >-
-    
+
   tls.key: >-
-    
+
 kind: Secret
 metadata:
   name: entando-tls-secret
@@ -318,7 +318,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.serviceAccountName
             - name: ENTANDO_DEFAULT_ROUTING_SUFFIX
-              value: "192.168.64.25"
+              value: "192.168.64.25.nip.io"
             - name: ENTANDO_DISABLE_KEYCLOAK_SSL_REQUIREMENT
               value: "true"
             - name: ENTANDO_DOCKER_IMAGE_ORG_FALLBACK
