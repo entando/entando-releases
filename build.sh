@@ -5,6 +5,9 @@ cd "$DIR"
 . ./manifest
 . .wd/scripts/_base.sh
 
+rm -rf ./dist
+mkdir ./dist
+
 $S/init.sh force
 $S/gen.sh force
 
