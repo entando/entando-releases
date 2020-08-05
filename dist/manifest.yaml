@@ -1,7 +1,7 @@
 entando: 
-  main: "v6.2.0-sprint6-rc"
+  main: "v6.2.0"
   custom_model: "v6.1.5"
-  quickstart: "v6.2.0-sprint6-rc"
+  quickstart: "v6.2.0"
 
 dependencies:
   nvm:
@@ -14,8 +14,8 @@ dependencies:
       req_ver: "6.9.1"
       def_ver: "6.9.1"
   generator_jhipster_entando:
-      req_ver: "v6.2.0-sprint6-rc"
-      def_ver: "v6.2.0-sprint6-rc"
+      req_ver: "v6.2.0"
+      def_ver: "v6.2.0"
   k3s:
       req_ver: "1.18.*"
       def_ver: "v1.18.6+k3s1"
