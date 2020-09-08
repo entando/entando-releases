@@ -2,6 +2,7 @@ entando:
   main: \"$ENTANDO_VERSION\"
   custom_model: \"$CUSTOM_MODEL_VERSION\"
   quickstart: \"$QUICKSTART_VERSION\"
+  entando_cli_version: \"$ENTANDO_CLI_VERSION\"
 
 dependencies:
   nvm:

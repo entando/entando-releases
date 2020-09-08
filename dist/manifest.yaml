@@ -2,6 +2,7 @@ entando:
   main: "v6.2.0"
   custom_model: "v6.1.5"
   quickstart: "v6.2.0"
+  entando_cli_version: "v6.2.0"
 
 dependencies:
   nvm:
