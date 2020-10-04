@@ -5,6 +5,9 @@ entando:
   entando_cli_version: \"$ENTANDO_CLI_VERSION\"
 
 dependencies:
+  jdk:
+      req_ver: \"$VER_JDK_REQ\"
+      def_ver: \"$VER_JDK_DEF\"
   nvm:
       req_ver: \"$VER_NVM_REQ\"
       def_ver: \"$VER_NVM_DEF\"
