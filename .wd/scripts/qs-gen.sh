@@ -15,7 +15,7 @@ set -e
 
 mkdir -p "$D/qs"
 
-cat "$D/entando-deployment-specs.yaml.tpl" \
+cat "$D/$DEPL_SPEC_YAML_FILE.tpl" \
   | sed "s/PLACEHOLDER_ENTANDO_NAMESPACE/$QS_NAMESPACE/" \
   | sed "s/PLACEHOLDER_ENTANDO_APPNAME/$QS_APPNAME/" \
   | sed "s/your\\.domain\\.suffix\\.com/$QS_ADDR/" \
