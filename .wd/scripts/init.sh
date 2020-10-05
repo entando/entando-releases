@@ -22,17 +22,23 @@ echo "> Found helm version $CURRENT_HELM_VERSION => OK"
 cd $T
 
 # REPOS -- CUSTOM MODEL
-
 git clone "$REPO_CUSTOM_MODEL_ADDR" "$REPO_CUSTOM_MODEL_DIR"
 cd "$REPO_CUSTOM_MODEL_DIR"
-git checkout -b "$REPO_CUSTOM_MODEL_TAG"
+git checkout -b "$REPO_CUSTOM_MODEL_TAG" "$REPO_CUSTOM_MODEL_TAG" || {
+  echo -e '/!\\\n/!\\ Unable to checkout the provided custom model version /!\\\n/!\\' 2>&1
+  exit 0
+}
 cd ..
 
 # REPOS -- QUICKSTART
 
 git clone "$REPO_QUICKSTART_ADDR" "$REPO_QUICKSTART_DIR"
 cd "$REPO_QUICKSTART_DIR"
-git checkout -b "$REPO_QUICKSTART_TAG"
+git checkout -b  "$REPO_QUICKSTART_TAG" "$REPO_QUICKSTART_TAG" || {
+  echo -e '/!\\\n/!\\ Unable to checkout the provided quickstart version /!\\\n/!\\' 2>&1
+  exit 0
+}
+
 [ ! -f values.yaml.tpl ] && cp values.yaml values.yaml.tpl
 cd ..
 
