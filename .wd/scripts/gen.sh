@@ -26,6 +26,7 @@ echo "> \"$D/crd\" built"
 
 # SPECIFICATION FOR OPENSHIFT
 cd "$T/$REPO_QUICKSTART_DIR"
+helm dependency update ./
 
 cat values.yaml.tpl \
   | sed "s/supportOpenshift:.*$/supportOpenshift: true/" \
