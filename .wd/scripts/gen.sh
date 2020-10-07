@@ -10,6 +10,7 @@ set -e
 [ "$1" == "force" ] && {
   [ -d "$D/crd" ] && rm -rf "$D/crd"
   [ -f "$D/$DEPL_SPEC_YAML_FILE.tpl" ] && rm "$D/$DEPL_SPEC_YAML_FILE.tpl"
+  [ -f "$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl" ] && rm "$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl"
   shift
 }
 
@@ -36,9 +37,9 @@ cat values.yaml.tpl \
 helm template "PLACEHOLDER_ENTANDO_APPNAME" --namespace="PLACEHOLDER_ENTANDO_NAMESPACE" . > "./$DEPL_SPEC_YAML_FILE"
 
 cd "$DIR/../.."
-mv "$T/$REPO_QUICKSTART_DIR/$DEPL_SPEC_YAML_FILE" "$D/$DEPL_SPEC_YAML_FILE.OKD.tpl"
+mv "$T/$REPO_QUICKSTART_DIR/$DEPL_SPEC_YAML_FILE" "$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl"
 
-echo "> \"$D/$DEPL_SPEC_YAML_FILE.OKD.tpl\" built"
+echo "> \"$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl\" built"
 
 # SPECIFICATION NON-OPENSHIFT
 cd "$T/$REPO_QUICKSTART_DIR"
