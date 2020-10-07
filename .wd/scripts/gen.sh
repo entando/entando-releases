@@ -31,7 +31,7 @@ helm dependency update ./
 
 cat values.yaml.tpl \
   | sed "s/supportOpenshift:.*$/supportOpenshift: true/" \
-  | sed "s/name:.*/name: ##ENTANDO_APPNAME##/" \
+  | sed "s/name:.*/name: PLACEHOLDER_ENTANDO_APPNAME/" \
   > values.yaml
 
 helm template "PLACEHOLDER_ENTANDO_APPNAME" --namespace="PLACEHOLDER_ENTANDO_NAMESPACE" . > "./$DEPL_SPEC_YAML_FILE"
