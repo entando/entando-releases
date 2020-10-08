@@ -20,3 +20,9 @@ cat "$D/$DEPL_SPEC_YAML_FILE.tpl" \
   | sed "s/PLACEHOLDER_ENTANDO_APPNAME/$QS_APPNAME/" \
   | sed "s/your\\.domain\\.suffix\\.com/$QS_ADDR/" \
   > "$D/qs/entando-okd3.yaml"
+
+cat "$D/$DEPL_SPEC_YAML_FILE.OKD4.tpl" \
+  | sed "s/PLACEHOLDER_ENTANDO_NAMESPACE/$QS_NAMESPACE/" \
+  | sed "s/PLACEHOLDER_ENTANDO_APPNAME/$QS_APPNAME/" \
+  | sed "s/your\\.domain\\.suffix\\.com/$QS_ADDR/" \
+  > "$D/qs/entando-okd4.yaml"

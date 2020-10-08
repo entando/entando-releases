@@ -11,6 +11,7 @@ set -e
   [ -d "$D/crd" ] && rm -rf "$D/crd"
   [ -f "$D/$DEPL_SPEC_YAML_FILE.tpl" ] && rm "$D/$DEPL_SPEC_YAML_FILE.tpl"
   [ -f "$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl" ] && rm "$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl"
+  [ -f "$D/$DEPL_SPEC_YAML_FILE.OKD4.tpl" ] && rm "$D/$DEPL_SPEC_YAML_FILE.OKD4.tpl"
   shift
 }
 
@@ -29,6 +30,7 @@ echo "> \"$D/crd\" built"
 cd "$T/$REPO_QUICKSTART_DIR"
 helm dependency update ./
 
+# BASE
 cat values.yaml.tpl \
   | sed "s/supportOpenshift:.*$/supportOpenshift: true/" \
   | sed "s/name:.*/name: PLACEHOLDER_ENTANDO_APPNAME/" \
@@ -36,10 +38,16 @@ cat values.yaml.tpl \
 
 helm template "PLACEHOLDER_ENTANDO_APPNAME" --namespace="PLACEHOLDER_ENTANDO_NAMESPACE" . > "./$DEPL_SPEC_YAML_FILE"
 
+# OKD3
 cd "$DIR/../.."
 mv "$T/$REPO_QUICKSTART_DIR/$DEPL_SPEC_YAML_FILE" "$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl"
 
 echo "> \"$D/$DEPL_SPEC_YAML_FILE.OKD3.tpl\" built"
+
+# OKD4
+mv "$T/$REPO_QUICKSTART_DIR/$DEPL_SPEC_YAML_FILE" "$D/$DEPL_SPEC_YAML_FILE.OKD4.tpl"
+
+echo "> \"$D/$DEPL_SPEC_YAML_FILE.OKD4.tpl\" built"
 
 # SPECIFICATION NON-OPENSHIFT
 cd "$T/$REPO_QUICKSTART_DIR"
