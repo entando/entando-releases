@@ -1,8 +1,8 @@
 entando: 
-  main: "v6.2.0"
-  custom_model: "v6.1.5"
-  quickstart: "v6.2.0"
-  entando_cli_version: "v6.2.0"
+  main: "v6.2.1-sprint10"
+  custom_model: "v6.2.3"
+  quickstart: "v6.2.1-sprint10"
+  entando_cli_version: "v6.2.1-sprint10"
 
 dependencies:
   jdk:
@@ -18,8 +18,8 @@ dependencies:
       req_ver: "6.9.1"
       def_ver: "6.9.1"
   generator_jhipster_entando:
-      req_ver: "v6.2.0"
-      def_ver: "v6.2.0"
+      req_ver: "v6.2.1-sprint10"
+      def_ver: "v6.2.1-sprint10"
   k3s:
       req_ver: "1.18.*"
       def_ver: "v1.18.6+k3s1"
