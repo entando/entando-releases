@@ -5,6 +5,9 @@ entando:
   entando_cli_version: "v6.2.0"
 
 dependencies:
+  jdk:
+      req_ver: "1.8.>=0.265"
+      def_ver: "1.8.0.265"
   nvm:
       req_ver: "*.*.*"
       def_ver: "v0.35.3"
