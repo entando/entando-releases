@@ -62,21 +62,21 @@ data:
   entando-de-app-wildfly: >-
     {"version":"6.2.2","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-app-controller: >-
-    {"version":"6.2.3","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.4","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
     {"version":"6.1.2","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-cluster-infrastructure-controller: >-
-    {"version":"6.2.2","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.3","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-composite-app-controller: >-
-    {"version":"6.2.2","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.3","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-controller-coordinator: >-
-    {"version":"6.2.9","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.10","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-dbjob: >-
     {"version":"6.1.4","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-keycloak-controller: >-
-    {"version":"6.2.8","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.9","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-plugin-controller: >-
-    {"version":"6.2.2","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.3","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-service: >-
     {"version":"6.2.0","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-keycloak: >-
@@ -175,6 +175,12 @@ rules:
       - get
       - delete
       - update
+  - apiGroups:
+      - ""
+    resources:
+      - "pods/exec"
+    verbs:
+      - "get"
   - apiGroups:
       - ""
     resources:
@@ -297,7 +303,7 @@ metadata:
   namespace: PLACEHOLDER_ENTANDO_NAMESPACE
   labels:
     draft: draft-app
-    chart: "operator-6.2.10"
+    chart: "operator-6.2.12"
 spec:
   replicas: 1
   selector:
@@ -314,7 +320,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "docker.io/entando/entando-k8s-controller-coordinator:6.2.10"
+          image: "docker.io/entando/entando-k8s-controller-coordinator:6.2.12"
           imagePullPolicy: Always
           volumeMounts:
           env:
@@ -322,6 +328,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.serviceAccountName
+            - name: ENTANDO_ASSUME_EXTERNAL_HTTPS_PROVIDER
+              value: "false"
             - name: ENTANDO_DEFAULT_ROUTING_SUFFIX
               value: "your.domain.suffix.com"
             - name: ENTANDO_DISABLE_KEYCLOAK_SSL_REQUIREMENT
@@ -332,6 +340,8 @@ spec:
               value: "6.0.0"
             - name: ENTANDO_DOCKER_REGISTRY_FALLBACK
               value: "docker.io"
+            - name: ENTANDO_K8S_OPERATOR_DISABLE_PVC_GARBAGE_COLLECTION
+              value: "false"
             - name: ENTANDO_K8S_OPERATOR_FORCE_DB_PASSWORD_RESET
               value: "true"
             - name: ENTANDO_K8S_OPERATOR_IMPOSE_DEFAULT_LIMITS
@@ -404,4 +414,5 @@ spec:
         standardServerImage: wildfly
         ingressPath: /entando-de-app
         parameters:
-          SPRING_PROFILES_ACTIVE: "default,swagger"
+          - name: SPRING_PROFILES_ACTIVE
+            value: "default,swagger"
