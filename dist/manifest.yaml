@@ -1,7 +1,7 @@
 entando: 
-  main: "v6.3.0-sprint11"
+  main: "master"
   custom_model: "v6.2.4"
-  quickstart: "v6.3.0-sprint11"
+  quickstart: "master"
   entando_cli_version: "develop"
 
 dependencies:
@@ -18,8 +18,8 @@ dependencies:
       req_ver: "6.9.1"
       def_ver: "6.9.1"
   generator_jhipster_entando:
-      req_ver: "v6.3.0-sprint11"
-      def_ver: "v6.3.0-sprint11"
+      req_ver: "master"
+      def_ver: "master"
   k3s:
       req_ver: "1.18.*"
       def_ver: "v1.18.6+k3s1"
