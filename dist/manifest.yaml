@@ -1,25 +1,25 @@
 entando: 
-  main: "v6.2.0"
-  custom_model: "v6.1.5"
-  quickstart: "v6.2.0"
-  entando_cli_version: "v6.2.0"
+  main: "v6.3.0-sprint11"
+  custom_model: "v6.2.4"
+  quickstart: "v6.3.0-sprint11"
+  entando_cli_version: "v6.3.0-sprint11"
 
 dependencies:
   jdk:
-      req_ver: "1.8.>=0.265"
-      def_ver: "1.8.0.265"
+      req_ver: "11.0.>=8"
+      def_ver: "1.0.9"
   nvm:
       req_ver: "*.*.*"
       def_ver: "v0.35.3"
   node:
-      req_ver: "13.*.*"
-      def_ver: "v13.14"
+      req_ver: "12.18.>=4"
+      def_ver: "v12.18.4"
   jhipster:
       req_ver: "6.9.1"
       def_ver: "6.9.1"
   generator_jhipster_entando:
-      req_ver: "v6.2.0"
-      def_ver: "v6.2.0"
+      req_ver: "v6.3.0-sprint11"
+      def_ver: "v6.3.0-sprint11"
   k3s:
       req_ver: "1.18.*"
       def_ver: "v1.18.6+k3s1"

@@ -4,21 +4,21 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: entando-k8s-service
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 ---
 # Source: preview/charts/operator/templates/operator-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: entando-operator
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 ---
 # Source: preview/charts/operator/templates/plugin-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: entando-plugin
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 ---
 # Source: preview/charts/operator/templates/ca-cert-secret.yaml
 apiVersion: v1
@@ -26,7 +26,7 @@ data:
 kind: Secret
 metadata:
   name: entando-ca-cert-secret
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 type: Opaque
 ---
 # Source: preview/charts/operator/templates/tls-secret.yaml
@@ -39,7 +39,7 @@ data:
 kind: Secret
 metadata:
   name: entando-tls-secret
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 type: kubernetes.io/tls
 ---
 # Source: preview/charts/operator/templates/docker-image-info-configmap.yaml
@@ -47,7 +47,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: entando-docker-image-info
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 data:
   app-builder: >-
     {"version":"6.1.216","executable-type":"jvm","registry":"docker.io","organization":"entando"}
@@ -95,7 +95,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: entando-k8s-service
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 rules:
   - apiGroups:
       - entando.org
@@ -125,6 +125,13 @@ rules:
     verbs:
       - "*"
   - apiGroups:
+      - route.openshift.io
+    resources:
+      - "routes"
+      - "routes/custom-host"
+    verbs:
+      - "*"
+  - apiGroups:
       - ""
     resources:
       - secrets
@@ -151,7 +158,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: entando-operator
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 rules:
   - apiGroups:
       - entando.org
@@ -192,6 +199,13 @@ rules:
     verbs:
       - "*"
   - apiGroups:
+      - route.openshift.io
+    resources:
+      - "routes"
+      - "routes/custom-host"
+    verbs:
+      - "*"
+  - apiGroups:
       - ""
     resources:
       - namespaces
@@ -211,7 +225,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: entando-plugin
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 rules:
   - apiGroups:
       - entando.org
@@ -235,7 +249,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: entando-k8s-service-rolebinding
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -243,14 +257,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: entando-k8s-service
-    namespace: entando
+    namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 ---
 # Source: preview/charts/operator/templates/operator-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: entando-operator-rolebinding
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -258,14 +272,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: entando-operator
-    namespace: entando
+    namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 ---
 # Source: preview/charts/operator/templates/plugin-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: entando-plugin-rolebinding
-  namespace: entando
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -273,14 +287,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: entando-plugin
-    namespace: entando
+    namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 ---
 # Source: preview/charts/operator/templates/deployment.yaml
 apiVersion: "apps/v1"
 kind: Deployment
 metadata:
-  name: quickstart-operator
-  namespace: entando
+  name: PLACEHOLDER_ENTANDO_APPNAME-operator
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
   labels:
     draft: draft-app
     chart: "operator-6.2.10"
@@ -289,12 +303,12 @@ spec:
   selector:
     matchLabels:
       draft: draft-app
-      app: quickstart-operator
+      app: PLACEHOLDER_ENTANDO_APPNAME-operator
   template:
     metadata:
       labels:
         draft: draft-app
-        app: quickstart-operator
+        app: PLACEHOLDER_ENTANDO_APPNAME-operator
     spec:
       serviceAccountName: entando-operator
       volumes:
@@ -309,7 +323,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.serviceAccountName
             - name: ENTANDO_DEFAULT_ROUTING_SUFFIX
-              value: "192.168.64.25.nip.io"
+              value: "your.domain.suffix.com"
             - name: ENTANDO_DISABLE_KEYCLOAK_SSL_REQUIREMENT
               value: "true"
             - name: ENTANDO_DOCKER_IMAGE_ORG_FALLBACK
@@ -358,8 +372,8 @@ spec:
 kind: "EntandoCompositeApp"
 apiVersion: "entando.org/v1"
 metadata:
-  name: "quickstart-composite-app"
-  namespace: entando
+  name: "PLACEHOLDER_ENTANDO_APPNAME-composite-app"
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 entandoStatus:
   serverStatuses: {}
   entandoDeploymentPhase: "requested"
@@ -367,14 +381,14 @@ spec:
   components:
     - kind: "EntandoKeycloakServer"
       metadata:
-        name: "quickstart-kc"
+        name: "PLACEHOLDER_ENTANDO_APPNAME-kc"
       spec:
         dbms: none
         isDefault: true
         replicas: 1
     - kind: "EntandoClusterInfrastructure"
       metadata:
-        name: "quickstart-eci"
+        name: "PLACEHOLDER_ENTANDO_APPNAME-eci"
       spec:
         dbms: none
         replicas: 1
@@ -383,7 +397,7 @@ spec:
       metadata:
         annotations: {}
         labels: {}
-        name: "quickstart"
+        name: "PLACEHOLDER_ENTANDO_APPNAME"
       spec:
         dbms: none
         replicas: 1
