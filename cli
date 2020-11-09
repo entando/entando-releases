@@ -1,0 +1,2 @@
+#!/bin/bash
+source <(curl -L https://raw.githubusercontent.com/entando/entando-cli/quickstart/auto-install) "$@"
