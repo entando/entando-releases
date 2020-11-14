@@ -11,7 +11,7 @@ set -e
 
 reload_cfg
 
-sed "s/your\\.domain\\.suffix\\.com/$ADDR.nip.io/" "d/$DEPL_SPEC_YAML_FILE.tpl" > "d/$DEPL_SPEC_YAML_FILE"
+sed "s/PLACEHOLDER_ENTANDO_DOMAIN_SUFFIX/$ADDR.nip.io/" "d/$DEPL_SPEC_YAML_FILE.tpl" > "d/$DEPL_SPEC_YAML_FILE"
 
 echo "> Using address: $ADDR$COMM"
 echo "> Deploying.."
