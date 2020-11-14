@@ -317,7 +317,7 @@ spec:
             - name: ENTANDO_ASSUME_EXTERNAL_HTTPS_PROVIDER
               value: "false"
             - name: ENTANDO_DEFAULT_ROUTING_SUFFIX
-              value: "your.domain.suffix.com"
+              value: "PLACEHOLDER_ENTANDO_DOMAIN_SUFFIX"
             - name: ENTANDO_DISABLE_KEYCLOAK_SSL_REQUIREMENT
               value: "true"
             - name: ENTANDO_DOCKER_IMAGE_ORG_FALLBACK
@@ -382,7 +382,7 @@ spec:
         dbms: none
         isDefault: true
         replicas: 1
-        ingressHostName: PLACEHOLDER_ENTANDO_SINGLE_HOST_NAME
+        ingressHostName: PLACEHOLDER_ENTANDO_SINGLE_HOSTNAME
     - kind: "EntandoClusterInfrastructure"
       metadata:
         name: "PLACEHOLDER_ENTANDO_APPNAME-eci"
@@ -390,7 +390,7 @@ spec:
         dbms: none
         replicas: 1
         isDefault: true
-        ingressHostName: PLACEHOLDER_ENTANDO_SINGLE_HOST_NAME
+        ingressHostName: PLACEHOLDER_ENTANDO_SINGLE_HOSTNAME
     - kind: "EntandoApp"
       metadata:
         annotations: {}
@@ -401,4 +401,4 @@ spec:
         replicas: 1
         standardServerImage: wildfly
         ingressPath: /entando-de-app
-        ingressHostName: PLACEHOLDER_ENTANDO_SINGLE_HOST_NAME
+        ingressHostName: PLACEHOLDER_ENTANDO_SINGLE_HOSTNAME

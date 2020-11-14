@@ -41,7 +41,7 @@ spec:
           properties:
             host:
               type: string
-              pattern: '^([A-Za-z0-9-]{1,63}\.)+[[A-Za-z0-9-]{1,63}$'
+              pattern: '^([A-Za-z0-9-]{1,63}\.)*[[A-Za-z0-9-]{1,63}$'
             port:
               type: integer
             databaseName:

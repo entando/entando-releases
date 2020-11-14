@@ -36,7 +36,8 @@ cat values.yaml.tpl \
   | sed "s/supportOpenshift:.*$/supportOpenshift: true/" \
   | sed "s/name:.*/name: PLACEHOLDER_ENTANDO_APPNAME/" \
   | sed 's/#\([[:space:]]*singleHostName:*\)\:/\1:/' \
-  | sed 's/singleHostName:.*$/singleHostName: PLACEHOLDER_ENTANDO_SINGLE_HOST_NAME/' \
+  | sed 's/singleHostName:.*$/singleHostName: PLACEHOLDER_ENTANDO_SINGLE_HOSTNAME/' \
+  | sed "s/your\\.domain\\.suffix\\.com/PLACEHOLDER_ENTANDO_DOMAIN_SUFFIX/" \
   > values.yaml
 
 helm template "PLACEHOLDER_ENTANDO_APPNAME" --namespace="PLACEHOLDER_ENTANDO_NAMESPACE" . > "./$DEPL_SPEC_YAML_FILE"
@@ -64,7 +65,8 @@ cat values.yaml.tpl \
   | sed "s/supportOpenshift:.*$/supportOpenshift: false/" \
   | sed "s/name:.*/name: PLACEHOLDER_ENTANDO_APPNAME/" \
   | sed 's/#\([[:space:]]*singleHostName:*\)\:/\1:/' \
-  | sed 's/singleHostName:.*$/singleHostName: PLACEHOLDER_ENTANDO_SINGLE_HOST_NAME/' \
+  | sed 's/singleHostName:.*$/singleHostName: PLACEHOLDER_ENTANDO_SINGLE_HOSTNAME/' \
+  | sed "s/your\\.domain\\.suffix\\.com/PLACEHOLDER_ENTANDO_DOMAIN_SUFFIX/" \
   > values.yaml
 
 helm template "PLACEHOLDER_ENTANDO_APPNAME" --namespace="PLACEHOLDER_ENTANDO_NAMESPACE" ./ > "./$DEPL_SPEC_YAML_FILE"
