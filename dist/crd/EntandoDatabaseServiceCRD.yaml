@@ -54,4 +54,6 @@ spec:
               type: string
               pattern: '^(mysql|oracle|postgresql|none)$'
             jdbcParameters: {}
+            createDeployment:
+              type: boolean
         entandoStatus: {}
