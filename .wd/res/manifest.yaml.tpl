@@ -20,6 +20,9 @@ dependencies:
   generator_jhipster_entando:
       req_ver: \"$VER_GENERATOR_JHIPSTER_ENTANDO_REQ\"
       def_ver: \"$VER_GENERATOR_JHIPSTER_ENTANDO_DEF\"
+  entando_bundler:
+      req_ver: \"$VER_ENTANDO_BUNDLER_REQ\"
+      def_ver: \"$VER_ENTANDO_BUNDLER_DEF\"
   k3s:
       req_ver: \"$VER_K3S_REQ\"
       def_ver: \"$VER_K3S_DEF\"

@@ -11,7 +11,7 @@ spec:
   dbms: "postgresql"
   roles: []
   permissions: []
-  parameters: {}
+  environmentVariables: {}
   ingressPath: "/avatarPlugin"
   keycloakServerNamespace: "keycloak-namespace"
   keycloakServerName: "test-keycloak"

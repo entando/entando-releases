@@ -33,27 +33,62 @@ spec:
   scope: Namespaced
   validation:
     openAPIV3Schema:
+      type: object
       properties:
         spec:
           type: object
           properties:
-            imageName:
-              type: string
-            dbms:
-              type: string
-              pattern: '^(mysql|oracle|postgresql|embedded|none)$'
-            tlsSecretName:
-              type: string
-              pattern: '^([a-z])+([a-z0-9-\.])*[a-z0-9]$'
-            ingressHostName:
-              type: string
-              pattern: '^([A-Za-z0-9-]{1,63}\.)*[[A-Za-z0-9-]{1,63}$'
-            entandoImageVersion:
-              type: string
             replicas:
               type: integer
               minimum: 1
               maximum: 10
+            dbms:
+              type: string
+              pattern: '^(mysql|oracle|postgresql|embedded|none)$'
+            ingressHostName:
+              type: string
+              pattern: '^([A-Za-z0-9-]{1,63}\.)*[[A-Za-z0-9-]{1,63}$'
+            tlsSecretName:
+              type: string
+              pattern: '^([a-z])+([a-z0-9-\.])*[a-z0-9]$'
+            serviceAccountToUse:
+              type: string
+              pattern: '^([a-z])+([a-z0-9-\.])*[a-z0-9]$'
             parameters: {}
+            environmentVariables:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+                  valueFrom:
+                    type: object
+                    properties:
+                      configMapKeyRef: {}
+                      fieldRef: {}
+                      resourceFieldRef: {}
+                      secretKeyRef: {}
+            resourceRequirements:
+              type: object
+              properties:
+                storageRequest:
+                  type: string
+                storageLimit:
+                  type: string
+                memoryRequest:
+                  type: string
+                memoryLimit:
+                  type: string
+                cpuRequest:
+                  type: string
+                cpuLimit:
+                  type: string
+                fileUploadLimit:
+                  type: string
+            imageName:
+              type: string
         entandoStatus: {}
 
