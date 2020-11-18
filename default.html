@@ -1,2 +1,12 @@
-#!/bin/bash
-source <(curl -L https://raw.githubusercontent.com/entando/entando-cli/quickstart/hr/auto) "$@"
+if (
+ [[ -n $ZSH_EVAL_CONTEXT && $ZSH_EVAL_CONTEXT =~ :file$ ]] ||
+ [[ -n $KSH_VERSION && $(cd "$(dirname -- "$0")" &&
+    printf '%s' "${PWD%/}/")$(basename -- "$0") != "${.sh.file}" ]] ||
+ [[ -n $BASH_VERSION ]] && (return 0 2>/dev/null)
+); then
+  # SCRIPT WAS SOURCED
+  source /dev/stdin <<<"$(curl -L https://raw.githubusercontent.com/entando/entando-cli/quickstart/hr/auto)" "$@"
+else
+  # SCRIPT WAS NOT SOURCED
+  bash <(curl -L https://raw.githubusercontent.com/entando/entando-cli/quickstart/hr/auto) "$@"
+fi
