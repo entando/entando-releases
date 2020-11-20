@@ -1,0 +1,15 @@
+---
+kind: "EntandoApp"
+apiVersion: "entando.org/v1"
+metadata:
+  name: "test-entando"
+  namespace: "test-namespace"
+spec:
+  jeeServer: "wildfly"
+  dbms: "postgresql"
+  ingressHostName: "test-entando.192.168.1.9.nip.io"
+  tlsEnabled: false
+  entandoImageVersion: "5.2.0-SNAPSHOT"
+  replicas: 1
+  keycloakServerNamespace: "keycloak-namespace"
+  keycloakServerName: "test-keycloak"

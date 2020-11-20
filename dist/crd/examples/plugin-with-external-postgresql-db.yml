@@ -1,0 +1,18 @@
+---
+kind: "EntandoPlugin"
+apiVersion: "entando.org/v1"
+metadata:
+  name: "test-plugin-a"
+spec:
+  entandoAppName: "test-entando"
+  entandoAppNamespace: "test-namespace"
+  image: "entando/entando-avatar-plugin"
+  replicas: 1
+  dbms: "postgresql"
+  roles: []
+  permissions: []
+  environmentVariables: {}
+  ingressPath: "/avatarPlugin"
+  keycloakServerNamespace: "keycloak-namespace"
+  keycloakServerName: "test-keycloak"
+  healthCheckPath: "/management/health"
