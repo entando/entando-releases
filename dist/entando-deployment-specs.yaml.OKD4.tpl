@@ -40,7 +40,7 @@ data:
   entando-de-app-wildfly: >-
     {"version":"6.2.54","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-app-controller: >-
-    {"version":"6.2.10","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.11","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
     {"version":"6.1.3","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-cluster-infrastructure-controller: >-
@@ -237,6 +237,37 @@ rules:
       - delete
       - update
 ---
+# Source: preview/charts/operator/templates/pod-viewer-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-viewer
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - "list"
+      - "get"
+      - "watch"
+---
+# Source: preview/charts/operator/templates/default-pod-viewer-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-pod-viewer-rolebinding
+  namespace: PLACEHOLDER_ENTANDO_NAMESPACE
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: pod-viewer
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: PLACEHOLDER_ENTANDO_NAMESPACE
+---
 # Source: preview/charts/operator/templates/k8s-service-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -290,7 +321,7 @@ metadata:
   namespace: PLACEHOLDER_ENTANDO_NAMESPACE
   labels:
     draft: draft-app
-    chart: "operator-6.2.18"
+    chart: "operator-6.2.20"
 spec:
   replicas: 1
   selector:
@@ -307,7 +338,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "docker.io/entando/entando-k8s-controller-coordinator:6.2.18"
+          image: "docker.io/entando/entando-k8s-controller-coordinator:6.2.20"
           imagePullPolicy: Always
           volumeMounts:
           env:
