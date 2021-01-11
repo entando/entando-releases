@@ -28,15 +28,15 @@ metadata:
   namespace: PLACEHOLDER_ENTANDO_NAMESPACE
 data:
   app-builder: >-
-    {"version":"6.1.349","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.1.353","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-avatar-plugin: >-
     {"version":"6.0.5","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-component-manager: >-
-    {"version":"6.2.38","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.39","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-de-app-eap: >-
-    {"version":"6.3.23","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.3.25","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-de-app-wildfly: >-
-    {"version":"6.3.23","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.3.25","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-app-controller: >-
     {"version":"6.2.11","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
@@ -46,7 +46,7 @@ data:
   entando-k8s-composite-app-controller: >-
     {"version":"6.2.7","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-controller-coordinator: >-
-    {"version":"6.2.22","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.25","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-database-service-controller: >-
     {"version":"6.2.3","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-dbjob: >-
@@ -54,7 +54,7 @@ data:
   entando-k8s-keycloak-controller: >-
     {"version":"6.2.14","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-plugin-controller: >-
-    {"version":"6.2.8","executable-type":"jvm","registry":"docker.io","organization":"entando"}
+    {"version":"6.2.10","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-k8s-service: >-
     {"version":"6.2.2","executable-type":"jvm","registry":"docker.io","organization":"entando"}
   entando-keycloak: >-
@@ -307,7 +307,7 @@ metadata:
   namespace: PLACEHOLDER_ENTANDO_NAMESPACE
   labels:
     draft: draft-app
-    chart: "operator-6.2.25"
+    chart: "operator-6.2.26"
 spec:
   replicas: 1
   selector:
@@ -324,7 +324,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "docker.io/entando/entando-k8s-controller-coordinator:6.2.25"
+          image: "docker.io/entando/entando-k8s-controller-coordinator:6.2.26"
           imagePullPolicy: Always
           volumeMounts:
           env:

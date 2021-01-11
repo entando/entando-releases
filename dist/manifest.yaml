@@ -1,7 +1,7 @@
 entando: 
-  main: "v6.3.0-pr7"
+  main: "v6.3.0"
   custom_model: "v6.2.7"
-  quickstart: "v6.3.0-pr7"
+  quickstart: "v6.3.0"
   entando_cli_version: "v6.3.0"
 
 dependencies:
@@ -18,11 +18,11 @@ dependencies:
       req_ver: "6.9.1"
       def_ver: "6.9.1"
   generator_jhipster_entando:
-      req_ver: "v6.3.0-pr7"
-      def_ver: "v6.3.0-pr7"
+      req_ver: "v6.3.0"
+      def_ver: "v6.3.0"
   entando_bundler:
-      req_ver: "v6.3.0-pr7"
-      def_ver: "v6.3.0-pr7"
+      req_ver: "v6.3.0"
+      def_ver: "v6.3.0"
   k3s:
       req_ver: "1.18.*"
       def_ver: "v1.18.6+k3s1"
