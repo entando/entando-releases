@@ -5,8 +5,8 @@ if (
  [[ -n $BASH_VERSION ]] && (return 0 2>/dev/null)
 ); then
   # SCRIPT WAS SOURCED
-  source /dev/stdin <<<"$(curl -L https://raw.githubusercontent.com/entando/entando-cli/quickstart/auto-install)" "$@"
+  source /dev/stdin <<<"$(curl -L https://raw.githubusercontent.com/entando/entando-cli/source-for-auto-install/auto-install)" "$@"
 else
   # SCRIPT WAS NOT SOURCED
-  bash <(curl -L https://raw.githubusercontent.com/entando/entando-cli/quickstart/auto-install) "$@"
+  bash <(curl -L https://raw.githubusercontent.com/entando/entando-cli/source-for-auto-install/auto-install) "$@"
 fi
