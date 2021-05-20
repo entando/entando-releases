@@ -10,26 +10,29 @@ set -e
 rm -rf "$T"
 
 # PREREQ
-mkdir -p $T
+mkdir -p "$T"
 
-CURRENT_HELM_VERSION=$(helm version --client | sed 's/.*SemVer:"\([^"]*\)".*/\1/')
-[[ ! "$CURRENT_HELM_VERSION" =~ $REQUIRED_HELM_VERSION_REGEX ]] && echo "> FATAL: Found helm version $CURRENT_HELM_VERSION, required: $REQUIRED_HELM_VERSION_REGEX" 1>&2 && exit
-
-echo "> Found helm version $CURRENT_HELM_VERSION => OK"
-
+echo "> Found helm version $HELM_VERSION_MAJOR ($CURRENT_HELM_VERSION) $ => OK"
 
 # -- REPOS
-cd $T
 
-# REPOS -- CUSTOM MODEL
-clone "$REPO_CUSTOM_MODEL_ADDR" "$REPO_CUSTOM_MODEL_TAG" "$REPO_CUSTOM_MODEL_DIR" "custom model"
+(
+  cd "$T" || {
+    echo "Error entering dir \"$T\""
+    exit 99
+  }
 
-# REPOS -- QUICKSTART
-clone "$REPO_QUICKSTART_ADDR" "$REPO_QUICKSTART_TAG" "$REPO_QUICKSTART_DIR" "quickstart"
+  # REPOS -- OPERATOR BUNDLE
+  echo -e "> Cloning the OPERATOR BUNDLE REPO"
+  [ "$1" == "force" ] && [ -d "$REPO_OPERATOR_BUNDLE_DIR" ] && rm -rf "./$REPO_OPERATOR_BUNDLE_DIR"
+  clone "$REPO_OPERATOR_BUNDLE_ADDR" "$OPERATOR_BUNDLE_VERSION" "$REPO_OPERATOR_BUNDLE_DIR" "operator bundle"
 
-cd "$REPO_QUICKSTART_DIR"
-[ ! -f values.yaml.tpl ] && cp values.yaml values.yaml.tpl
-cd ..
+  # REPOS -- QUICKSTART
+  echo -e "> Cloning the QUICKSTART REPO"
+  [ "$1" == "force" ] && [ -d "$REPO_QUICKSTART_DIR" ] && rm -rf "./$REPO_QUICKSTART_DIR"
+  clone "$REPO_QUICKSTART_ADDR" "$QUICKSTART_VERSION" "$REPO_QUICKSTART_DIR" "quickstart"
 
+  cd "$REPO_QUICKSTART_DIR"
+  [ ! -f values.yaml.tpl ] && cp values.yaml values.yaml.tpl
+)
 # --
-cd ..
