@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entando-operator-config
+data:
+# For slow environments with low bandwidth, you can given the various pods more time to get to ready state and/or completion state by
+# increasing the values for the following two properties
+  entando.pod.completion.timeout.seconds: "600"
+  entando.pod.readiness.timeout.seconds: "600"
+
+# if you want to specify an additional image pull secret for the Entando operator to use, add the dockercfg json  in the
+# sample-secrets/sample-pull-secret.yaml file, create the secret in  [your-sandbox-namespace]
+# and uncomment the property 'entando.k8s.operator.image.pull.secrets'
+#
+#  entando.k8s.operator.image.pull.secrets=sample-pull-secret
+
+# if you want to load the Entando containers from a private registry, specify the hostname using the
+# property 'entando.docker.registry.override'. This is often used in conjunction with the property 'entando.k8s.operator.image.pull.secrets'
+#
+#  entando.docker.registry.override: "docker.io"
+
+# if you want to retain all storage that was allocated even when the Entando custom resource it was provided for is
+# deleted, then set the 'entando.k8s.operator.disable.pvc.garbage.collection' property to "true"
+#  entando.k8s.operator.disable.pvc.garbage.collection: "true"
+
+# if you want to expose all your services over TLS, specify the certificate and key in the sample-secrets/sample-tls-secret.yaml
+# file, create the secret in  [your-sandbox-namespace]  and uncomment the property 'entando.tls.secret.name'
+#
+#  entando.tls.secret.name: sample-tls-secret
+
+# if you want to access services with self signed certificate, or if your own TLS certificate was self signed, specify the certificate(s)
+# in the  sample-secrets/sample-ca-cert-secret.yaml file, create the secret in  [your-sandbox-namespace]
+# and uncomment the property 'entando.ca.secret.name'
+#  entando.ca.secret.name: sample-ca-cert-secret
+
+
+# if you want to specify a global routing suffix, set the value of the 'entando.default.routing.suffix' property to a
+# domain suffix that will resolve to your cluster host. For Entando custom resource that do not specify an ingress
+# hostname, the hostnames for deployments will be calculated by prefixing the name and namespace of the resource to this
+# routing suffix.
+#
+#  entando.default.routing.suffix: your.domain.com
+
+# if you want to inspect the Entando deployer pods even after deployment has completed successfully, you can turn of
+# the deployer pod garbage collection by setting the property 'entando.k8s.operator.gc.controller.pods' to "false"
+#
+  entando.k8s.operator.gc.controller.pods: "true"
+
+# if you want to regain access to you shared database without having to recreated schemas, but you also want to
+# delete the Entando custom resources at will, you will need to  instruct the Entando operator to force a password
+# reset by setting the 'entando.k8s.operator.force.db.password.reset' property to "true"

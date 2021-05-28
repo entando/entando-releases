@@ -1,28 +1,8 @@
 [ -z $ZSH_VERSION ] && [ -z $BASH_VERSION ] && echo "Unsupported shell, user either bash or zsh" 1>&2 && exit 99
 
-T=".wd/cache"
-S=".wd/scripts"
+T="./.wd/cache"
+S="./.wd/scripts"
 D="./dist"
-
-save_cfg_value() {
-  local V
-  V=$(printf "\"%q\"" "$2")
-  if [[ -f $CFG_FILE ]]; then
-    sed --in-place='' "/^$1=.*$/d" $CFG_FILE
-  fi 
-  if [ -n "$2" ]; then
-    echo "$1=$V" >> $CFG_FILE
-  fi
-  return 0
-}
-
-reload_cfg() {
-  set -a
-  # shellcheck disable=SC1091
-  [[ -f $CFG_FILE ]] && . $CFG_FILE
-  set +a
-  return 0
-}
 
 clone() {
   local URL="$1"
@@ -50,9 +30,9 @@ clone() {
         fi
       fi
       if [ $? ]; then
-        cd -
+        cd - 1>/dev/null
       else
-        cd -
+        cd - 1>/dev/null
         rm -rf "./$FLD"
         exit "$?"
       fi
@@ -62,5 +42,12 @@ clone() {
   fi
 }
 
-REPO_CUSTOM_MODEL_TAG="$CUSTOM_MODEL_VERSION"
-REPO_QUICKSTART_TAG="$QUICKSTART_VERSION"
+CURRENT_HELM_VERSION=$(helm version --client --short)
+if [[ "$CURRENT_HELM_VERSION" =~ ^2\..* ]] || [[ "$CURRENT_HELM_VERSION" =~ ^v2\..* ]]; then
+  HELM_VERSION_MAJOR=2
+elif [[ "$CURRENT_HELM_VERSION" =~ ^3\..* ]] || [[ "$CURRENT_HELM_VERSION" =~ ^v3\..* ]]; then
+  HELM_VERSION_MAJOR=3
+else
+  echo "> FATAL: Found helm version $CURRENT_HELM_VERSION but only versions 2 and 3 are supported" 1>&2
+  exit 1
+fi
