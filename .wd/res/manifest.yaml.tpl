@@ -1,6 +1,6 @@
 entando: 
   main: \"$ENTANDO_VERSION\"
-  custom_model: \"$CUSTOM_MODEL_VERSION\"
+  operator_bundle: \"$OPERATOR_BUNDLE_VERSION\"
   quickstart: \"$QUICKSTART_VERSION\"
   entando_cli_version: \"$ENTANDO_CLI_VERSION\"
 

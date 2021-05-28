@@ -9,8 +9,6 @@ ADDR="$1"
 
 set -e
 
-reload_cfg
-
 sed "s/PLACEHOLDER_ENTANDO_DOMAIN_SUFFIX/$ADDR.nip.io/" "d/$DEPL_SPEC_YAML_FILE.tpl" > "d/$DEPL_SPEC_YAML_FILE"
 
 echo "> Using address: $ADDR$COMM"
