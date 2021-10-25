@@ -462,7 +462,7 @@ data:
 # sample-secrets/sample-pull-secret.yaml file, create the secret in  [your-sandbox-namespace]
 # and uncomment the property 'entando.k8s.operator.image.pull.secrets'
 #
-#  entando.k8s.operator.image.pull.secrets=sample-pull-secret
+#  entando.k8s.operator.image.pull.secrets: sample-pull-secret
 
 # if you want to load the Entando containers from a private registry, specify the hostname using the
 # property 'entando.docker.registry.override'. This is often used in conjunction with the property 'entando.k8s.operator.image.pull.secrets'
@@ -499,6 +499,7 @@ data:
 # if you want to regain access to you shared database without having to recreated schemas, but you also want to
 # delete the Entando custom resources at will, you will need to  instruct the Entando operator to force a password
 # reset by setting the 'entando.k8s.operator.force.db.password.reset' property to "true"
+
 
 ####
 # entando-deployment-specs.yaml

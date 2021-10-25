@@ -15,8 +15,8 @@ dependencies:
       req_ver: "14.*.*"
       def_ver: "v14.15.0"
   jhipster:
-      req_ver: "6.10.5"
-      def_ver: "6.10.5"
+      req_ver: "7.2.0"
+      def_ver: "7.2.0"
   generator_jhipster_entando:
       req_ver: "master"
       def_ver: "master"
