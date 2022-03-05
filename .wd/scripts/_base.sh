@@ -9,10 +9,22 @@ clone() {
   local TAG="$2"
   local FLD="$3"
   local DSC="$4"
+  local OUT
 
   if [[ ! -d "$FLD" ]]; then
     (
-      git clone "$URL" "$FLD"
+      set +e
+      OUT="$(git clone "$URL" "$FLD" 2>&1)"
+
+      if [ "$?" != 0 ]; then
+        echo -e "\n~~~"
+        echo -e '/!\\ Unable to clone the repo '"$URL"' /!\\' 2>&1
+        echo -e "~~~\n"
+        exit 91
+      fi
+      
+      set -e
+
       if cd "$FLD"; then
         curr_branch="$(git branch --show-current)"
         if [ "$TAG" == "$curr_branch" ]; then
@@ -20,23 +32,25 @@ clone() {
           git pull
         else
           git fetch --tags
-          if ! git checkout -b "$TAG" "$TAG" 1> /dev/null; then
+          if ! git checkout -b "$TAG" "$TAG" &> /dev/null; then
             echo "Retrying to checkout as branch.."
             if ! git checkout -b "$TAG" origin/"$TAG" 1> /dev/null; then
-              echo -e '/!\\\n/!\\ Unable to checkout the provided '"$DSC \"$TAG\""'/!\\\n/!\\' 2>&1
+              echo -e "\n~~~"
+              echo -e '/!\\ Unable to checkout the provided '"$DSC \"$TAG\""'/!\\\n/!\\' 2>&1
+              echo -e "~~~\n"
               exit 92
             fi
           fi
         fi
       fi
-      if [ $? ]; then
+      if [ "$?" == 0 ]; then
         cd - 1>/dev/null
       else
         cd - 1>/dev/null
         rm -rf "./$FLD"
         exit "$?"
       fi
-    )
+    ) || exit "$?"
   else
     echo "Destination dir \"$PWD/$FLD\" already exists and will not be overwritten.." 1>&2
   fi
@@ -51,3 +65,5 @@ else
   echo "> FATAL: Found helm version $CURRENT_HELM_VERSION but only versions 2 and 3 are supported" 1>&2
   exit 1
 fi
+
+SAMPLE_TMP_DIR="samples"

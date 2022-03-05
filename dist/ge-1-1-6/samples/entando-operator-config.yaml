@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entando-operator-config
+data:
+  entando.pod.completion.timeout.seconds: "2000"
+  entando.pod.readiness.timeout.seconds: "2000"
+
+# More..
+#  entando.k8s.operator.image.pull.secrets: sample-pull-secret
+#  entando.docker.registry.override: "docker.io"
+#  entando.tls.secret.name: sample-tls-secret
+#  entando.ca.secret.name: sample-ca-cert-secret
