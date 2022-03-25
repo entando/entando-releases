@@ -54,7 +54,7 @@ data:
   entando-de-app-wildfly-6-4: >-
     {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
   entando-k8s-app-controller: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"INGRESS_LOGS","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"lcorsettientando"}
   entando-k8s-app-plugin-link-controller: >-
     {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-database-service-controller: >-
