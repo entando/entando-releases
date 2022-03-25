@@ -30,6 +30,7 @@ $S/init.sh force
 P "DIST GENERATION"
 
 $S/gen.sh force
+$S/smp-gen.sh force
 
 TPL=""
 

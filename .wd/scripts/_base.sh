@@ -31,8 +31,7 @@ clone() {
           echo "Please specify a release tag or branch" 1>&2
           git pull
         else
-          git fetch --tags
-          if ! git checkout -b "$TAG" "$TAG" &> /dev/null; then
+          if ! git checkout "$TAG" &> /dev/null; then
             echo "Retrying to checkout as branch.."
             if ! git checkout -b "$TAG" origin/"$TAG" 1> /dev/null; then
               echo -e "\n~~~"

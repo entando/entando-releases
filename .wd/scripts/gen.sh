@@ -22,7 +22,7 @@ mkdir -p "$D/ge-1-1-6"
 # NAMESPACE SCOPED DEPLOYMENT
 
 cp -a -R \
-  "$T/$REPO_OPERATOR_BUNDLE_DIR/manifests/k8s-before-116/namespace-scoped-deployment/" \
+  "$T/$REPO_OPERATOR_BUNDLE_DIR/manifests/k8s-116-and-later/namespace-scoped-deployment/" \
   "$D/ge-1-1-6/namespace-scoped-deployment"
   
 rm "$D/ge-1-1-6/namespace-scoped-deployment/all-in-one.yaml"
@@ -33,11 +33,10 @@ cp -a -R \
   "$T/$REPO_OPERATOR_BUNDLE_DIR/manifests/k8s-116-and-later/cluster-scoped-deployment" \
   "$D/ge-1-1-6/cluster-scoped-deployment"
 
-# SAMPLES
+# RELEASE TEMPLATES
 
-echo "> Collecting the samples"
+echo "> Collecting the plain-templates"
 
 cp -a -R \
-  "$T/$REPO_OPERATOR_BUNDLE_DIR/samples/" \
-  "$D/ge-1-1-6/samples"
-
+  "$T/$REPO_OPERATOR_BUNDLE_DIR/plain-templates/" \
+  "$D/ge-1-1-6/plain-templates"

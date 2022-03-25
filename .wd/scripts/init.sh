@@ -23,7 +23,7 @@ echo "> Found helm version $HELM_VERSION_MAJOR ($CURRENT_HELM_VERSION) $ => OK"
   }
 
   # REPOS -- OPERATOR BUNDLE
-  echo -e "> Cloning the OPERATOR BUNDLE REPO"
+  echo -e "> Cloning the OPERATOR BUNDLE REPO ($OPERATOR_BUNDLE_VERSION)"
   [ "$1" == "force" ] && [ -d "$REPO_OPERATOR_BUNDLE_DIR" ] && rm -rf "./$REPO_OPERATOR_BUNDLE_DIR"
   clone "$REPO_OPERATOR_BUNDLE_ADDR" "$OPERATOR_BUNDLE_VERSION" "$REPO_OPERATOR_BUNDLE_DIR" "operator bundle"
 
