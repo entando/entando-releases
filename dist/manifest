@@ -39,6 +39,9 @@ VER_K3S_DEF="v1.21.10+k3s1"
 VER_OKD_REQ="4.8"
 VER_OKD_DEF="4.8"
 
+# OPENSHIFT CATALOG IMAGE
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:962b2ae1734edbbfe47e1f4b0df1434b62e4843c3d6aba2908151f59bd2ad86f"
+
 # ----------------
 # others..
 
