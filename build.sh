@@ -30,16 +30,11 @@ $S/init.sh force
 P "DIST GENERATION"
 
 $S/gen.sh force
+$S/smp-gen.sh force
 
 TPL=""
 
 set -e
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-P "ADDING SUPPORT FOR THE LEGACY QUICKSTART"
-
-#./.wd/scripts/qs-gen.sh
-echo "File \"$D/qs/entando.yaml\" generated"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 P "ADDING THE PARAMETERS FILES"

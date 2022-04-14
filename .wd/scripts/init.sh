@@ -23,16 +23,12 @@ echo "> Found helm version $HELM_VERSION_MAJOR ($CURRENT_HELM_VERSION) $ => OK"
   }
 
   # REPOS -- OPERATOR BUNDLE
-  echo -e "> Cloning the OPERATOR BUNDLE REPO"
+  echo -e "> Cloning the OPERATOR BUNDLE REPO ($OPERATOR_BUNDLE_VERSION)"
   [ "$1" == "force" ] && [ -d "$REPO_OPERATOR_BUNDLE_DIR" ] && rm -rf "./$REPO_OPERATOR_BUNDLE_DIR"
   clone "$REPO_OPERATOR_BUNDLE_ADDR" "$OPERATOR_BUNDLE_VERSION" "$REPO_OPERATOR_BUNDLE_DIR" "operator bundle"
 
   # REPOS -- QUICKSTART
-  echo -e "> Cloning the QUICKSTART REPO"
-  [ "$1" == "force" ] && [ -d "$REPO_QUICKSTART_DIR" ] && rm -rf "./$REPO_QUICKSTART_DIR"
-  clone "$REPO_QUICKSTART_ADDR" "$QUICKSTART_VERSION" "$REPO_QUICKSTART_DIR" "quickstart"
-
-  cd "$REPO_QUICKSTART_DIR"
-  [ ! -f values.yaml.tpl ] && cp values.yaml values.yaml.tpl
+  [ "$1" == "force" ] && [ -d "$SAMPLE_TMP_DIR" ] && rm -rf "./$SAMPLE_TMP_DIR"
+  mkdir -p "$SAMPLE_TMP_DIR"
 )
 # --

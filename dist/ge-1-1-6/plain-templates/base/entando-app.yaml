@@ -1,0 +1,12 @@
+---
+apiVersion: entando.org/v1
+kind: EntandoApp
+metadata:
+  namespace: {{ENTANDO_NAMESPACE}}
+  name: {{ENTANDO_APP_NAME}}
+spec:
+  environmentVariables: {{ENTANDO_VARS}}
+  dbms: {{ENTANDO_DBMS}}
+  ingressHostName: {{ENTANDO_HOSTNAME}}
+  standardServerImage: {{ENTANDO_APP_IMAGE_TYPE}}
+  replicas: {{ENTANDO_APP_REPLICAS}}
