@@ -25,5 +25,5 @@ Coordination repository for the Entando releases
 
 **PUBLISH:**
 
-- `Eventually merge to master and tag the commit according with ENTANDO_VERSION`
+- `Eventually merge to master and tag the commit according with ENTANDO_RELEASE`
 
