@@ -2,7 +2,7 @@
 ENTANDO_VERSION="v7.0.1"
 
 # MAIN MODULES VERSIONS
-OPERATOR_BUNDLE_VERSION="$ENTANDO_VERSION"
+OPERATOR_BUNDLE_VERSION="v7.0.1"
 ENTANDO_CLI_VERSION="v7.0.0"
 
 # DEPENDENCIES
@@ -40,7 +40,7 @@ VER_OKD_REQ="4.8"
 VER_OKD_DEF="4.8"
 
 # OPENSHIFT CATALOG IMAGE
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:29951f01ecdaace414c058caab30f110901edf8d98f227d7d5ad9278dba98317"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:22d1635a9fdd35f79bcb01df0131624aa6104f227a5d69c8014f259a434d6151"
 
 # ----------------
 # others..
