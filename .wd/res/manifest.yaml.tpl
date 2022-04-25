@@ -1,5 +1,5 @@
 entando: 
-  main: \"$ENTANDO_VERSION\"
+  main: \"$ENTANDO_RELEASE\"
   operator_bundle: \"$OPERATOR_BUNDLE_VERSION\"
   entando_cli_version: \"$ENTANDO_CLI_VERSION\"
 
