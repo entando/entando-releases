@@ -54,7 +54,7 @@ data:
   entando-de-app-wildfly-6-4: >-
     {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
   entando-k8s-app-controller: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
     {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-database-service-controller: >-
@@ -62,13 +62,13 @@ data:
   entando-k8s-dbjob: >-
     {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-keycloak-controller: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-plugin-controller: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-service: >-
     {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-keycloak: >-
-    {"version":"7.0.0","executable-type":"","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.1","executable-type":"","registry":"registry.hub.docker.com","organization":"entando"}
   entando-process-driven-plugin: >-
     {"version":"6.0.50-fix.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-redhat-sso: >-
@@ -283,7 +283,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "entando/entando-k8s-controller-coordinator:7.0.0"
+          image: "entando/entando-k8s-controller-coordinator:7.0.1"
           imagePullPolicy: Always
           volumeMounts:
           env:
