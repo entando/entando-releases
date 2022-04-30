@@ -6,13 +6,10 @@ entando:
 dependencies:
   jdk:
       req_ver: "11.*.*"
-      def_ver: "11.0.14"
-  nvm:
-      req_ver: "*.*.*"
-      def_ver: "v0.39.1"
+      def_ver: "11.0.15"
   node:
-      req_ver: "14.*.*"
-      def_ver: "v14.19.0"
+      req_ver: "14.*.1"
+      def_ver: "v14.19.1"
   jhipster:
       req_ver: "7.2.0"
       def_ver: "7.2.0"
@@ -22,9 +19,12 @@ dependencies:
   entando_bundler:
       req_ver: "v7.0.0"
       def_ver: "v7.0.0"
+  entando_bundle_cli:
+      req_ver: "v7.1.0"
+      def_ver: "v7.1.0"
   k3s:
-      req_ver: "1.21.*"
-      def_ver: "v1.21.10+k3s1"
+      req_ver: "1.22.*"
+      def_ver: "v1.22.9+k3s1"
   okd:
-      req_ver: "4.8"
-      def_ver: "4.8"
+      req_ver: "4.9"
+      def_ver: "4.9"
