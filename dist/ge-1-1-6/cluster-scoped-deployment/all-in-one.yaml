@@ -1772,7 +1772,7 @@ data:
   app-builder-6-3: >-
     {"version":"6.3.93-hotfix.1","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   app-builder-6-4: >-
-    {"version":"7.0.0","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
+    {"version":"7.0.2","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   busybox: >-
     {"version":"latest","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-avatar-plugin: >-
@@ -1780,29 +1780,29 @@ data:
   entando-component-manager-6-3: >-
     {"version":"6.3.26-fix.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-component-manager-6-4: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-de-app-eap-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-eap-6-4: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-wildfly-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
   entando-de-app-wildfly-6-4: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
   entando-k8s-app-controller: >-
-    {"version":"7.0.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-database-service-controller: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-dbjob: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-keycloak-controller: >-
-    {"version":"7.0.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-plugin-controller: >-
-    {"version":"7.0.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-service: >-
-    {"version":"7.0.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.0.2","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-keycloak: >-
     {"version":"7.0.1","executable-type":"","registry":"registry.hub.docker.com","organization":"entando"}
   entando-process-driven-plugin: >-
@@ -2054,7 +2054,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "entando/entando-k8s-controller-coordinator:7.0.1"
+          image: "entando/entando-k8s-controller-coordinator:7.0.2"
           imagePullPolicy: Always
           volumeMounts:
           env:
@@ -2181,5 +2181,5 @@ spec:
             failureThreshold: 1
             timeoutSeconds: 1
           image: >-
-            docker.io/entando/entando-k8s-service:7.0.0
+            docker.io/entando/entando-k8s-service:7.0.2
       serviceAccount: entando-operator
