@@ -17,11 +17,11 @@ dependencies:
       req_ver: "7.2.0"
       def_ver: "7.2.0"
   generator_jhipster_entando:
-      req_ver: "v7.0.0"
-      def_ver: "v7.0.0"
+      req_ver: "v7.0.2"
+      def_ver: "v7.0.2"
   entando_bundler:
-      req_ver: "v7.0.0"
-      def_ver: "v7.0.0"
+      req_ver: "v7.0.2"
+      def_ver: "v7.0.2"
   k3s:
       req_ver: "1.22.*"
       def_ver: "v1.22.9+k3s1"
