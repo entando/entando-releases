@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-marketplace
 spec:
   displayName: "Entando 7.0"
-  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:22d1635a9fdd35f79bcb01df0131624aa6104f227a5d69c8014f259a434d6151
+  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:15a73e93c4f3be3846bf0fb0d698e8d662aff6c435a96138af3a8f84d3169d36
   sourceType: grpc
   updateStrategy:
     registryPoll:
