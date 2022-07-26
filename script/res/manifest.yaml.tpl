@@ -7,9 +7,6 @@ dependencies:
   jdk:
       req_ver: \"$VER_JDK_REQ\"
       def_ver: \"$VER_JDK_DEF\"
-  nvm:
-      req_ver: \"$VER_NVM_REQ\"
-      def_ver: \"$VER_NVM_DEF\"
   node:
       req_ver: \"$VER_NODE_REQ\"
       def_ver: \"$VER_NODE_DEF\"
@@ -22,6 +19,9 @@ dependencies:
   entando_bundler:
       req_ver: \"$VER_ENTANDO_BUNDLER_REQ\"
       def_ver: \"$VER_ENTANDO_BUNDLER_DEF\"
+  entando_bundle_cli:
+      req_ver: \"$VER_ENTANDO_BUNDLE_CLI_REQ\"
+      def_ver: \"$VER_ENTANDO_BUNDLE_CLI_DEF\"
   k3s:
       req_ver: \"$VER_K3S_REQ\"
       def_ver: \"$VER_K3S_DEF\"

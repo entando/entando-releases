@@ -1279,6 +1279,11 @@ spec:
                     the SERVER_SERVLET_CONTEXT_PATH environment variable for the Spring Boot application inside this
                     container.
                   type: string
+                customIngressPath:
+                  description: >
+                    An optional custom path that will be used to expose this EntandoPlugin microservice on the ingress
+                    host specified in 'EntandoPlugin.spec.ingressHostname'.
+                  type: string
                 tlsSecretName:
                   description: >
                     The name of a standard Kubernetes TLS Secret, assumed to be in the same Namespace as the EntandoPlugin
