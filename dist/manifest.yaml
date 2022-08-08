@@ -1,7 +1,7 @@
 entando: 
-  main: "v7.1.0-pre2"
-  operator_bundle: "v7.1.0-pre2"
-  entando_cli_version: "v7.1.0-pre2"
+  main: "v7.1.0-pre6"
+  operator_bundle: "v7.1.0-pre6"
+  entando_cli_version: "v7.1.0"
 
 dependencies:
   jdk:
