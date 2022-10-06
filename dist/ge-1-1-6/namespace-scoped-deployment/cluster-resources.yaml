@@ -132,7 +132,7 @@ spec:
                     The database management system (DBMS) to use for persistence of this EntandoApp. 
                     Can be any of mysql, oracle  postgresql, embedded or none. Only 1 replica of the container is supported if embedded is selected. If Oracle is selected it must be created manually, the operator does not deploy Oracle instances.
 
-                    See [here] (https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
+                    See [here] (https://developer.entando.com/v7.1/docs/consume/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
                   type: string
                   pattern: '^(mysql|oracle|postgresql|embedded|none)$'
                 storageClass:
@@ -146,7 +146,7 @@ spec:
                     path specified in 'EntandoApp.spec.ingressPath' on
                     this host. If omitted, the Entando Operator will automatically generate a hostname.
 
-                    See [here] (https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#ingress-path-generation) for how the operator will create and configure the Ingress.
+                    See [here] (https://developer.entando.com/v7.1/docs/consume/operator-intro.html#ingress-path-generation) for how the operator will create and configure the Ingress.
                   type: string
                   pattern: '^([A-Za-z0-9-]{1,63}\.)*[[A-Za-z0-9-]{1,63}$'
                 ingressPath:
@@ -160,7 +160,7 @@ spec:
                 tlsSecretName:
                   description: >
                     The name of a standard Kubernetes TLS Secret, assumed to be in the same Namespace as the EntandoApp being created.
-                    See [here](https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#tls-secret-creation) for details and instructions on
+                    See [here](https://developer.entando.com/v7.1/docs/consume/operator-intro.html#tls-secret-creation) for details and instructions on
                     creating a secret for your Entando applications.
                   type: string
                   pattern: '^([a-z])+([a-z0-9-\.])*[a-z0-9]$'
@@ -486,7 +486,7 @@ spec:
                     The database management system (DBMS) to make available as a Kubernetes Service.
                     Can be oracle, mysql or postgresql. Only 1 replica of the container is supported if embedded is selected. If
                     Oracle is selected it must be created manually, the operator does not deploy Oracle instances.
-                    See [here](https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
+                    See [here](https://developer.entando.com/v7.1/docs/consume/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
                   type: string
                   pattern: ^(mysql|oracle|postgresql)$
                 storageClass:
@@ -906,7 +906,7 @@ spec:
 
                      Only 1 replica of the container is supported if embedded is selected. If
                      Oracle is selected it must be created manually, the operator does not deploy Oracle instances.
-                     See [here](https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
+                     See [here](https://developer.entando.com/v7.1/docs/consume/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
                   type: string
                   pattern: ^(mysql|oracle|postgresql|embedded|none)$
                 storageClass:
@@ -921,7 +921,7 @@ spec:
                     Keycloak on the '/auth' path on this host. If omitted, the operator will generate a default host
                     path.
 
-                    See [here] (https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#ingress-path-generation) for how the operator will create and configure the Ingress.
+                    See [here] (https://developer.entando.com/v7.1/docs/consume/operator-intro.html#ingress-path-generation) for how the operator will create and configure the Ingress.
 
                   type: string
                   pattern: '^([A-Za-z0-9-]{1,63}\.)*[[A-Za-z0-9-]{1,63}$'
@@ -929,7 +929,7 @@ spec:
                   description: >
                     The name of a standard Kubernetes TLS Secret, assumed to be
                     in the same Namespace as the EntandoKeycloakServer being
-                    created. See (here) [https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#tls-secret-creation] for details and instructions on
+                    created. See (here) [https://developer.entando.com/v7.1/docs/consume/operator-intro.html#tls-secret-creation] for details and instructions on
                     creating a secret for your Entando applications.
 
                   type: string
@@ -1255,7 +1255,7 @@ spec:
                     postgresql, embedded or none.
                     Only 1 replica of the container is supported if embedded is selected. If
                     Oracle is selected it must be created manually, the operator does not deploy Oracle instances.
-                    See [here] (https://dev.entando.org/v6.3/docs/concepts/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
+                    See [here] (https://developer.entando.com/v7.1/docs/consume/operator-intro.html#database-deployment) for how the operator will create and configure the DBMS.
                   type: string
                   pattern: '^(mysql|oracle|postgresql|embedded|none)$'
                 storageClass:
