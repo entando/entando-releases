@@ -1,16 +1,16 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.1.1"
+ENTANDO_RELEASE="v7.1.2"
 
 # --------------------------------------------------------------------------------
 
 # OLM INSTALLATIONS - OPERATOR BUNDLE
-OPERATOR_BUNDLE_VERSION="v7.1.1"
+OPERATOR_BUNDLE_VERSION="v7.1.2"
 REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
 REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:053db13b42ddb3a6d2eb0e4f0ba28154a5e4d9fb474f75c952135c3e51d0aac3"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:fec68c06441f04d66ed8936540e2bb9a4f9dc4eb45677a98cdb4a24a3a512889"
 
 # TOOL: ENTANDO CLI
-ENTANDO_CLI_VERSION="v7.1.1"
+ENTANDO_CLI_VERSION="v7.1.2"
 
 # TOOL: BUNDLER
 REPO_ENTANDO_BUNDLER_ADDR="https://github.com/entando/entando-bundler"
@@ -34,19 +34,19 @@ VER_JHIPSTER_DEF="7.2.0"
 
 # JDK
 VER_JDK_REQ="11.*.*"
-VER_JDK_DEF="11.0.15"
+VER_JDK_DEF="11.0.17"
 
 # NODE
 VER_NODE_REQ="14.*.*"
 VER_NODE_DEF="v14.20.0"
 
 # K3S
-VER_K3S_REQ="1.22.*"
-VER_K3S_DEF="v1.22.15+k3s1"
+VER_K3S_REQ="1.23.*"
+VER_K3S_DEF="v1.23.14+k3s1"
 
 # OPENSHIFT OKD
-VER_OKD_REQ="4.9"
-VER_OKD_DEF="4.9"
+VER_OKD_REQ="4.10"
+VER_OKD_DEF="4.10"
 
 # --------------------------------------------------------------------------------
 
