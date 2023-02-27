@@ -1,0 +1,299 @@
+name: Entando Release
+
+on:
+  repository_dispatch:
+    types: [entando-release]
+
+env:
+  # URL of the DockerHub repositories configuration file
+  DOCKER_HUB_REPOS_CONFIG_URL: global-config/docker-hub-repositories.json
+  # URL of the DockerHub repositories configuration file
+  ENTANDO_K8S_OPERATOR_BUNDLE_REPO: entando-k8s/entando-k8s-operator-bundle
+  # URL of the DockerHub repositories configuration file
+  ENTANDO_RELEASES_REPO: entando/entando-releases
+  
+  # The user name to be associated with the commit
+  COMMIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+  # The user email address to be associated with the commit
+  COMMIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+  # The user token to be associated with the commit
+  COMMIT_USER_TOKEN: ${{ secrets.ENTANDO_BOT_TOKEN }}
+  
+  # Major release version specified in the repository_dispatch payload
+  MAJOR: ${{ github.event.client_payload.major }}
+  # Minor release version specified in the repository_dispatch payload
+  MINOR: ${{ github.event.client_payload.minor }}
+  # Patch release version specified in the repository_dispatch payload
+  PATCH: ${{ github.event.client_payload.patch }}
+  # Suffix release version specified in the repository_dispatch payload
+  SUFFIX: ${{ github.event.client_payload.suffix }}
+
+  # Auxiliary variables that are created based in the repository_dispatch payload
+  # Release version. Example: 7.1
+  RELEASE_VERSION: ${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}
+  # Release branch. Example: release/7.1
+  RELEASE_BRANCH: release/${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}
+  # Release version with patch. Example: 7.1.4
+  RELEASE_VERSION_PATCH: ${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}.${{ github.event.client_payload.patch }}
+  # Release version with patch. Example: 7.1.4-rc2
+  RELEASE_VERSION_SUFFIX: ${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}.${{ github.event.client_payload.patch }}${{ github.event.client_payload.suffix }}
+  # Release tag. Example: v7.1.4-rc2
+  RELEASE_TAG: v${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}.${{ github.event.client_payload.patch }}${{ github.event.client_payload.suffix }}
+
+jobs:
+  release-entando-k8s-operator-bundle:
+    name: Release operator-bundle
+    runs-on: ubuntu-latest
+    steps:
+    
+    # Validate client payload
+    - name: Validate client payload
+      run: |
+        # Check if mandatory fields are present
+        if [[ -z "${{ env.MAJOR }}" ]]
+        then
+            echo "::error :: Mandatory field 'major' not found in client_paylod"
+            exit 1
+        fi
+        if [[ -z "${{ env.MINOR }}" ]]
+        then
+            echo "::error :: Mandatory field 'minor' not found in client_paylod"
+            exit 2
+        fi
+        if [[ -z "${{ env.PATCH }}" ]]
+        then
+            echo "::error :: Mandatory field 'patch' not found in client_paylod"
+            exit 3
+        fi
+        
+    # Checkout the catalyst-infra-templates repository
+    - name: Checkout catalyst-infra-templates
+      uses: actions/checkout@v3
+      with:
+        repository: entando/catalyst-infra-templates
+        token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+        
+    # Load Docker Hub repositories configuration
+    - name: Load Docker Hub repositories
+      run: |
+        echo "DOCKER_HUB_REPOS=$(jq -c . < $DOCKER_HUB_REPOS_CONFIG_URL)" >> $GITHUB_ENV
+
+    # Checkout the entando-k8s-operator-bundle repository
+    - name: Checkout entando-k8s-operator-bundle
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ env.RELEASE_BRANCH }}
+        token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+        fetch-depth: 0
+        
+    # Validate the release tag
+    - name: Validate release tag
+      run: |
+        # Check if the release tag already exists
+        if [[ $(git tag -l $RELEASE_TAG) ]]
+        then
+            echo "::error :: Tag '$RELEASE_TAG' already exists"
+            exit 4
+        fi
+        
+    # Update images versions and SHA digests in the values.yaml file
+    - name: Set images versions and sha
+      env: 
+        # Convert the client_payload JSON object to a string and set it as an environment variable
+        CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+      run: |
+        for IMAGE in $(echo "$CLIENT_PAYLOAD" | jq -c '.images[]'); do
+          IMAGE_NAME=$(echo $IMAGE | jq -r '.name')
+          NEW_VERSION=$(echo $IMAGE | jq -r '.version')
+          FOUND_IMAGE=false
+          FOUND_VERSION=false
+          for DOCKER_HUB_REPO in $(echo "$DOCKER_HUB_REPOS" | jq -c '.images[]'); do
+            REPO_NAME=$(echo $DOCKER_HUB_REPO | jq -r '.name')
+            REPO_NAMESPACE=$(echo $DOCKER_HUB_REPO | jq -r '.docker_hub_namespace')
+            REPO=$(echo $DOCKER_HUB_REPO | jq -r '.docker_hub_repository')
+            if [[ $IMAGE_NAME == $REPO_NAME ]]
+            then 
+              FOUND_IMAGE=true
+              BASE_URL="https://hub.docker.com/v2/namespaces/$REPO_NAMESPACE/repositories/$REPO/tags?name="$NEW_VERSION"&page_size=1000"
+              echo "Querying docker hub: $BASE_URL"
+              curl -X GET $BASE_URL > result.json
+              COUNT=$(jq .count result.json)
+              # Check if the Docker image version exists on Docker Hub
+              if [[ $COUNT > 0 ]]
+              then
+                for ((i=0;i<COUNT;i++)); do
+                  DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
+                  if [[ '"'$NEW_VERSION'"' == $DOCKER_HUB_VERSION ]]
+                  then
+                     FOUND_VERSION=true
+                     ORIGINAL_VERSION=$(yq ".operator.relatedImages.$IMAGE_NAME.version" values.yaml)
+                     ORIGINAL_SHA=$(yq ".operator.relatedImages.$IMAGE_NAME.sha256" values.yaml)
+                     SHA=$(jq .results[$i].images[0].digest result.json)
+                     SHA=${SHA//sha256:/}
+                     # Update the version and SHA digest of the Docker image in the values.yaml file
+                     yq -i ".operator.relatedImages.$IMAGE_NAME.version = $DOCKER_HUB_VERSION" values.yaml
+                     yq -i ".operator.relatedImages.$IMAGE_NAME.sha256 = $SHA" values.yaml
+                     # Print the original and updated version and SHA digest of the Docker image
+                     echo "Updating values.yaml"
+                     echo "Image name: $IMAGE_NAME"
+                     echo 'Original data: version="'$ORIGINAL_VERSION'", sha="'$ORIGINAL_SHA'"'
+                     echo 'New data: version="'$NEW_VERSION'", sha='$SHA
+                     echo ""
+                     break
+                  fi
+                done
+              fi
+              # If the Docker image version doesn't exist on Docker Hub, exit with an error
+              if [[ $FOUND_VERSION = false ]]
+              then
+                echo "::error :: Version '$NEW_VERSION' does not exist for '$IMAGE_NAME'"
+                exit 5
+              fi
+            fi
+          done
+          # If the Docker image doesn't exist in the Docker Hub repositories configuration, exit with an error
+          if [[ $FOUND_IMAGE = false ]]
+          then
+            echo "::error :: Image '$IMAGE_NAME' does not exist in '$DOCKER_HUB_REPOS_CONFIG_URL'"
+            exit 6
+          fi
+        done
+        
+    # Generating manifest files
+    - name: Run generate-manifest.sh
+      run: |
+        bash ./generate-manifests.sh --version "${{ env.RELEASE_VERSION_PATCH }}" --mainline "${{ env.RELEASE_VERSION }}"
+    
+    # Commit updated values.yaml and manifest files
+    - name: Commit updated values.yaml and manifest files
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_user_name: ${{ env.COMMIT_USER_NAME }}
+        commit_user_email: ${{ env.COMMIT_USER_EMAIL }}
+        commit_message: Automated entando-k8s-operator-bundle update
+
+    # Tag entando-k8s-operator-bundle
+    - name: Tag entando-k8s-operator-bundle ${{ env.RELEASE_TAG }}
+      run: |
+        git tag ${{ env.RELEASE_TAG }} ${{ env.RELEASE_BRANCH }}
+        git push origin ${{ env.RELEASE_TAG }}
+        
+    # Release entando-k8s-operator-bundle
+    - name: Release entando-k8s-operator-bundle ${{ env.RELEASE_TAG }}
+      run: |
+        curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}/releases \
+          -d '{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}'
+
+  release-entando-releases-bundle:
+    name: Release entando-releases
+    runs-on: ubuntu-latest
+    needs: release-entando-k8s-operator-bundle
+    steps:
+
+    # Checkout the entando-releases repository
+    - name: Checkout entando-releases
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ env.ENTANDO_RELEASES_REPO }}
+        ref: ${{ env.RELEASE_BRANCH }}
+        token: ${{ secrets.ENTANDO_BOT_TOKEN }}       
+        
+    # Update the manifest file
+    - name: Update manifest file
+      env: 
+        # Convert the client_payload JSON object to a string and set it as an environment variable
+        CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+      run: |
+        pwd
+        sed -i "s|ENTANDO_RELEASE=.*|ENTANDO_RELEASE=\"${{ env.RELEASE_TAG }}\"|" manifest
+        BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
+        echo "Querying docker hub: $BASE_URL"
+        curl -X GET $BASE_URL > result.json
+        COUNT=$(jq .count result.json)
+        # Check if the Docker image version exists on Docker Hub
+        if [[ $COUNT > 0 ]]
+        then
+          for ((i=0;i<COUNT;i++)); do
+            DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
+            if [[ \"$RELEASE_VERSION_PATCH\" == $DOCKER_HUB_VERSION ]]
+            then
+               FOUND_VERSION=true
+               INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
+               INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
+               sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
+            fi
+          done
+        fi
+        for PROPERTY in $(echo $CLIENT_PAYLOAD | jq -c '.properties[]'); do
+          PROPERTY_NAME=$(echo $PROPERTY | jq -r '.name')
+          PROPERTY_VALUE=$(echo $PROPERTY | jq -r '.value')
+          sed -i "s|${PROPERTY_NAME}=.*|${PROPERTY_NAME}=\"${PROPERTY_VALUE}\"|" manifest  
+        done
+        
+    # Generating manifest files
+    - name: Run build.sh
+      run: |
+        pwd
+        ls -l
+        bash ./build.sh
+
+    # Commit the changes made by build.sh
+    - name: Commit changes made by build.sh
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_user_name: ${{ env.COMMIT_USER_NAME }}
+        commit_user_email: ${{ env.COMMIT_USER_EMAIL }}
+        commit_message: Automated entando-releases update
+        
+    # Tag and release entando-releases
+    - name: Tag and release entando-releases ${{ env.RELEASE_TAG }}
+      run: |
+        git tag ${{ env.RELEASE_TAG }} ${{ env.RELEASE_BRANCH }}
+        git push origin ${{ env.RELEASE_TAG }}
+        curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
+          -d '{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}'
+          
+    # Recreate quickstart tag and release
+    - name: Recreate quickstart tag and release
+      run: |
+        if [[ -z "${{ env.SUFFIX }}" ]]
+        then
+          curl \
+            -X GET \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=10 > releases.json
+          COUNT=$(jq length releases.json)
+          for ((i=0;i<COUNT;i++)); do
+            RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
+            if [[ $RELEASE_TAG_NAME == \"quickstart\" ]]
+            then
+              RELEASE_ID=$(jq .[$i].id releases.json)
+              curl \
+              -X DELETE \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/${RELEASE_ID}
+            fi
+          done
+          git push --delete origin quickstart
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
+            -d '{"tag_name":"quickstart","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"quickstart","body":"quickstart release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}'
+        fi
