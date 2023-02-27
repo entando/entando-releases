@@ -5,11 +5,11 @@ cd "$DIR/../.."
 . ./manifest
 . "$DIR/_base.sh"
 
-set -e 
+set -e
 
 TPLD="$D/ge-1-1-6/plain-templates"
 SMPD="$D/ge-1-1-6/samples"
-APPVER="${ENTANDO_RELEASE%.*}"
+APPVER="${ENTANDO_RELEASE}"
 if [ "${APPVER:0:1}" = "v" ]; then
   APPVER="${APPVER:1}"
 fi
@@ -35,7 +35,7 @@ _set_placeholders() {
   local ENTANDO_APPNAME="quickstart"
   local CATALOG_NAME="entando-catalog-${APPVER//./-}"
   local CATALOG_DISP_NAME="Entando $APPVER"
-  
+
   cat - \
     | sed "s/{{ENTANDO_NAMESPACE}}/$ENTANDO_NAMESPACE/" \
     | sed "s/{{ENTANDO_APP_NAME}}/$ENTANDO_APPNAME/" \
