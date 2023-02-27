@@ -7,9 +7,11 @@ on:
 env:
   # URL of the DockerHub repositories configuration file
   DOCKER_HUB_REPOS_CONFIG_URL: global-config/docker-hub-repositories.json
-  # URL of the DockerHub repositories configuration file
+  # catalyst-infra-templates namespace and repository
+  CATALYST_INFRA_TEMPLATES_REPO: entando/catalyst-infra-templates
+  # entando-k8s-operator-bundle namespace and repository
   ENTANDO_K8S_OPERATOR_BUNDLE_REPO: entando-k8s/entando-k8s-operator-bundle
-  # URL of the DockerHub repositories configuration file
+  # entando-releases namespace and repository
   ENTANDO_RELEASES_REPO: entando/entando-releases
   
   # The user name to be associated with the commit
@@ -70,7 +72,7 @@ jobs:
     - name: Checkout catalyst-infra-templates
       uses: actions/checkout@v3
       with:
-        repository: entando/catalyst-infra-templates
+        repository: ${{ env.CATALYST_INFRA_TEMPLATES_REPO }}
         token: ${{ secrets.ENTANDO_BOT_TOKEN }}
         
     # Load Docker Hub repositories configuration
@@ -82,6 +84,7 @@ jobs:
     - name: Checkout entando-k8s-operator-bundle
       uses: actions/checkout@v3
       with:
+        repository: ${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}
         ref: ${{ env.RELEASE_BRANCH }}
         token: ${{ secrets.ENTANDO_BOT_TOKEN }}
         fetch-depth: 0
