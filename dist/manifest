@@ -1,5 +1,5 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.1.5-test5"
+ENTANDO_RELEASE="v7.1.5-test6"
 
 # --------------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ VER_JHIPSTER_DEF="7.2.0"
 
 # JDK
 VER_JDK_REQ="11.*.*"
-VER_JDK_DEF="11.0.36"
+VER_JDK_DEF="11.0.18"
 
 # NODE
 VER_NODE_REQ="14.*.*"
