@@ -191,13 +191,14 @@ jobs:
         then
           MAKE_LATEST=legacy
         fi
+        PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
         curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
           -H "X-GitHub-Api-Version: 2022-11-28" \
           https://api.github.com/repos/${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}/releases \
-          -d '{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"${ MAKE_LATEST }"}'
+          -d "$PAYLOAD"
         set +xv
   release-entando-releases-bundle:
     name: Release entando-releases
@@ -271,7 +272,7 @@ jobs:
         fi
         git tag ${{ env.RELEASE_TAG }} ${{ env.RELEASE_BRANCH }}
         git push origin ${{ env.RELEASE_TAG }}
-        PAYLOAD={"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"${ MAKE_LATEST }"}
+        PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
         curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
@@ -318,14 +319,13 @@ jobs:
               fi
             done
             git push --delete origin quickstart
-            PAYLOAD={"tag_name":"quickstart","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"quickstart","body":"quickstart release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}
             curl \
               -X POST \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
-              -d "$PAYLOAD"
+              -d '{"tag_name":"quickstart","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"quickstart","body":"quickstart release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"false"}'
           else           
             echo "Here 3"
           fi
