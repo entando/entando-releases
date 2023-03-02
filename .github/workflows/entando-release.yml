@@ -146,6 +146,7 @@ jobs:
                   fi
                 done
               fi
+              rm result.json
               # If the Docker image version doesn't exist on Docker Hub, exit with an error
               if [[ $FOUND_VERSION = false ]]
               then
@@ -184,17 +185,23 @@ jobs:
     # Release entando-k8s-operator-bundle
     - name: Release entando-k8s-operator-bundle ${{ env.RELEASE_TAG }}
       run: |
+        MAKE_LATEST=false
+        if [[ -z "${{ env.SUFFIX }}" ]]
+        then
+          MAKE_LATEST=legacy
+        fi
+        PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
         curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
           -H "X-GitHub-Api-Version: 2022-11-28" \
           https://api.github.com/repos/${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}/releases \
-          -d '{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}'
-
+          -d "$PAYLOAD"
   release-entando-releases-bundle:
     name: Release entando-releases
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: release-entando-k8s-operator-bundle
     steps:
 
@@ -212,26 +219,32 @@ jobs:
         # Convert the client_payload JSON object to a string and set it as an environment variable
         CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
       run: |
-        pwd
         sed -i "s|ENTANDO_RELEASE=.*|ENTANDO_RELEASE=\"${{ env.RELEASE_TAG }}\"|" manifest
-        BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
-        echo "Querying docker hub: $BASE_URL"
-        curl -X GET $BASE_URL > result.json
-        COUNT=$(jq .count result.json)
-        # Check if the Docker image version exists on Docker Hub
-        if [[ $COUNT > 0 ]]
-        then
-          for ((i=0;i<COUNT;i++)); do
-            DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
-            if [[ \"$RELEASE_VERSION_PATCH\" == $DOCKER_HUB_VERSION ]]
-            then
-               FOUND_VERSION=true
-               INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
-               INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
-               sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
-            fi
-          done
-        fi
+        while true; do
+          BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
+          echo "Querying docker hub: $BASE_URL"
+          curl -X GET $BASE_URL > result.json
+          COUNT=$(jq .count result.json)
+          # Check if the Docker image version exists on Docker Hub
+          if [[ $COUNT > 0 ]]
+          then
+            for ((i=0;i<COUNT;i++)); do
+              DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
+              if [[ \"$RELEASE_VERSION_SUFFIX\" == $DOCKER_HUB_VERSION ]]
+              then
+                 INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
+                 INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
+                 sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
+              fi
+            done
+            rm result.json
+            break
+          else
+            echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
+            sleep 20
+            continue
+          fi
+        done
         for PROPERTY in $(echo $CLIENT_PAYLOAD | jq -c '.properties[]'); do
           PROPERTY_NAME=$(echo $PROPERTY | jq -r '.name')
           PROPERTY_VALUE=$(echo $PROPERTY | jq -r '.value')
@@ -241,7 +254,6 @@ jobs:
     # Generating manifest files
     - name: Run build.sh
       run: |
-        pwd
         ls -l
         bash ./build.sh
 
@@ -256,15 +268,21 @@ jobs:
     # Tag and release entando-releases
     - name: Tag and release entando-releases ${{ env.RELEASE_TAG }}
       run: |
+        MAKE_LATEST=false
+        if [[ -z "${{ env.SUFFIX }}" ]]
+        then
+          MAKE_LATEST=legacy
+        fi
         git tag ${{ env.RELEASE_TAG }} ${{ env.RELEASE_BRANCH }}
         git push origin ${{ env.RELEASE_TAG }}
+        PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
         curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
           -H "X-GitHub-Api-Version: 2022-11-28" \
           https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
-          -d '{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}'
+          -d "$PAYLOAD"
           
     # Recreate quickstart tag and release
     - name: Recreate quickstart tag and release
@@ -276,27 +294,38 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=10 > releases.json
-          COUNT=$(jq length releases.json)
-          for ((i=0;i<COUNT;i++)); do
-            RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
-            if [[ $RELEASE_TAG_NAME == \"quickstart\" ]]
-            then
-              RELEASE_ID=$(jq .[$i].id releases.json)
-              curl \
-              -X DELETE \
+            https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/latest > releases.json
+          LATEST_TAG_NAME=$(jq .tag_name releases.json)
+          if [[ $LATEST_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
+          then
+            curl \
+              -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/${RELEASE_ID}
-            fi
-          done
-          git push --delete origin quickstart
-          curl \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
-            -d '{"tag_name":"quickstart","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"quickstart","body":"quickstart release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"legacy"}'
+              https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=10 > releases.json
+            COUNT=$(jq length releases.json)
+            for ((i=0;i<COUNT;i++)); do
+              RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
+              if [[ $RELEASE_TAG_NAME == \"quickstart\" ]]
+              then
+                RELEASE_ID=$(jq .[$i].id releases.json)
+                curl \
+                -X DELETE \
+                -H "Accept: application/vnd.github+json" \
+                -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/${RELEASE_ID}
+              fi
+            done
+            git push --delete origin quickstart
+            curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
+              -d '{"tag_name":"quickstart","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"quickstart","body":"quickstart release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"false"}'
+          fi
+          rm releases.json
         fi
