@@ -241,7 +241,7 @@ jobs:
             rm result.json
             break
           else
-            echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. Waiting 5 seconds"
+            echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
             sleep 5
             continue
           fi
