@@ -228,7 +228,6 @@ jobs:
           # Check if the Docker image version exists on Docker Hub
           if [[ $COUNT > 0 ]]
           then
-            set -xv
             for ((i=0;i<COUNT;i++)); do
               DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
               if [[ \"$RELEASE_VERSION_SUFFIX\" == $DOCKER_HUB_VERSION ]]
@@ -239,7 +238,6 @@ jobs:
               fi
             done
             rm result.json
-            set +xv
             break
           else
             echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
