@@ -231,7 +231,7 @@ jobs:
             set -xv
             for ((i=0;i<COUNT;i++)); do
               DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
-              if [[ \"$RELEASE_VERSION_PATCH\" == $DOCKER_HUB_VERSION ]]
+              if [[ \"$RELEASE_VERSION_SUFFIX\" == $DOCKER_HUB_VERSION ]]
               then
                  INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
                  INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
