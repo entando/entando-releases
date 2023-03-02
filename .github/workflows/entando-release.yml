@@ -228,21 +228,22 @@ jobs:
           # Check if the Docker image version exists on Docker Hub
           if [[ $COUNT > 0 ]]
           then
+            set -xv
             for ((i=0;i<COUNT;i++)); do
               DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
               if [[ \"$RELEASE_VERSION_PATCH\" == $DOCKER_HUB_VERSION ]]
               then
-                 FOUND_VERSION=true
                  INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
                  INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
                  sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
               fi
             done
             rm result.json
+            set +xv
             break
           else
             echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
-            sleep 5
+            sleep 20
             continue
           fi
         done
