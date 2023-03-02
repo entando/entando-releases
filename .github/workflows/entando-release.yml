@@ -201,6 +201,7 @@ jobs:
   release-entando-releases-bundle:
     name: Release entando-releases
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: release-entando-k8s-operator-bundle
     steps:
 
@@ -218,27 +219,33 @@ jobs:
         # Convert the client_payload JSON object to a string and set it as an environment variable
         CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
       run: |
-        pwd
         sed -i "s|ENTANDO_RELEASE=.*|ENTANDO_RELEASE=\"${{ env.RELEASE_TAG }}\"|" manifest
-        BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
-        echo "Querying docker hub: $BASE_URL"
-        curl -X GET $BASE_URL > result.json
-        COUNT=$(jq .count result.json)
-        # Check if the Docker image version exists on Docker Hub
-        if [[ $COUNT > 0 ]]
-        then
-          for ((i=0;i<COUNT;i++)); do
-            DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
-            if [[ \"$RELEASE_VERSION_PATCH\" == $DOCKER_HUB_VERSION ]]
-            then
-               FOUND_VERSION=true
-               INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
-               INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
-               sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
-            fi
-          done
-        fi
-        rm result.json
+        while true; do
+          BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
+          echo "Querying docker hub: $BASE_URL"
+          curl -X GET $BASE_URL > result.json
+          COUNT=$(jq .count result.json)
+          # Check if the Docker image version exists on Docker Hub
+          if [[ $COUNT > 0 ]]
+          then
+            for ((i=0;i<COUNT;i++)); do
+              DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
+              if [[ \"$RELEASE_VERSION_PATCH\" == $DOCKER_HUB_VERSION ]]
+              then
+                 FOUND_VERSION=true
+                 INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
+                 INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
+                 sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
+              fi
+            done
+            rm result.json
+            break
+          else
+            echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. Waiting 5 seconds"
+            sleep 5
+            continue
+          fi
+        done
         for PROPERTY in $(echo $CLIENT_PAYLOAD | jq -c '.properties[]'); do
           PROPERTY_NAME=$(echo $PROPERTY | jq -r '.name')
           PROPERTY_VALUE=$(echo $PROPERTY | jq -r '.value')
@@ -248,7 +255,6 @@ jobs:
     # Generating manifest files
     - name: Run build.sh
       run: |
-        pwd
         ls -l
         bash ./build.sh
 
