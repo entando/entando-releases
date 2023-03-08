@@ -234,7 +234,7 @@ jobs:
               then
                  INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
                  INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
-                 sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:${INDEX_SHA}\"|" manifest
+                 sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@${INDEX_SHA}\"|" manifest
               fi
             done
             rm result.json
