@@ -220,6 +220,7 @@ jobs:
         CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
       run: |
         sed -i "s|ENTANDO_RELEASE=.*|ENTANDO_RELEASE=\"${{ env.RELEASE_TAG }}\"|" manifest
+        sed -i "s|OPERATOR_BUNDLE_VERSION=.*|OPERATOR_BUNDLE_VERSION=\"${{ env.RELEASE_TAG }}\"|" manifest
         while true; do
           BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
           echo "Querying docker hub: $BASE_URL"
