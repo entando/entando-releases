@@ -1,5 +1,5 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.1.5-test11"
+ENTANDO_RELEASE="v7.1.5-rc1"
 
 # --------------------------------------------------------------------------------
 
@@ -7,7 +7,7 @@ ENTANDO_RELEASE="v7.1.5-test11"
 OPERATOR_BUNDLE_VERSION="v7.1.4"
 REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
 REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:sha256:43fe83a1bf702358053413a2d46f340b0a802a1ea0832686cf5305947a9d2024"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:sha256:b588bad1b30848806519b3154015a794d3bcfc75c8b7282e7c4c60920b699149"
 
 # TOOL: ENTANDO CLI
 ENTANDO_CLI_VERSION="v7.1.3"
