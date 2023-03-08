@@ -1,3 +1,74 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: entando-crd-viewer
+  labels:
+    # Add these permissions to the "view" default role.
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+rules:
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    resourceNames:
+      - entandoapppluginlinks.entando.org
+      - entandoapps.entando.org
+      - entandodatabaseservices.entando.org
+      - entandodebundles.entando.org
+      - entandokeycloakservers.entando.org
+      - entandoplugins.entando.org
+      - providedcapabilities.entando.org
+    verbs:
+      - get
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: entando-crd-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: entando-crd-viewer
+subjects:
+  - kind: Group
+    name: system:serviceaccounts
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: entando-editor
+  labels:
+    # Add these permissions to the "edit" default role.
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+rules:
+  - apiGroups:
+      - entando.org
+    resources:
+      - "*"
+    verbs:
+      - "*"
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: entando-viewer
+  labels:
+    # Add these permissions to the "view" default role.
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+rules:
+  - apiGroups:
+      - entando.org
+    resources:
+      - "*"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+
+---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -400,43 +471,6 @@ spec:
   scope: Namespaced
 
 ---
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: entando-crd-viewer
-  labels:
-    # Add these permissions to the "view" default role.
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-rules:
-  - apiGroups:
-      - apiextensions.k8s.io
-    resources:
-      - customresourcedefinitions
-    resourceNames:
-      - entandoapppluginlinks.entando.org
-      - entandoapps.entando.org
-      - entandodatabaseservices.entando.org
-      - entandodebundles.entando.org
-      - entandokeycloakservers.entando.org
-      - entandoplugins.entando.org
-      - providedcapabilities.entando.org
-    verbs:
-      - get
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: entando-crd-viewer
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: entando-crd-viewer
-subjects:
-  - kind: Group
-    name: system:serviceaccounts
-
----
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -827,22 +861,6 @@ spec:
                 serverStatuses:
                   type: object
                   x-kubernetes-preserve-unknown-fields: true
-
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: entando-editor
-  labels:
-    # Add these permissions to the "edit" default role.
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-rules:
-  - apiGroups:
-      - entando.org
-    resources:
-      - "*"
-    verbs:
-      - "*"
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -1559,24 +1577,6 @@ spec:
     shortNames:
       - eps
   scope: Namespaced
-
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: entando-viewer
-  labels:
-    # Add these permissions to the "view" default role.
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-rules:
-  - apiGroups:
-      - entando.org
-    resources:
-      - "*"
-    verbs:
-      - "get"
-      - "list"
-      - "watch"
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
