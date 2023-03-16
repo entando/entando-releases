@@ -255,7 +255,6 @@ jobs:
     # Generating manifest files
     - name: Run build.sh
       run: |
-        ls -l
         bash ./build.sh
 
     # Commit the changes made by build.sh
@@ -296,7 +295,10 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/latest > releases.json
+          echo "Curl done."
+          cat releases.json
           LATEST_TAG_NAME=$(jq .tag_name releases.json)
+          Echo "Comparing $LATEST_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
           if [[ $LATEST_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
           then
             curl \
@@ -317,6 +319,8 @@ jobs:
                 -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/${RELEASE_ID}
+              else
+                echo "Not entering because $RELEASE_TAG_NAME it is not \"quickstart\""
               fi
             done
             git push --delete origin quickstart
@@ -327,6 +331,8 @@ jobs:
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
               -d '{"tag_name":"quickstart","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"quickstart","body":"quickstart release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"false"}'
+          else
+            echo "Not recreating tag because $LATEST_TAG_NAME is different then \"${{ env.RELEASE_TAG }}\""
           fi
           rm releases.json
         fi
