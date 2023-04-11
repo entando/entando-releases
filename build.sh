@@ -13,7 +13,7 @@ P() {
 P "ENVIRONMENT AND PARAMETERS"
 
 . ./manifest
-. .wd/scripts/_base.sh
+. ./script/lib/_base.sh
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 P "OUTPUT CLEANUP"
@@ -45,7 +45,7 @@ touch "$D/manifest.yaml"
 while IFS= read -r line
 do
   eval "echo \"$line\"" >> "$D/manifest.yaml"
-done < "./.wd/res/manifest.yaml.tpl"
+done < "././script/res/manifest.yaml.tpl"
 
 echo "File \"$D/manifest.yaml\" built"
 

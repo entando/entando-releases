@@ -1,56 +1,54 @@
 # ENTANDO VERSION
-ENTANDO_VERSION="v7.0.1"
+ENTANDO_RELEASE="v7.1.5-test16"
 
-# MAIN MODULES VERSIONS
-OPERATOR_BUNDLE_VERSION="v7.0.1"
-ENTANDO_CLI_VERSION="v7.0.0"
+# --------------------------------------------------------------------------------
 
-# DEPENDENCIES
+# OLM INSTALLATIONS - OPERATOR BUNDLE
+OPERATOR_BUNDLE_VERSION="v7.1.5-test16"
+REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
+REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:cdf1770d254a6122939b30df2bc54de0c6ecd76002ccec21edbbba0dd4959363"
 
-# JDK
-VER_JDK_REQ="11.*.*"
-VER_JDK_DEF="11.0.14"
+# TOOL: ENTANDO CLI
+ENTANDO_CLI_VERSION="v7.1.3"
 
-# NVM
-VER_NVM_REQ="*.*.*"
-VER_NVM_DEF="v0.39.1"
+# TOOL: BUNDLER
+REPO_ENTANDO_BUNDLER_ADDR="https://github.com/entando/entando-bundler"
+VER_ENTANDO_BUNDLER_REQ="v7.1.2"
+VER_ENTANDO_BUNDLER_DEF="v7.1.2"
 
-# NODE
-VER_NODE_REQ="14.*.*"
-VER_NODE_DEF="v14.19.0"
+# TOOL: entando-bundle-cli
+REPO_ENTANDO_BUNDLE_CLI_ADDR="https://github.com/entando/entando-bundle-cli"
+VER_ENTANDO_BUNDLE_CLI_REQ="v1.0.3"
+VER_ENTANDO_BUNDLE_CLI_DEF="v1.0.3"
 
-# JHIPSTER
+# TOOL: ECR
+VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.1.1"
+VER_GENERATOR_JHIPSTER_ENTANDO_DEF="v7.1.1"
 VER_JHIPSTER_REQ="7.2.0"
 VER_JHIPSTER_DEF="7.2.0"
 
-# GENERATOR_JHIPSTER_ENTANDO (entando blueprint)
-VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.0.0"
-VER_GENERATOR_JHIPSTER_ENTANDO_DEF="v7.0.0"
+# --------------------------------------------------------------------------------
 
-# BUNDLER
-VER_ENTANDO_BUNDLER_REQ="v7.0.0"
-VER_ENTANDO_BUNDLER_DEF="v7.0.0"
+# OTHER DEPENDENCIES
+
+# JDK
+VER_JDK_REQ="11.*.*"
+VER_JDK_DEF="11.0.17"
+
+# NODE
+VER_NODE_REQ="14.*.*"
+VER_NODE_DEF="v14.20.0"
 
 # K3S
-VER_K3S_REQ="1.21.*"
-VER_K3S_DEF="v1.21.10+k3s1"
+VER_K3S_REQ="1.23.*"
+VER_K3S_DEF="v1.23.16+k3s1"
 
 # OPENSHIFT OKD
-VER_OKD_REQ="4.8"
-VER_OKD_DEF="4.8"
+VER_OKD_REQ="4.11"
+VER_OKD_DEF="4.11"
 
-# OPENSHIFT CATALOG IMAGE
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:22d1635a9fdd35f79bcb01df0131624aa6104f227a5d69c8014f259a434d6151"
-
-# ----------------
-# others..
-
-# REPO OPERATOR BUNDLE
-REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
-REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-
-# REPO BUNDLE TOOL
-REPO_ENTANDO_BUNDLER_ADDR="https://github.com/entando/entando-bundler"
+# --------------------------------------------------------------------------------
 
 # BASE NAME FOR MANIFESTS
 DEPL_SPEC_YAML_FILE="entando-deployment-specs.yaml"

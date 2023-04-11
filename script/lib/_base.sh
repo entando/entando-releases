@@ -1,7 +1,7 @@
 [ -z $ZSH_VERSION ] && [ -z $BASH_VERSION ] && echo "Unsupported shell, user either bash or zsh" 1>&2 && exit 99
 
-T="./.wd/cache"
-S="./.wd/scripts"
+T="./script/cache"
+S="./script/lib"
 D="./dist"
 
 clone() {
