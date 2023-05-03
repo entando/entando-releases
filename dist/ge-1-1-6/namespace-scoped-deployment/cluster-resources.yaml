@@ -417,15 +417,16 @@ spec:
                 standardServerImage:
                   description: >
                     Specifies the standard server base image that this EntandoApp has been packaged in. Valid values
-                    are wildfly (https://github.com/entando/entando-docker-base-images/tree/master/entando-wildfly17-base)
-                    or eap (https://github.com/entando/entando-docker-base-images/tree/master/entando-eap72-clustered-base).
+                    are wildfly (https://github.com/entando/entando-app-engine-base/tree/develop/wildfly)
+                    or tomcat (https://github.com/entando/entando-app-engine-base/tree/develop/tomcat)
+                    or eap (https://github.com/entando/entando-app-engine-base/tree/develop/eap).
                     This property is required to provide the appropriate environment variables to the deployed container.
                     This should be used in conjunction with the 'EntandoApp.spec.customServerImage' property to indicate
                     which base image the custom server image was based on. If no customer server image is specified, this
                     property will result in the deployment of the entando/entando-de-app-eap image for the value 'eap',
                     and the entando/entando-de-app-wildfly image for the value 'wildfly'.
                   type: string
-                  pattern: '^(wildfly|eap)$'
+                  pattern: '^(wildfly|eap|tomcat)$'
                 customServerImage:
                   description: >
                     The full Docker image URI for the Docker image to be deployed. This is only required in scenarios

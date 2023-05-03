@@ -417,15 +417,16 @@ spec:
                 standardServerImage:
                   description: >
                     Specifies the standard server base image that this EntandoApp has been packaged in. Valid values
-                    are wildfly (https://github.com/entando/entando-docker-base-images/tree/master/entando-wildfly17-base)
-                    or eap (https://github.com/entando/entando-docker-base-images/tree/master/entando-eap72-clustered-base).
+                    are wildfly (https://github.com/entando/entando-app-engine-base/tree/develop/wildfly)
+                    or tomcat (https://github.com/entando/entando-app-engine-base/tree/develop/tomcat)
+                    or eap (https://github.com/entando/entando-app-engine-base/tree/develop/eap).
                     This property is required to provide the appropriate environment variables to the deployed container.
                     This should be used in conjunction with the 'EntandoApp.spec.customServerImage' property to indicate
                     which base image the custom server image was based on. If no customer server image is specified, this
                     property will result in the deployment of the entando/entando-de-app-eap image for the value 'eap',
                     and the entando/entando-de-app-wildfly image for the value 'wildfly'.
                   type: string
-                  pattern: '^(wildfly|eap)$'
+                  pattern: '^(wildfly|eap|tomcat)$'
                 customServerImage:
                   description: >
                     The full Docker image URI for the Docker image to be deployed. This is only required in scenarios
@@ -1777,7 +1778,7 @@ data:
   app-builder-6-3: >-
     {"version":"6.3.93-hotfix.1","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   app-builder-6-4: >-
-    {"version":"7.1.5","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
+    {"version":"7.1.6","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   busybox: >-
     {"version":"latest","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-avatar-plugin: >-
@@ -1785,17 +1786,19 @@ data:
   entando-component-manager-6-3: >-
     {"version":"6.3.26-fix.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-component-manager-6-4: >-
-    {"version":"7.1.5-ENGPM-535-PR-294","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
+    {"version":"7.1.5","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-de-app-eap-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-eap-6-4: >-
-    {"version":"7.1.5-ENG-4695-PR-103","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
+    {"version":"7.1.6","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-wildfly-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
   entando-de-app-wildfly-6-4: >-
-    {"version":"7.1.5-ENG-4695-PR-103","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
+    {"version":"7.1.6","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
+  entando-de-app-tomcat-6-4: >-
+    {"version":"7.1.5","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-tomcat"}
   entando-k8s-app-controller: >-
-    {"version":"7.1.3","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.1.6","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
     {"version":"7.1.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-database-service-controller: >-
@@ -2059,7 +2062,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "entando/entando-k8s-controller-coordinator:7.1.4"
+          image: "entando/entando-k8s-controller-coordinator:7.1.6"
           imagePullPolicy: Always
           volumeMounts:
           env:
