@@ -247,9 +247,8 @@ jobs:
             rm result.json
             break
           else
-            echo "Waiting for entando-releases release to be done. It takes around 15 seconds. Waiting 5 seconds."
-            sleep 5
-            continue
+            echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
+            sleep 20
           fi
         done
         for PROPERTY in $(echo $CLIENT_PAYLOAD | jq -c '.properties[]'); do
