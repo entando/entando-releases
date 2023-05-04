@@ -225,24 +225,30 @@ jobs:
           BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
           echo "Querying docker hub: $BASE_URL"
           curl -X GET $BASE_URL > result.json
+          cat result.json
           COUNT=$(jq .count result.json)
           # Check if the Docker image version exists on Docker Hub
           if [[ $COUNT > 0 ]]
           then
             for ((i=0;i<COUNT;i++)); do
               DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
-              if [[ \"$RELEASE_VERSION_SUFFIX\" == $DOCKER_HUB_VERSION ]]
+              if [[ \"${{ env.RELEASE_VERSION_SUFFIX }}\" == $DOCKER_HUB_VERSION ]]
               then
                  INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
                  INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
                  sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@${INDEX_SHA}\"|" manifest
+                 CATALOG_SHA_UPDATED=true
               fi
             done
+          fi
+          if [[ $CATALOG_SHA_UPDATED = true ]]
+          then
+            echo "OKD_CATALOG_IMAGE value uploaded to '${INDEX_SHA}'. Exiting "
             rm result.json
             break
           else
-            echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
-            sleep 20
+            echo "Waiting for entando-releases release to be done. It takes around 15 seconds. Waiting 5 seconds."
+            sleep 5
             continue
           fi
         done
