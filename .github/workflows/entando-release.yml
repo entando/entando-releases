@@ -284,7 +284,7 @@ jobs:
           https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
           -d "$PAYLOAD"
           
-    # Recreate quickstart tag and release
+        # Recreate quickstart tag and release
     - name: Recreate quickstart tag and release
       run: |
         if [[ -z "${{ env.SUFFIX }}" ]]
@@ -293,15 +293,16 @@ jobs:
             curl \
                 -X GET \
                 -H "Accept: application/vnd.github+json" \
-                -H "Authorization: Bearer ${ENTANDO_BOT_TOKEN}"\
+                -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
                 -H "X-GitHub-Api-Version: 2022-11-28" \
-                https://api.github.com/repos/${ENTANDO_RELEASES_REPO}/releases?per_page=50 > releases.json
+                https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=50 > releases.json
+            cat releases.json
             COUNT=$(jq length releases.json)
             TAG_FOUND=false
             for ((i=0;i<COUNT;i++)); do
               RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
-              Echo "Comparing $RELEASE_TAG_NAME with \"${RELEASE_TAG}\""
-              if [[ $RELEASE_TAG_NAME == \"${RELEASE_TAG}\" ]]
+              echo "Comparing $RELEASE_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
+              if [[ $RELEASE_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
               then
                 TAG_FOUND=true
                 break
@@ -324,9 +325,8 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/latest > releases.json
           echo "Curl done."
-          cat releases.json
           LATEST_TAG_NAME=$(jq .tag_name releases.json)
-          Echo "Comparing $LATEST_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
+          echo "Comparing $LATEST_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
           if [[ $LATEST_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
           then
             curl \
