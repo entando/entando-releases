@@ -284,7 +284,7 @@ jobs:
           https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases \
           -d "$PAYLOAD"
           
-        # Recreate quickstart tag and release
+    # Recreate quickstart tag and release
     - name: Recreate quickstart tag and release
       run: |
         if [[ -z "${{ env.SUFFIX }}" ]]
