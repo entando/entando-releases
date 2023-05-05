@@ -191,6 +191,7 @@ jobs:
           MAKE_LATEST=legacy
         fi
         PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
+        echo $PAYLOAD
         curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
@@ -211,7 +212,18 @@ jobs:
       with:
         repository: ${{ env.ENTANDO_RELEASES_REPO }}
         ref: ${{ env.RELEASE_BRANCH }}
-        token: ${{ secrets.ENTANDO_BOT_TOKEN }}       
+        token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+        fetch-depth: 0        
+
+    # Validate the release tag
+    - name: Validate release tag
+      run: |
+        # Check if the release tag already exists
+        if [[ $(git tag -l $RELEASE_TAG) ]]
+        then
+            echo "::error :: Tag '$RELEASE_TAG' already exists"
+            exit 7
+        fi
         
     # Update the manifest file
     - name: Update manifest file
@@ -225,25 +237,30 @@ jobs:
           BASE_URL="https://hub.docker.com/v2/namespaces/entandobuilduser/repositories/entando-k8s-index/tags?name="${{ env.RELEASE_VERSION_SUFFIX }}"&page_size=1000"
           echo "Querying docker hub: $BASE_URL"
           curl -X GET $BASE_URL > result.json
+          cat result.json
           COUNT=$(jq .count result.json)
           # Check if the Docker image version exists on Docker Hub
           if [[ $COUNT > 0 ]]
           then
             for ((i=0;i<COUNT;i++)); do
               DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
-              if [[ \"$RELEASE_VERSION_SUFFIX\" == $DOCKER_HUB_VERSION ]]
+              if [[ \"${{ env.RELEASE_VERSION_SUFFIX }}\" == $DOCKER_HUB_VERSION ]]
               then
                  INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
                  INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
                  sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@${INDEX_SHA}\"|" manifest
+                 CATALOG_SHA_UPDATED=true
               fi
             done
+          fi
+          if [[ $CATALOG_SHA_UPDATED = true ]]
+          then
+            echo "OKD_CATALOG_IMAGE value updated to '${INDEX_SHA}'. Exiting"
             rm result.json
             break
           else
             echo "Waiting for entando-k8s-index to release the version ${{ env.RELEASE_VERSION_SUFFIX }}. It takes around 1 minute. Waiting 20 seconds."
             sleep 20
-            continue
           fi
         done
         for PROPERTY in $(echo $CLIENT_PAYLOAD | jq -c '.properties[]'); do
@@ -273,9 +290,8 @@ jobs:
         then
           MAKE_LATEST=legacy
         fi
-        git tag ${{ env.RELEASE_TAG }} ${{ env.RELEASE_BRANCH }}
-        git push origin ${{ env.RELEASE_TAG }}
         PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
+        echo $PAYLOAD
         curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
@@ -293,15 +309,16 @@ jobs:
             curl \
                 -X GET \
                 -H "Accept: application/vnd.github+json" \
-                -H "Authorization: Bearer ${ENTANDO_BOT_TOKEN}"\
+                -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
                 -H "X-GitHub-Api-Version: 2022-11-28" \
-                https://api.github.com/repos/${ENTANDO_RELEASES_REPO}/releases?per_page=50 > releases.json
+                https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=50 > releases.json
+            cat releases.json
             COUNT=$(jq length releases.json)
             TAG_FOUND=false
             for ((i=0;i<COUNT;i++)); do
               RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
-              Echo "Comparing $RELEASE_TAG_NAME with \"${RELEASE_TAG}\""
-              if [[ $RELEASE_TAG_NAME == \"${RELEASE_TAG}\" ]]
+              echo "Comparing $RELEASE_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
+              if [[ $RELEASE_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
               then
                 TAG_FOUND=true
                 break
@@ -323,10 +340,9 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/latest > releases.json
-          echo "Curl done."
           cat releases.json
           LATEST_TAG_NAME=$(jq .tag_name releases.json)
-          Echo "Comparing $LATEST_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
+          echo "Comparing $LATEST_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
           if [[ $LATEST_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
           then
             curl \
@@ -335,6 +351,7 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=10 > releases.json
+            cat releases.json
             COUNT=$(jq length releases.json)
             for ((i=0;i<COUNT;i++)); do
               RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
