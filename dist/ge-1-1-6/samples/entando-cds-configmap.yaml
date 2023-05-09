@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entando-operator-config
+data:
+  entando.pod.completion.timeout.seconds: "2000"
+  entando.pod.readiness.timeout.seconds: "2000"
+  entando.requires.filesystem.group.override: "true"
+  entando.ingress.class: "nginx"
+  entando.tls.secret.name: YOUR-TLS-SECRET
+
+# More..
+#  entando.k8s.operator.image.pull.secrets: sample-pull-secret
+#  entando.docker.registry.override: "docker.io"
+#  entando.ca.secret.name: sample-ca-cert-secret
+#  entando.assume.external.https.provider: "true"
+#  entando.k8s.operator.impose.limits: "true"

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    deployment: YOUR-PRIMARY-CDS-DEPLOYMENT
+  name: YOUR-PRIMARY-PVC
+  namespace: YOUR-NAMESPACE
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    limits:
+      storage: 1Gi
+    requests:
+      storage: 1Gi
