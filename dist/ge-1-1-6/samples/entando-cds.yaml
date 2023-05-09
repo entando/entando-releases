@@ -145,7 +145,7 @@ spec:
                 port:
                   number: 8081
             pathType: Prefix
-            path: /YOUR-TENANT-ID-cds-service
+            path: /YOUR-TENANT-ID
           - backend:
               service:
                 name: YOUR-TENANT-ID-cds-service
