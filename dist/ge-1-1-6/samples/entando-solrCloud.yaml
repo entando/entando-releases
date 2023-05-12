@@ -9,8 +9,6 @@ spec:
       method: Ingress
       useExternalAddress: true
   customSolrKubeOptions:
-    ingressOptions:
-      ingressClassName: nginx
     podOptions:
       resources:
         limits:
