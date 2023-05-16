@@ -1,0 +1,52 @@
+apiVersion: solr.apache.org/v1beta1
+kind: SolrCloud
+metadata:
+  name: solr
+spec:
+  customSolrKubeOptions:
+    podOptions:
+      resources:
+        limits:
+          memory: 2Gi
+          cpu: 1000m
+        requests:
+          cpu: 350m
+          memory: 2Gi
+  dataStorage:
+    persistent:
+      pvcTemplate:
+        spec:
+          resources:
+            requests:
+              storage: 10Gi
+      reclaimPolicy: Delete
+  replicas: 3
+  solrImage:
+    repository: entando/entando-solr
+    tag: "8"
+  solrJavaMem: -Xms2048M -Xmx2048M
+  updateStrategy:
+    method: StatefulSet
+  zookeeperRef:
+    provided:
+      chroot: /explore
+      image:
+        pullPolicy: IfNotPresent
+        repository: pravega/zookeeper
+        tag: 0.2.13
+      persistence:
+        reclaimPolicy: Delete
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+      replicas: 3
+      zookeeperPodPolicy:
+        resources:
+          limits:
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 500Mi
