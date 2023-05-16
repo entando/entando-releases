@@ -3,11 +3,6 @@ kind: SolrCloud
 metadata:
   name: solr
 spec:
-  solrAddressability:
-    external:
-      domainName: YOUR-HOST-NAME
-      method: Ingress
-      useExternalAddress: true
   customSolrKubeOptions:
     podOptions:
       resources:
