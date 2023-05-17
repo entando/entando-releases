@@ -1,0 +1,77 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    entando.org/YOUR-APP-NAME-appbuilder-path: /app-builder/
+    entando.org/YOUR-APP-NAME-de-path: /digital-exchange
+    entando.org/YOUR-APP-NAME-pn-3c07adf0-fac54a9f-entando3323-pn-3c07adf0-fa-path: /entando-epc-bootstrap-3c07adf0/app-builder-menu-bff
+    entando.org/YOUR-APP-NAME-server-path: /entando-de-app
+  generation: 4
+  labels:
+    EntandoApp: YOUR-APP-NAME
+  name: YOUR-TENANT1-ID-YOUR-APP-NAME-ingress
+  namespace: YOUR-NAMESPACE
+spec:
+  rules:
+  - host: YOUR-TENANT1-ID.YOUR-HOST-NAME
+    http:
+      paths:
+      - backend:
+          service:
+            name: YOUR-APP-NAME-ab-service
+            port:
+              number: 8081
+        path: /app-builder/
+        pathType: Prefix
+      - backend:
+          service:
+            name: YOUR-APP-NAME-service
+            port:
+              number: 8080
+        path: /entando-de-app
+        pathType: Prefix
+      - backend:
+          service:
+            name: YOUR-APP-NAME-cm-service
+            port:
+              number: 8083
+        path: /digital-exchange
+        pathType: Prefix
+      - backend:
+          service:
+            name: pn-3c07adf0-fac54a9f-entando-app-builder-menu-bff-service
+            port:
+              number: 8081
+        path: /entando-epc-bootstrap-3c07adf0/app-builder-menu-bff
+        pathType: Prefix
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/dockercfg
+metadata:
+  name: YOUR-TENANT1-ID-SECRET
+stringData:
+  ENTANDO_TENANTS: >-
+    [
+        {
+            "tenantCode": "YOUR-TENANT1-ID", # default subdomain name 
+            "fqdns": "YOUR-TENANT1-ID.YOUR-HOSTNAME" # value string and comma separated domains
+            "kcEnabled": true,
+            "kcAuthUrl": "https://YOUR-HOST-NAME/auth",
+            "kcRealm": "YOUR-TENANT1-ID",
+            "kcClientId": "YOUR-APP-NAME",
+            "kcClientSecret": "YOUR-TENANT1-KC-SECRET",
+            "kcPublicClientId": "entando-web",
+            "kcSecureUris": "",
+            "kcDefaultAuthorizations": "",
+            "dbDriverClassName": "org.postgresql.Driver",
+            "dbUrl": "YOUR-POSTGRESQL-TENANT1-URL",
+            "dbUsername": "postgres",
+            "dbPassword": "e7d60efa865c4510",
+            "cdsPublicUrl": "http://YOUR-APP-NAME-cds.YOUR-HOST-NAME/YOUR-TENANT1-ID", # will depend on your DNS entry
+            "cdsPrivateUrl": "http://YOUR-TENANT1-ID-cds-service:8080",
+            "cdsPath": "api/v1",
+            "solrAddress": "http://solr-solrcloud-common/solr/solr",
+            "solrCore": "YOUR-TENANT1-ID"
+        }
+    ]
