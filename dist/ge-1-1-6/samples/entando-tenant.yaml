@@ -47,7 +47,7 @@ spec:
 ---
 apiVersion: v1
 kind: Secret
-type: kubernetes.io/dockercfg
+type: Opaque
 metadata:
   name: YOUR-TENANT1-ID-SECRET
 stringData:
