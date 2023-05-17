@@ -9,11 +9,11 @@ metadata:
   generation: 4
   labels:
     EntandoApp: YOUR-APP-NAME
-  name: YOUR-TENANT1-ID-YOUR-APP-NAME-ingress
+  name: YOUR-TENANT-ID-YOUR-APP-NAME-ingress
   namespace: YOUR-NAMESPACE
 spec:
   rules:
-  - host: YOUR-TENANT1-ID.YOUR-HOST-NAME
+  - host: YOUR-TENANT-ID.YOUR-HOST-NAME
     http:
       paths:
       - backend:
