@@ -10,10 +10,9 @@ metadata:
   labels:
     EntandoApp: YOUR-APP-NAME
   name: YOUR-TENANT-ID-YOUR-APP-NAME-ingress
-  namespace: YOUR-NAMESPACE
 spec:
   rules:
-  - host: YOUR-TENANT-ID.YOUR-HOST-NAME
+  - host: YOUR-TENANT-ID.YOUR-APP-NAME.YOUR-HOST-NAME
     http:
       paths:
       - backend:
