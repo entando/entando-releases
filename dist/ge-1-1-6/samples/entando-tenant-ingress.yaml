@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    entando.org/YOUR-APP-NAME-appbuilder-path: /app-builder/
+    entando.org/YOUR-APP-NAME-de-path: /digital-exchange
+    entando.org/YOUR-APP-NAME-server-path: /entando-de-app
+  generation: 4
+  labels:
+    EntandoApp: YOUR-APP-NAME
+  name: YOUR-TENANT-ID-YOUR-APP-NAME-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: YOUR-TENANT-ID.YOUR-APP-NAME.YOUR-HOST-NAME
+    http:
+      paths:
+      - backend:
+          service:
+            name: YOUR-APP-NAME-ab-service
+            port:
+              number: 8081
+        path: /app-builder/
+        pathType: Prefix
+      - backend:
+          service:
+            name: YOUR-APP-NAME-service
+            port:
+              number: 8080
+        path: /entando-de-app
+        pathType: Prefix
+      - backend:
+          service:
+            name: YOUR-APP-NAME-cm-service
+            port:
+              number: 8083
+        path: /digital-exchange
+        pathType: Prefix
+      - backend:
+          service:
+            name: pn-3c07adf0-fac54a9f-entando-app-builder-menu-bff-service
+            port:
+              number: 8081
+        path: /entando-epc-bootstrap-3c07adf0/app-builder-menu-bff
+        pathType: Prefix
