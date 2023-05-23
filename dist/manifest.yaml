@@ -1,7 +1,7 @@
 entando: 
-  main: "v7.2.1-rc1"
-  operator_bundle: "v7.2.1-rc1"
-  entando_cli_version: "v7.1.3"
+  main: "v7.2.1-rc2"
+  operator_bundle: "v7.2.1-rc2"
+  entando_cli_version: "v7.2.0"
 
 dependencies:
   jdk:
@@ -20,8 +20,8 @@ dependencies:
       req_ver: "v7.1.2"
       def_ver: "v7.1.2"
   entando_bundle_cli:
-      req_ver: "1.1.0-ENGPM-546-rc1"
-      def_ver: "1.1.0-ENGPM-546-rc1"
+      req_ver: "1.1.0"
+      def_ver: "1.1.0"
   k3s:
       req_ver: "1.23.*"
       def_ver: "v1.23.16+k3s1"
