@@ -57,5 +57,8 @@ cat "$TPLD/base/entando-solrCloud.yaml" | _set_placeholders > "$SMPD/entando-sol
 cat "$TPLD/base/entando-tenant-ingress.yaml" | _set_placeholders > "$SMPD/entando-tenant-ingress.yaml"
 cat "$TPLD/base/entando-tenants-secret.yaml" | _set_placeholders > "$SMPD/entando-tenants-secret.yaml"
 
-# CATALOG
+# OTHERS
 cat "$TPLD/misc/catalog-source.yaml" | _set_catalog_placeholders > "$SMPD/openshift-catalog-source.yaml"
+cat "$TPLD/misc/entando-solrCloud.yaml" > "$SMPD/entando-solrCloud.yaml"
+cat "$TPLD/misc/entando-tenant-ingress.yaml" > "$SMPD/entando-tenant-ingress.yaml"
+cat "$TPLD/misc/entando-tenants-secret.yaml" > "$SMPD/entando-tenants-secret.yaml"
