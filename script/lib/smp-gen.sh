@@ -53,9 +53,9 @@ mkdir -p "$SMPD"
 cat "$TPLD/base/entando-app.yaml" | _set_placeholders > "$SMPD/entando-app.yaml"
 cat "$TPLD/base/entando-operator-config.yaml" | _set_placeholders > "$SMPD/entando-operator-config.yaml"
 cat "$TPLD/base/entando-operator-config.yaml" | _set_placeholders > "$SMPD/entando-operator-config.yaml"
-cat "$TPLD/base/entando-solrCloud.yaml" | _set_placeholders > "$SMPD/entando-solrCloud.yaml"
-cat "$TPLD/base/entando-tenant-ingress.yaml" | _set_placeholders > "$SMPD/entando-tenant-ingress.yaml"
-cat "$TPLD/base/entando-tenants-secret.yaml" | _set_placeholders > "$SMPD/entando-tenants-secret.yaml"
+cat "$TPLD/base/entando-solrCloud.yaml" > "$SMPD/entando-solrCloud.yaml"
+cat "$TPLD/base/entando-tenant-ingress.yaml" > "$SMPD/entando-tenant-ingress.yaml"
+cat "$TPLD/base/entando-tenants-secret.yaml" > "$SMPD/entando-tenants-secret.yaml"
 
 # CATALOG
 cat "$TPLD/misc/catalog-source.yaml" | _set_catalog_placeholders > "$SMPD/openshift-catalog-source.yaml"
