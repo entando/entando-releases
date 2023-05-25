@@ -62,3 +62,4 @@ cat "$TPLD/misc/catalog-source.yaml" | _set_catalog_placeholders > "$SMPD/opensh
 cat "$TPLD/misc/entando-solrCloud.yaml" > "$SMPD/entando-solrCloud.yaml"
 cat "$TPLD/misc/entando-tenant-ingress.yaml" > "$SMPD/entando-tenant-ingress.yaml"
 cat "$TPLD/misc/entando-tenants-secret.yaml" > "$SMPD/entando-tenants-secret.yaml"
+cat "$TPLD/misc/entando-cds.yaml" > "$SMPD/entando-cds.yaml"
