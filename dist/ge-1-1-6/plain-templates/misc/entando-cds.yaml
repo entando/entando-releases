@@ -1,0 +1,165 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: YOUR-TENANT-ID-kc-secret
+type: Opaque
+stringData:
+  KC_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nYOUR-PUBLIC-KEYCLOAK-KEY\n-----END PUBLIC KEY-----\n"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    deployment: YOUR-TENANT-ID-cds-deployment
+  name: YOUR-TENANT-ID-cds-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    limits:
+      storage: 1Gi
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: YOUR-TENANT-ID-cds-service
+  labels:
+    app: YOUR-TENANT-ID-cds-service
+spec:
+  ports:
+    - port: 8080
+      name: internal-port
+      protocol: TCP
+      targetPort: 8080
+    - port: 8081
+      name: public-port
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    app: YOUR-TENANT-ID-cds-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: YOUR-TENANT-ID-cds-deployment
+  labels:
+    app: YOUR-TENANT-ID-cds-deployment
+spec:
+  selector:
+    matchLabels:
+      app: YOUR-TENANT-ID-cds-deployment
+  template:
+    metadata:
+      labels:
+        app: YOUR-TENANT-ID-cds-deployment
+    spec:
+      initContainers:
+        - name: init-cds-data
+          env:
+          - name: FORCE_CDS
+            value: "false"
+          - name: REPO_PATH
+            value: https://raw.github.com/entando-ps/cds/entando721/entando-data/
+          - name: ARCHIVE_NAME
+            value: entando721.tar.gz
+          image: registry.hub.docker.com/entando/busybox-cds:1.36.0
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /entando-data
+              name: cds-data-volume
+      containers:
+        - readinessProbe:
+            httpGet:
+              port: 8081
+              path: /health/health_check
+              scheme: HTTP
+            failureThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          env:
+            - name: RUST_LOG
+              value: actix_web=info,actix_server=info,actix_web_middleware_keycloak_auth=trace
+            - name: KEYCLOAK_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: KC_PUBLIC_KEY
+                  name: YOUR-TENANT-ID-kc-secret
+            - name: CORS_ALLOWED_ORIGIN # # use for external CDS service
+              value: All # enter your Entando app domain name
+            - name: CORS_ALLOWED_ORIGIN_END_WITH # use for wildcard domain name
+              value: "YOUR-HOST-NAME" # enter wildcard domain name for your Entando app, e.g. "nip.io"
+          name: cds
+          image: docker.io/entando/cds:1.0.4
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 8081
+              path: /health/health_check
+            timeoutSeconds: 5
+            successThreshold: 1
+            periodSeconds: 30
+            initialDelaySeconds: 5
+            failureThreshold: 1
+          ports:
+            - containerPort: 8080
+              name: internal-port
+            - containerPort: 8081
+              name: public-port
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 500m
+              memory: 500Mi
+          volumeMounts:
+            - mountPath: /entando-data
+              name: cds-data-volume
+      volumes:
+        - name: cds-data-volume
+          persistentVolumeClaim:
+            claimName: YOUR-TENANT-ID-cds-pvc
+            readOnly: false
+  replicas: 1
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: YOUR-TENANT-ID-cds-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+      proxy_set_header X-Scheme \$scheme;
+      proxy_set_header X-Forwarded-Proto \$scheme;
+      add_header Content-Security-Policy upgrade-insecure-requests;
+    nginx.ingress.kubernetes.io/proxy-body-size: "150m" # edit according to the file size you require
+    nginx.org/client-max-body-size: "150m" # edit according to the file size you require
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: YOUR-APP-NAME-cds.YOUR-HOST-NAME
+      http:
+        paths:
+          - backend:
+              service:
+                name: YOUR-TENANT-ID-cds-service
+                port:
+                  number: 8081
+            pathType: Prefix
+            path: /YOUR-TENANT-ID
+          - backend:
+              service:
+                name: YOUR-TENANT-ID-cds-service
+                port:
+                  number: 8080
+            pathType: Prefix
+            path: /api/v1/
+#  tls: # Optional - enable TLS here
+#    - hosts:
+#        - YOUR-APP-NAME-cds.YOUR-HOST-NAME
+#      secretName: cds-tls
