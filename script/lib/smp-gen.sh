@@ -28,7 +28,7 @@ _set_catalog_placeholders() {
 _set_placeholders() {
   local TPL="$1"
   local REPLICA="1"
-  local IMGTYPE="eap"
+  local IMGTYPE="tomcat"
   local DB="${OVERRIDE_DB_TYPE:-"embedded"}"
   local ENTANDO_HOSTNAME="YOUR-HOST-NAME"
   local ENTANDO_NAMESPACE="entando"
