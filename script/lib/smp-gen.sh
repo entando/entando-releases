@@ -28,8 +28,7 @@ _set_catalog_placeholders() {
 _set_placeholders() {
   local TPL="$1"
   local REPLICA="1"
-  #local IMGTYPE="tomcat"
-  local IMGTYPE="eap"
+  local IMGTYPE="tomcat"
   local DB="${OVERRIDE_DB_TYPE:-"embedded"}"
   local ENTANDO_HOSTNAME="YOUR-HOST-NAME"
   local ENTANDO_NAMESPACE="entando"
@@ -60,7 +59,7 @@ cat "$TPLD/base/entando-tenants-secret.yaml" | _set_placeholders > "$SMPD/entand
 
 # OTHERS
 cat "$TPLD/misc/catalog-source.yaml" | _set_catalog_placeholders > "$SMPD/openshift-catalog-source.yaml"
-#cat "$TPLD/misc/entando-solrCloud.yaml" > "$SMPD/entando-solrCloud.yaml"
-#cat "$TPLD/misc/entando-tenant-ingress.yaml" > "$SMPD/entando-tenant-ingress.yaml"
-#cat "$TPLD/misc/entando-tenants-secret.yaml" > "$SMPD/entando-tenants-secret.yaml"
-#cat "$TPLD/misc/entando-cds.yaml" > "$SMPD/entando-cds.yaml"
+cat "$TPLD/misc/entando-solrCloud.yaml" > "$SMPD/entando-solrCloud.yaml"
+cat "$TPLD/misc/entando-tenant-ingress.yaml" > "$SMPD/entando-tenant-ingress.yaml"
+cat "$TPLD/misc/entando-tenants-secret.yaml" > "$SMPD/entando-tenants-secret.yaml"
+cat "$TPLD/misc/entando-cds.yaml" > "$SMPD/entando-cds.yaml"
