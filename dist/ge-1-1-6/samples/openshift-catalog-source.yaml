@@ -1,11 +1,11 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
-  name: entando-7-2-1-test2
+  name: entando-7-2-2-rc1
   namespace: openshift-marketplace
 spec:
-  displayName: "Entando 7.2.1-test2"
-  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:755de58079c333ee0ddc866f318c0d9cf191ece7285723ae8cff749eebbab0e4
+  displayName: "Entando 7.2.2-rc1"
+  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:e617461203f31ae422c4e17567422ca7fd8f7d89447ab79ed50cf276851dd7c7
   sourceType: grpc
   updateStrategy:
     registryPoll:
