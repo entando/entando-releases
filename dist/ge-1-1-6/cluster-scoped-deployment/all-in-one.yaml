@@ -1772,7 +1772,7 @@ data:
   app-builder-6-3: >-
     {"version":"6.3.93-hotfix.1","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   app-builder-6-4: >-
-    {"version":"6.3.93-hotfix.2","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
+    {"version":"6.5.4","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   busybox: >-
     {"version":"latest","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-avatar-plugin: >-
@@ -2054,7 +2054,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "entando/entando-k8s-controller-coordinator:7.0.4"
+          image: "entando/entando-k8s-controller-coordinator:7.0.5"
           imagePullPolicy: Always
           volumeMounts:
           env:
@@ -2111,7 +2111,6 @@ spec:
             timeoutSeconds: 3
           resources:
             null
-          terminationGracePeriodSeconds:
 ---
 # Source: entando-k8s-operator-bundle/charts/operator/templates/entando-k8s-service-deployment.yaml
 kind: Deployment
