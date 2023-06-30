@@ -185,11 +185,42 @@ jobs:
     # Release entando-k8s-operator-bundle
     - name: Release entando-k8s-operator-bundle ${{ env.RELEASE_TAG }}
       run: |
-        MAKE_LATEST=false
-        if [[ -z "${{ env.SUFFIX }}" ]]
-        then
-          MAKE_LATEST=legacy
+        curl \
+          -X GET \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}/releases/latest > releases.json
+        LATEST_TAG_NAME=$(jq .tag_name releases.json)
+        echo "The current entando-k8s-operator-bundle latest tag is = $LATEST_TAG_NAME"
+        VERSION_REGEX='^([0-9]+).([0-9]+).([0-9]+)$'
+        CURRENT_LATEST_VERSION=${LATEST_TAG_NAME:2:-1}
+        echo "CURRENT_LATEST_VERSION = $CURRENT_LATEST_VERSION"
+        if [[ $CURRENT_LATEST_VERSION =~ $VERSION_REGEX ]]; then
+            current_major=${BASH_REMATCH[1]}
+            current_minor=${BASH_REMATCH[2]} 
+            current_patch=${BASH_REMATCH[3]}
+            echo "current_major = $current_major, current_minor = $current_minor, current_patch = $current_patch"
+        else
+            echo "CURRENT_LATEST_VERSION = $CURRENT_LATEST_VERSION did not match regex"
         fi
+        MAKE_LATEST=false
+        if [[ ${{ env.RELEASE_VERSION_SUFFIX }} =~ $VERSION_REGEX ]]; then
+            new_major=${BASH_REMATCH[1]}
+            new_minor=${BASH_REMATCH[2]}
+            new_patch=${BASH_REMATCH[3]}
+            echo "new_major = $new_major, new_minor = $new_minor, new_patch = $new_patch"
+            if [[ $new_major -gt $current_major ]] || 
+            [[ $new_major -eq $current_major && $new_minor -gt $current_minor ]] ||
+            [[ $new_major -eq $current_major && $new_minor -eq $current_minor && $new_patch -gt $current_patch ]]; then
+                MAKE_LATEST=true 
+            else 
+                echo "RELEASE_VERSION_SUFFIX = ${{ env.RELEASE_VERSION_SUFFIX }} was not considered the latest"
+            fi
+        else
+            echo "RELEASE_VERSION_SUFFIX = ${{ env.RELEASE_VERSION_SUFFIX }} did not match regex"
+        fi
+        echo "MAKE_LATEST = $MAKE_LATEST"
         PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
         echo $PAYLOAD
         curl \
@@ -213,8 +244,8 @@ jobs:
         repository: ${{ env.ENTANDO_RELEASES_REPO }}
         ref: ${{ env.RELEASE_BRANCH }}
         token: ${{ secrets.ENTANDO_BOT_TOKEN }}
-        fetch-depth: 0        
-
+        fetch-depth: 0
+        
     # Validate the release tag
     - name: Validate release tag
       run: |
@@ -285,11 +316,42 @@ jobs:
     # Tag and release entando-releases
     - name: Tag and release entando-releases ${{ env.RELEASE_TAG }}
       run: |
-        MAKE_LATEST=false
-        if [[ -z "${{ env.SUFFIX }}" ]]
-        then
-          MAKE_LATEST=legacy
+        curl \
+          -X GET \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/latest > releases.json
+        LATEST_TAG_NAME=$(jq .tag_name releases.json)
+        echo "The current entando-releases latest tag is = $LATEST_TAG_NAME"
+        VERSION_REGEX='^([0-9]+).([0-9]+).([0-9]+)$'
+        CURRENT_LATEST_VERSION=${LATEST_TAG_NAME:2:-1}
+        echo "CURRENT_LATEST_VERSION = $CURRENT_LATEST_VERSION"
+        if [[ $CURRENT_LATEST_VERSION =~ $VERSION_REGEX ]]; then
+            current_major=${BASH_REMATCH[1]}
+            current_minor=${BASH_REMATCH[2]} 
+            current_patch=${BASH_REMATCH[3]}
+            echo "current_major = $current_major, current_minor = $current_minor, current_patch = $current_patch"
+        else
+            echo "CURRENT_LATEST_VERSION = $CURRENT_LATEST_VERSION did not match regex"
         fi
+        MAKE_LATEST=false
+        if [[ ${{ env.RELEASE_VERSION_SUFFIX }} =~ $VERSION_REGEX ]]; then
+            new_major=${BASH_REMATCH[1]}
+            new_minor=${BASH_REMATCH[2]}
+            new_patch=${BASH_REMATCH[3]}
+            echo "new_major = $new_major, new_minor = $new_minor, new_patch = $new_patch"
+            if [[ $new_major -gt $current_major ]] || 
+            [[ $new_major -eq $current_major && $new_minor -gt $current_minor ]] ||
+            [[ $new_major -eq $current_major && $new_minor -eq $current_minor && $new_patch -gt $current_patch ]]; then
+                MAKE_LATEST=true 
+            else 
+                echo "RELEASE_VERSION_SUFFIX = ${{ env.RELEASE_VERSION_SUFFIX }} was not considered the latest"
+            fi
+        else
+            echo "RELEASE_VERSION_SUFFIX = ${{ env.RELEASE_VERSION_SUFFIX }} did not match regex"
+        fi
+        echo "MAKE_LATEST = $MAKE_LATEST"
         PAYLOAD='{"tag_name":"${{ env.RELEASE_TAG }}","target_commitish":"${{ env.RELEASE_BRANCH }}","name":"${{ env.RELEASE_TAG }}","body":"${{ env.RELEASE_TAG }} release","draft":false,"prerelease":false,"generate_release_notes":true,"make_latest":"'$MAKE_LATEST\"}
         echo $PAYLOAD
         curl \
@@ -312,7 +374,6 @@ jobs:
                 -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=50 > releases.json
-            cat releases.json
             COUNT=$(jq length releases.json)
             TAG_FOUND=false
             for ((i=0;i<COUNT;i++)); do
@@ -340,7 +401,6 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases/latest > releases.json
-          cat releases.json
           LATEST_TAG_NAME=$(jq .tag_name releases.json)
           echo "Comparing $LATEST_TAG_NAME with \"${{ env.RELEASE_TAG }}\""
           if [[ $LATEST_TAG_NAME == \"${{ env.RELEASE_TAG }}\" ]]
@@ -351,7 +411,6 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.ENTANDO_BOT_TOKEN }}"\
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/${{ env.ENTANDO_RELEASES_REPO }}/releases?per_page=10 > releases.json
-            cat releases.json
             COUNT=$(jq length releases.json)
             for ((i=0;i<COUNT;i++)); do
               RELEASE_TAG_NAME=$(jq .[$i].tag_name releases.json)
