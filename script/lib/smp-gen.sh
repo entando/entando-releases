@@ -65,3 +65,4 @@ cat "$TPLD/misc/entando-tenants-secret.yaml" >"$SMPD/entando-tenants-secret.yaml
 cat "$TPLD/misc/entando-cds.yaml" >"$SMPD/entando-cds.yaml"
 cat "$TPLD/misc/kustomization-K8S.yaml" >"$SMPD/kustomization-K8S.yaml"
 cat "$TPLD/misc/kustomization-OCP.yaml" >"$SMPD/kustomization-OCP.yam"
+cat "$TPLD/misc/entando-upgrade.sh" >"$SMPD/entando-upgrade.sh"
