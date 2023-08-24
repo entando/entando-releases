@@ -34,7 +34,8 @@ env:
   # Release version. Example: 7.1
   RELEASE_VERSION: ${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}
   # Release branch. Example: release/7.1
-  RELEASE_BRANCH: release/${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}
+  # TODO Change this back to: RELEASE_BRANCH: release/${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}
+  RELEASE_BRANCH: develop
   # Release version with patch. Example: 7.1.4
   RELEASE_VERSION_PATCH: ${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}.${{ github.event.client_payload.patch }}
   # Release version with patch. Example: 7.1.4-rc2
