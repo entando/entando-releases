@@ -39,7 +39,7 @@
   digest: sha256:4bc6797bb41b3e407b64530c3cff7a78f3fc2c22863caad9c606ccd650310b61
 - name: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newName: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
-  digest: sha256:e5d38d61aa6176b65cad9df4dadcff4e760e2f3897842811eeb492dcc11a3aef
+  digest: sha256:1d4a90618a13be7c191d9bc296294f697a8972dbf9a55e9a76a714350e89db5d
 - name: registry.hub.docker.com/entando/entando-k8s-database-service-controller
   newName: registry.hub.docker.com/entando/entando-k8s-database-service-controller
   digest: sha256:9ca7d91f73882257c1efb2fd775b65e398599a177b2c4094d81c82bb1cedabf2

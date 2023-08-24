@@ -285,7 +285,7 @@ spec:
       volumes:
       containers:
         - name: operator
-          image: "entando/entando-k8s-controller-coordinator:7.2.0"
+          image: "entando/entando-k8s-controller-coordinator:7.2.0-IT-442-PR-131"
           imagePullPolicy: Always
           volumeMounts:
           env:

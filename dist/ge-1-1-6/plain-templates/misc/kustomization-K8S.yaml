@@ -39,7 +39,7 @@
   newTag: 6.3.11
 - name: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newName: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
-  newTag: 7.2.0
+  newTag: 7.2.0-IT-442-PR-131
 - name: registry.hub.docker.com/entando/entando-k8s-database-service-controller
   newName: registry.hub.docker.com/entando/entando-k8s-database-service-controller
   newTag: 7.2.0-IT-442-PR-48
