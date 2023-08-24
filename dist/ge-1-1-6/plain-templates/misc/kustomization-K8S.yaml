@@ -19,36 +19,54 @@
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   newTag: 7.2.1
+- name: registry.hub.docker.com/entando/entando-de-app-wildfly
+  newName: registry.hub.docker.com/entando/entando-de-app-wildfly
+  newTag: 7.2.1
+- name: registry.hub.docker.com/entando/entando-de-app-tomcat
+  newName: registry.hub.docker.com/entando/entando-de-app-tomcat
+  newTag: 7.3.0-IT-410-PR-189
+- name: registry.hub.docker.com/entando/entando-k8s-app-controller
+  newName: registry.hub.docker.com/entando/entando-k8s-app-controller
+  newTag: 7.2.0-IT-442-PR-90
+- name: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
+  newName: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
+  newTag: 7.3.0-IT-442-PR-54
+- name: registry.hub.docker.com/entando/entando-k8s-cluster-infrastructure-controller
+  newName: registry.hub.docker.com/entando/entando-k8s-cluster-infrastructure-controller
+  newTag: 6.3.7
+- name: registry.hub.docker.com/entando/entando-k8s-composite-app-controller
+  newName: registry.hub.docker.com/entando/entando-k8s-composite-app-controller
+  newTag: 6.3.11
 - name: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newName: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newTag: 7.2.0
 - name: registry.hub.docker.com/entando/entando-k8s-database-service-controller
   newName: registry.hub.docker.com/entando/entando-k8s-database-service-controller
-  newTag: 7.2.0
+  newTag: 7.2.0-IT-442-PR-48
 - name: registry.hub.docker.com/entando/entando-k8s-dbjob
   newName: registry.hub.docker.com/entando/entando-k8s-dbjob
-  newTag: 7.1.1
+  newTag: 7.2.0-IT-442-PR-46
 - name: registry.hub.docker.com/entando/entando-k8s-keycloak-controller
   newName: registry.hub.docker.com/entando/entando-k8s-keycloak-controller
-  newTag: 7.2.0
+  newTag: 7.2.0-IT-442-PR-72
 - name: registry.hub.docker.com/entando/entando-k8s-plugin-controller
   newName: registry.hub.docker.com/entando/entando-k8s-plugin-controller
-  newTag: 7.2.0
+  newTag: 7.3.0-IT-442-PR-83
 - name: registry.hub.docker.com/entando/entando-k8s-service
   newName: registry.hub.docker.com/entando/entando-k8s-service
-  newTag: 7.1.2
+  newTag: 7.3.0-ENG-5087-PR-80
 - name: registry.hub.docker.com/entando/entando-process-driven-plugin
   newName: registry.hub.docker.com/entando/entando-process-driven-plugin
   newTag: 6.0.50-fix.1
 - name: registry.hub.docker.com/entando/entando-keycloak
   newName: registry.hub.docker.com/entando/entando-keycloak
-  newTag: 7.2.0
+  newTag: 7.2.0-IT-406-PR-39
 - name: registry.hub.docker.com/entando/entando-redhat-sso
   newName: registry.hub.docker.com/entando/entando-redhat-sso
   newTag: 7.2.0
 - name: registry.hub.docker.com/entando/entando-mysql-rocky
   newName: registry.hub.docker.com/entando/entando-mysql-rocky
-  newTag: 8.0.29
+  newTag: v8.0.33-IT-409-PR-8-KB-release-2F-8.0
 - name: registry.hub.docker.com/entando/entando-postgres-rocky
   newName: registry.hub.docker.com/entando/entando-postgres-rocky
-  newTag: 14.1.0
+  newTag: 14.1.0-IT-408-PR-10
