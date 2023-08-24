@@ -19,24 +19,6 @@
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   newTag: 7.2.1
-- name: registry.hub.docker.com/entando/entando-de-app-wildfly
-  newName: registry.hub.docker.com/entando/entando-de-app-wildfly
-  newTag: 7.2.1
-- name: registry.hub.docker.com/entando/entando-de-app-tomcat
-  newName: registry.hub.docker.com/entando/entando-de-app-tomcat
-  newTag: 7.2.1
-- name: registry.hub.docker.com/entando/entando-k8s-app-controller
-  newName: registry.hub.docker.com/entando/entando-k8s-app-controller
-  newTag: 7.2.0
-- name: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
-  newName: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
-  newTag: 7.2.0
-- name: registry.hub.docker.com/entando/entando-k8s-cluster-infrastructure-controller
-  newName: registry.hub.docker.com/entando/entando-k8s-cluster-infrastructure-controller
-  newTag: 6.3.7
-- name: registry.hub.docker.com/entando/entando-k8s-composite-app-controller
-  newName: registry.hub.docker.com/entando/entando-k8s-composite-app-controller
-  newTag: 6.3.11
 - name: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newName: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newTag: 7.2.0
