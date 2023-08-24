@@ -36,7 +36,7 @@ data:
   app-builder-6-3: >-
     {"version":"6.3.93-hotfix.1","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   app-builder-6-4: >-
-    {"version":"7.2.1","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
+    {"version":"7.3.0-IT-403-PR-1521","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   busybox: >-
     {"version":"latest","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-avatar-plugin: >-
@@ -44,7 +44,7 @@ data:
   entando-component-manager-6-3: >-
     {"version":"6.3.26-fix.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-component-manager-6-4: >-
-    {"version":"7.2.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
+    {"version":"7.3.0-IT-442-PR-352","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-de-app-eap-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-eap-6-4: >-
@@ -80,9 +80,9 @@ data:
   postgresql-12-centos7: >-
     {"version":"14.1.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-rocky"}
   rhel8-mysql-80: >-
-    {"version":"8.0.29","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando",,"repository":"entando-mysql-ubi"}
+    {"version":"v8.0.33-IT-409-PR-8-KB-release-2F-8.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando",,"repository":"entando-mysql-ubi"}
   rhel8-postgresql-12: >-
-    {"version":"14.1.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-ubi"}
+    {"version":"14.1.0-IT-408-PR-10","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-ubi"}
 ---
 # Source: entando-k8s-operator-bundle/charts/operator/templates/operator-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1

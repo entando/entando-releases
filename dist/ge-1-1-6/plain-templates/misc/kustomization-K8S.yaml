@@ -1,12 +1,12 @@
 - name: registry.hub.docker.com/entando/entando-mysql-ubi
   newName: registry.hub.docker.com/entando/entando-mysql-ubi
-  newTag: 8.0.29
+  newTag: v8.0.33-IT-409-PR-8-KB-release-2F-8.0
 - name: registry.hub.docker.com/entando/entando-postgres-ubi
   newName: registry.hub.docker.com/entando/entando-postgres-ubi
-  newTag: 14.1.0
+  newTag: 14.1.0-IT-408-PR-10
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  newTag: 7.2.1
+  newTag: 7.3.0-IT-403-PR-1521
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   newTag: latest
@@ -15,7 +15,7 @@
   newTag: 6.0.5
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  newTag: 7.2.1
+  newTag: 7.3.0-IT-442-PR-352
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   newTag: 7.2.1
