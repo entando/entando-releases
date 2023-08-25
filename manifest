@@ -1,13 +1,13 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.3.0-test09"
+ENTANDO_RELEASE="v7.3.0-test10"
 
 # --------------------------------------------------------------------------------
 
 # OLM INSTALLATIONS - OPERATOR BUNDLE
-OPERATOR_BUNDLE_VERSION="v7.3.0-test09"
+OPERATOR_BUNDLE_VERSION="v7.3.0-test10"
 REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
 REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:42e4d6495d6accdf2163e1eaa99ac1a6f8839e24cdef078bdffc197b38c9fbe7"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:8d1f47b4688bd0a2c084df7b50da2e7151f1a322b999f6efbc00bd2aacf0ba54"
 
 # TOOL: ENTANDO CLI
 ENTANDO_CLI_VERSION="v7.2.1"
