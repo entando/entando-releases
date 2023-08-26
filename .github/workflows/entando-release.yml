@@ -426,8 +426,6 @@ jobs:
                 then
                    DIGEST="$(crane digest entandobuilduser/entando-k8s-index:${{ env.RELEASE_VERSION_SUFFIX }})"
                    echo "This is the digest: ${DIGEST}"
-                   INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
-                   INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
                    sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@${DIGEST}\"|" manifest
                    CATALOG_SHA_UPDATED=true
                 fi
