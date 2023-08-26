@@ -399,6 +399,10 @@ jobs:
               exit 7
           fi
 
+      # Installing crane
+      - name: Installing crane
+        uses: imjasonh/setup-crane@v0.1
+
       # Update the manifest file
       - name: Update manifest file
         env:
@@ -420,16 +424,18 @@ jobs:
                 DOCKER_HUB_VERSION=$(jq .results[$i].name result.json)
                 if [[ \"${{ env.RELEASE_VERSION_SUFFIX }}\" == $DOCKER_HUB_VERSION ]]
                 then
+                   DIGEST="$(crane digest entandobuilduser/entando-k8s-index:${{ env.RELEASE_VERSION_SUFFIX }})"
+                   echo "This is the digest: ${DIGEST}"
                    INDEX_SHA=$(jq .results[$i].images[0].digest result.json)
                    INDEX_SHA=$(echo $INDEX_SHA | cut -d "\"" -f 2)
-                   sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@${INDEX_SHA}\"|" manifest
+                   sed -i "s|OKD_CATALOG_IMAGE=.*|OKD_CATALOG_IMAGE=\"registry.hub.docker.com/entandobuilduser/entando-k8s-index@${DIGEST}\"|" manifest
                    CATALOG_SHA_UPDATED=true
                 fi
               done
             fi
             if [[ $CATALOG_SHA_UPDATED = true ]]
             then
-              echo "OKD_CATALOG_IMAGE value updated to '${INDEX_SHA}'. Exiting"
+              echo "OKD_CATALOG_IMAGE value updated to '${DIGEST}'. Exiting"
               rm result.json
               break
             else
