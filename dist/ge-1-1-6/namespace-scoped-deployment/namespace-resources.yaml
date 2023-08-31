@@ -44,7 +44,7 @@ data:
   entando-component-manager-6-3: >-
     {"version":"6.3.26-fix.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-component-manager-6-4: >-
-    {"version":"7.3.0-IT-442-PR-352","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
+    {"version":"7.3.0-IT-442-PR-364","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-de-app-eap-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-eap-6-4: >-
@@ -56,7 +56,7 @@ data:
   entando-de-app-tomcat-6-4: >-
     {"version":"7.3.0-IT-410-PR-189","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-tomcat"}
   entando-k8s-app-controller: >-
-    {"version":"7.2.0-IT-442-PR-90","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"sha-2cafdf0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
     {"version":"7.3.0-IT-442-PR-54","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-database-service-controller: >-
