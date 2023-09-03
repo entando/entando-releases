@@ -118,7 +118,7 @@ jobs:
               echo $REPO_NAMESPACE
               echo $REPO
               echo $NEW_VERSION
-              echo ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION})
+              echo ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION}
               NEW_DIGEST="$(crane digest ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION})"
               #if [[ $NEW_DIGEST = false ]]
               #then
