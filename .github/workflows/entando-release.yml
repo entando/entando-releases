@@ -112,11 +112,14 @@ jobs:
             for DOCKER_HUB_REPO in $(echo "$DOCKER_HUB_REPOS" | jq -c '.images[]'); do
               IMAGE_NAME=$(echo $IMAGE | jq -r '.name')
               REPO_NAMESPACE=$(echo $DOCKER_HUB_REPO | jq -r '.docker_hub_namespace')
+              REPO=$(echo $DOCKER_HUB_REPO | jq -r '.docker_hub_repository')
               NEW_VERSION=$(echo $IMAGE | jq -r '.version')
               echo $IMAGE_NAME
               echo $REPO_NAMESPACE
+              echo $REPO
               echo $NEW_VERSION
-              NEW_DIGEST="$(crane digest ${REPO_NAMESPACE}:${NEW_VERSION})"
+              echo ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION})
+              NEW_DIGEST="$(crane digest ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION})"
               #if [[ $NEW_DIGEST = false ]]
               #then
               #  echo "::error :: Version '$NEW_VERSION' does not exist for '$IMAGE_NAME'"
