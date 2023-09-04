@@ -58,7 +58,7 @@ data:
   entando-k8s-app-controller: >-
     {"version":"sha-2cafdf0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
-    {"version":"7.3.0-IT-442-PR-54","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
+    {"version":"7.3.0-IT-442-PR-54-KB-develop","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-database-service-controller: >-
     {"version":"7.2.0-IT-442-PR-48","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-dbjob: >-
