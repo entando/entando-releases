@@ -125,6 +125,7 @@ jobs:
                 echo $NEW_VERSION
                 echo ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION}
                 NEW_DIGEST="$(crane digest ${REPO_NAMESPACE}/${REPO}:${NEW_VERSION})"
+                NEW_DIGEST=${NEW_DIGEST//sha256:/}
                 #if [[ $NEW_DIGEST = false ]]
                 #then
                 #  echo "::error :: Version '$NEW_VERSION' does not exist for '$IMAGE_NAME'"
@@ -132,9 +133,13 @@ jobs:
                 #fi
                 echo "This is the digest: ${NEW_DIGEST}"
                 ORIGINAL_VERSION=$(yq ".operator.relatedImages.$IMAGE_NAME.version" values.yaml)
+                echo 1
                 ORIGINAL_SHA=$(yq ".operator.relatedImages.$IMAGE_NAME.sha256" values.yaml)
+                echo 2
                 yq -i ".operator.relatedImages.$IMAGE_NAME.version = $NEW_VERSION" values.yaml
+                echo 3
                 yq -i ".operator.relatedImages.$IMAGE_NAME.sha256 = $NEW_DIGEST" values.yaml
+                echo 4
                 # Print the original and updated version and SHA digest of the Docker image
                 echo "Updating values.yaml"
                 echo "Image name: $IMAGE_NAME"
