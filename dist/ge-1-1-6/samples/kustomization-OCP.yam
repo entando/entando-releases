@@ -15,7 +15,7 @@
   digest: sha256:3ff5425ca1b27c609614879bf1c8a25df4e6c0c560caa683d272eccd6090cee6
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  digest: sha256:803e8fa8dccb3f98fbfa643c8b44aa1dbccbb16e099d37850b8d5b87b40693b7
+  digest: sha256:d34c39362c61091acbc08e3a226999bdcfb6be5e8e4cdb2ed7d36946e193e430
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   digest: sha256:05901d8560c372b6616df9db83b6e2d481681a7fd34568ec7a96513de41d7496
@@ -27,7 +27,7 @@
   digest: sha256:d20dff3e25d11bddf23c6ac7a08d45c0745c3ac9f2be18fb7b4654264b99414f
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
-  digest: sha256:fe5f07ffb65a80921ee8a12e01b95ab82cabf6497b289f9b5f2c716a1e2d825d
+  digest: sha256:a3db370c1d1a46728eab5c577dc38d2afababb9bbb62e0eaa951dece3d3369f0
 - name: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
   digest: sha256:28e732a0da2ac74cae470423f6aafb025ffd1d8821cea3668445fc098720858a
