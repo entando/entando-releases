@@ -1,6 +1,6 @@
 entando: 
-  main: "v7.3.0-test17"
-  operator_bundle: "v7.3.0-test17"
+  main: "v7.3.0-test18"
+  operator_bundle: "v7.3.0-test18"
   entando_cli_version: "v7.2.1"
 
 dependencies:
