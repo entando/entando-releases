@@ -1791,7 +1791,7 @@ data:
   app-builder-6-3: >-
     {"version":"6.3.93-hotfix.1","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   app-builder-6-4: >-
-    {"version":"7.3.0-IT-403-PR-1521","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
+    {"version":"7.3.0-ENG-5100-PR-1529","executable-type":"n/a","registry":"registry.hub.docker.com","organization":"entando","repository":"app-builder"}
   busybox: >-
     {"version":"latest","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-avatar-plugin: >-

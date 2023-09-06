@@ -6,7 +6,7 @@
   newTag: 14.1.0-IT-408-PR-10
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  newTag: 7.3.0-IT-403-PR-1521
+  newTag: 7.3.0-ENG-5100-PR-1529
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   newTag: latest
