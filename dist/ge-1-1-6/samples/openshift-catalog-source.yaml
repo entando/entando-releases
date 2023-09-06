@@ -1,14 +1,14 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
-  name: entando-7-3-0-test18
+  name: entando-7-3-0-test19
   namespace: openshift-marketplace
   labels:
     operatorframework.io/arch.amd64: supported
     operatorframework.io/arch.arm64: supported
 spec:
-  displayName: "Entando 7.3.0-test18"
-  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:f7d5ae5f4124ebc45f7959b110a8a2f344ac14097585180eaa6d21f535912539
+  displayName: "Entando 7.3.0-test19"
+  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:755bdd8cfcdd1ce1f8e2d982fe6b33d9da608bf2bed30e94b4d567e0ef296e7d
   sourceType: grpc
   updateStrategy:
     registryPoll:

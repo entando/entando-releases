@@ -24,7 +24,7 @@
   digest: sha256:6afb110660ba0e175c5c5d2bb2de987cea14227c6db2bb36f06ef520242408dc
 - name: registry.hub.docker.com/entando/entando-de-app-tomcat
   newName: registry.hub.docker.com/entando/entando-de-app-tomcat
-  digest: sha256:18d0ce708ae9c372871b0633a25ba5585dd743a13fef8c51a72ec0d50c0a8ca0
+  digest: sha256:4eb5be708f14350b559ab796dbf8371786bab6c82e4089655441ba17d7af1ab7
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
   digest: sha256:a3db370c1d1a46728eab5c577dc38d2afababb9bbb62e0eaa951dece3d3369f0

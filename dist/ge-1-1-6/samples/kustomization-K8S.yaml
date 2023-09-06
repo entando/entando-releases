@@ -24,7 +24,7 @@
   newTag: 7.2.1
 - name: registry.hub.docker.com/entando/entando-de-app-tomcat
   newName: registry.hub.docker.com/entando/entando-de-app-tomcat
-  newTag: 7.3.0-ENG-5010-PR-195
+  newTag: 7.3.0-ENG-5127-PR-214
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
   newTag: sha-2cafdf0

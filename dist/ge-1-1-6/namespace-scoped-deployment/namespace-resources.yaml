@@ -54,7 +54,7 @@ data:
   entando-de-app-wildfly-6-4: >-
     {"version":"7.2.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-wildfly"}
   entando-de-app-tomcat-6-4: >-
-    {"version":"7.3.0-ENG-5010-PR-195","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-tomcat"}
+    {"version":"7.3.0-ENG-5127-PR-214","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-tomcat"}
   entando-k8s-app-controller: >-
     {"version":"sha-2cafdf0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando"}
   entando-k8s-app-plugin-link-controller: >-
