@@ -6,7 +6,7 @@
   digest: sha256:d09b7d940614b408f6b7f6e880a75b9fea4f3f0ce2dcccd6b55189ecf5c1e3db
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  digest: sha256:118cf1c5a9c7e4b6451dcfc7c1ef3ab6c2e6e2380e4a160637918452688f8cd5
+  digest: sha256:712b00c0fa15494406b9ccd594e6b32296af0b29c3450e2ef652e06c702e1d07
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   digest: sha256:a1ef5f92be800a97cf5baf89937aafe64bbd285514c4d8fec53f6800f8c4b31f
@@ -15,7 +15,7 @@
   digest: sha256:3ff5425ca1b27c609614879bf1c8a25df4e6c0c560caa683d272eccd6090cee6
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  digest: sha256:1099b227b548c358164584ae2a6062410226778a7f8443444084225d906fd4a0
+  digest: sha256:0cabe9a25f73780d10d1c2177916ca981f86b077b760b0d9fc720a6f40f235c5
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   digest: sha256:05901d8560c372b6616df9db83b6e2d481681a7fd34568ec7a96513de41d7496

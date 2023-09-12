@@ -6,7 +6,7 @@
   newTag: 14.1.0-IT-408-PR-10
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  newTag: 7.3.0-ENG-5100-PR-1529
+  newTag: 7.3.0-ENG-5042-PR-1523
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   newTag: latest
@@ -15,7 +15,7 @@
   newTag: 6.0.5
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  newTag: 7.3.0-ENG-5170-PR-369
+  newTag: sha-a77f072
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   newTag: 7.2.1
