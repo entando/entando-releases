@@ -15,7 +15,7 @@
   digest: sha256:3ff5425ca1b27c609614879bf1c8a25df4e6c0c560caa683d272eccd6090cee6
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  digest: sha256:0cabe9a25f73780d10d1c2177916ca981f86b077b760b0d9fc720a6f40f235c5
+  digest: sha256:cc02424d9a2c5e2ba2275f748fc34b3488406229b4a36c0dfa1d8043f1cddcb3
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   digest: sha256:05901d8560c372b6616df9db83b6e2d481681a7fd34568ec7a96513de41d7496

@@ -15,7 +15,7 @@
   newTag: 6.0.5
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  newTag: sha-a77f072
+  newTag: sha-119607e
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   newTag: 7.2.1

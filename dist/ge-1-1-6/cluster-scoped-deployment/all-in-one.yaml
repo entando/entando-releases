@@ -1799,7 +1799,7 @@ data:
   entando-component-manager-6-3: >-
     {"version":"6.3.26-fix.1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-component-manager-6-4: >-
-    {"version":"sha-a77f072","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
+    {"version":"sha-119607e","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-component-manager"}
   entando-de-app-eap-6-3: >-
     {"version":"6.3.68-fix.3-ENG-3332-PR-335","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-de-app-eap"}
   entando-de-app-eap-6-4: >-
