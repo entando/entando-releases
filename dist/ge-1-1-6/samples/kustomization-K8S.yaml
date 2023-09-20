@@ -15,7 +15,7 @@
   newTag: 6.0.5
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  newTag: sha-119607e
+  newTag: v7.3.0-SNAPSHOTENG-5098-PR-361-KB-release-2F-7.3
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
   newTag: 7.2.1
@@ -54,7 +54,7 @@
   newTag: 7.3.0-IT-442-PR-83
 - name: registry.hub.docker.com/entando/entando-k8s-service
   newName: registry.hub.docker.com/entando/entando-k8s-service
-  newTag: 7.3.0-ENG-5087-PR-80
+  newTag: 7.3.0-ENG-5098-PR-81
 - name: registry.hub.docker.com/entando/entando-process-driven-plugin
   newName: registry.hub.docker.com/entando/entando-process-driven-plugin
   newTag: 6.0.50-fix.1
