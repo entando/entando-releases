@@ -1831,13 +1831,13 @@ data:
   entando-redhat-sso: >-
     {"version":"7.3.0-rc1","executable-type":"","registry":"registry.hub.docker.com","organization":"entando"}
   mysql-80-centos7: >-
-    {"version":"v8.0.33-IT-409-PR-8-KB-release-2F-8.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-mysql-rocky"}
+    {"version":"8.0.33-rc1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-mysql-rocky"}
   postgresql-12-centos7: >-
-    {"version":"14.1.0-IT-408-PR-10","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-rocky"}
+    {"version":"v14.8-rc1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-rocky"}
   rhel8-mysql-80: >-
-    {"version":"v8.0.33-IT-409-PR-8-KB-release-2F-8.0","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando",,"repository":"entando-mysql-ubi"}
+    {"version":"8.0.33-rc1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando",,"repository":"entando-mysql-ubi"}
   rhel8-postgresql-12: >-
-    {"version":"14.1.0-IT-408-PR-10","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-ubi"}
+    {"version":"v14.8-rc1","executable-type":"jvm","registry":"registry.hub.docker.com","organization":"entando","repository":"entando-postgres-ubi"}
 ---
 # Source: entando-k8s-operator-bundle/charts/operator/templates/operator-clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1

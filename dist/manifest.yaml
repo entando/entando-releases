@@ -23,8 +23,8 @@ dependencies:
       req_ver: "1.2.0-rc1"
       def_ver: "1.2.0-rc1"
   k3s:
-      req_ver: "1.23.*"
-      def_ver: "v1.23.16+k3s1"
+      req_ver: "1.25.*"
+      def_ver: "1.26.9+k3s1"
   okd:
       req_ver: "4.12"
       def_ver: "4.12"
