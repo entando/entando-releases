@@ -101,9 +101,9 @@ EOF
 # We need to create the kustomization.yaml file inside the overlay directory based on the environment we are working on
 if [ $clusterType == "K8S" ]; then
   # We are going to download the K8S template from entando-releases repository
-  curl -O https://raw.githubusercontent.com/entando/entando-releases/release/7.2/dist/ge-1-1-6/plain-templates/misc/kustomization-K8S.yaml
+  curl -O https://raw.githubusercontent.com/entando/entando-releases/release/7.3/dist/ge-1-1-6/plain-templates/misc/kustomization-K8S.yaml
 else
-  curl -O https://raw.githubusercontent.com/entando/entando-releases/release/7.2/dist/ge-1-1-6/plain-templates/misc/kustomization-OCP.yaml
+  curl -O https://raw.githubusercontent.com/entando/entando-releases/release/7.3/dist/ge-1-1-6/plain-templates/misc/kustomization-OCP.yaml
 fi
 
 # Generate the final kustomization file
