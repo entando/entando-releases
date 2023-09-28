@@ -27,7 +27,7 @@
   digest: sha256:700e78aebb672349700bb4a73b750b3ac8d14dd571572366444c0d6f48463586
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
-  digest: sha256:703ee4f328f8c392b19272a5fae5005a1d83ffb2cffb2cbb2cad8650bf4a0ae9
+  digest: sha256:9a000dbe958fa5992ceb80b6d1ea70efc74b91a97ebb632e4603b7e8bde3f2f7
 - name: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
   digest: sha256:a9edd63e3c3f98d3bc7dee487c4011c46915e835d0210bd323fa4f7c4fdeb1e1
@@ -54,7 +54,7 @@
   digest: sha256:2ac8b59a4531094e75b4fdc12d3f9d0a6729a83de5ca0001da8e470b9f3cc6ab
 - name: registry.hub.docker.com/entando/entando-k8s-service
   newName: registry.hub.docker.com/entando/entando-k8s-service
-  digest: sha256:44b25c4a44206f838c1e9c629fc0d7825699c847c9163974a71f58fe6a7b0bb1
+  digest: sha256:6580c0b6f82419b91882acc27bb7115f5ac783d801b4743ca329f39962cfd2e5
 - name: registry.hub.docker.com/entando/entando-process-driven-plugin
   newName: registry.hub.docker.com/entando/entando-process-driven-plugin
   digest: sha256:18db1afb892393c1dcf7c36e5a4bbd1d6bc60029014094178ce1acb5dd1f68a4
