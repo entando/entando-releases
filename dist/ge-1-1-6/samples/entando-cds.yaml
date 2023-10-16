@@ -61,9 +61,9 @@ spec:
           - name: FORCE_CDS
             value: "false"
           - name: REPO_PATH
-            value: https://raw.github.com/entando-ps/cds/entando721/entando-data/
+            value: https://raw.github.com/entando-ps/cds/entando730/entando-data/
           - name: ARCHIVE_NAME
-            value: entando721.tar.gz
+            value: entando730.tar.gz
           image: registry.hub.docker.com/entando/busybox-cds:1.36.0
           imagePullPolicy: IfNotPresent
           volumeMounts:

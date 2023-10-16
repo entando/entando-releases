@@ -8,6 +8,7 @@ metadata:
   generation: 4
   labels:
     EntandoApp: YOUR-APP-NAME
+    EntandoTenant: YOUR-TENANT-NAME
   name: YOUR-TENANT-ID-YOUR-APP-NAME-ingress
 spec:
   ingressClassName: nginx
