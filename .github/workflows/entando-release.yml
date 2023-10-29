@@ -43,9 +43,39 @@ env:
   RELEASE_TAG: v${{ github.event.client_payload.major }}.${{ github.event.client_payload.minor }}.${{ github.event.client_payload.patch }}${{ github.event.client_payload.suffix }}
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      entando_k8s_operator_release_branch_exists: ${{ steps.entando-k8s-operator-release-branch.outputs.entando-k8s-operator-exists }}
+      entando_releases_release_branch_exists: ${{ steps.entando-releases-release-branch.outputs.entando-releases-exists }}
+    steps:
+    - name: Checkout entando-k8s-operator-bundle
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}
+        ref: develop
+        token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+        fetch-depth: 0
+    - name: entando-k8s-operator ${{ env.RELEASE_BRANCH }} branch exists?
+      id: entando-k8s-operator-release-branch
+      run: |
+        echo "entando-k8s-operator-exists=$(git ls-remote --heads origin ${{ env.RELEASE_BRANCH }})" >> $GITHUB_OUTPUT
+    - name: Checkout entando-releases
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ env.ENTANDO_RELEASES_REPO }}
+        ref: develop
+        token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+        fetch-depth: 0
+    - name: entando-releases ${{ env.RELEASE_BRANCH }} branch exists?
+      id: entando-releases-release-branch
+      run: |
+        echo "entando-releases-exists=$(git ls-remote --heads origin ${{ env.RELEASE_BRANCH }})" >> $GITHUB_OUTPUT
+  
   release-entando-k8s-operator-bundle:
     name: Release operator-bundle
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       # Validate client payload
       - name: Validate client payload
@@ -79,8 +109,23 @@ jobs:
         run: |
           echo "DOCKER_HUB_REPOS=$(jq -c . < $DOCKER_HUB_REPOS_CONFIG_URL)" >> $GITHUB_ENV
 
+      - name: Checkout entando-k8s-operator-bundle to create ${{ env.RELEASE_BRANCH }}
+        uses: actions/checkout@v3
+        if: ${{ needs.setup.outputs.entando_k8s_operator_release_branch_exists == '' }}
+        with:
+          repository: ${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}
+          ref: develop
+          token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+          fetch-depth: 0
+  
+      - name: Create release branch ${{ env.RELEASE_BRANCH }}
+        if: ${{ needs.setup.outputs.entando_k8s_operator_release_branch_exists == '' }}
+        run: |
+          git checkout -b ${{ env.RELEASE_BRANCH }}
+          git push origin ${{ env.RELEASE_BRANCH }}
+
       # Checkout the entando-k8s-operator-bundle repository
-      - name: Checkout entando-k8s-operator-bundle
+      - name: Checkout entando-k8s-operator-bundle ${{ env.RELEASE_BRANCH }}
         uses: actions/checkout@v3
         with:
           repository: ${{ env.ENTANDO_K8S_OPERATOR_BUNDLE_REPO }}
@@ -357,8 +402,23 @@ jobs:
     name: Release entando-releases
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: release-entando-k8s-operator-bundle
+    needs: [setup, release-entando-k8s-operator-bundle]
     steps:
+      - name: Checkout entando-releases to create ${{ env.RELEASE_BRANCH }}
+        uses: actions/checkout@v3
+        if: ${{ needs.setup.outputs.entando_releases_release_branch_exists == '' }}
+        with:
+          repository: ${{ env.ENTANDO_RELEASES_REPO }}
+          ref: develop
+          token: ${{ secrets.ENTANDO_BOT_TOKEN }}
+          fetch-depth: 0
+  
+      - name: Create release branch ${{ env.RELEASE_BRANCH }}
+        if: ${{ needs.setup.outputs.entando_releases_release_branch_exists == '' }}
+        run: |
+          git checkout -b ${{ env.RELEASE_BRANCH }}
+          git push origin ${{ env.RELEASE_BRANCH }}
+    
       # Checkout the entando-releases repository
       - name: Checkout entando-releases
         uses: actions/checkout@v3
