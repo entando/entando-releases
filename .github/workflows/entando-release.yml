@@ -420,7 +420,7 @@ jobs:
           git push origin ${{ env.RELEASE_BRANCH }}
     
       # Checkout the entando-releases repository
-      - name: Checkout entando-releases
+      - name: Checkout entando-releases ${{ env.RELEASE_BRANCH }}
         uses: actions/checkout@v3
         with:
           repository: ${{ env.ENTANDO_RELEASES_REPO }}
