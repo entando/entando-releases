@@ -1,21 +1,21 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.3.0-test25"
+ENTANDO_RELEASE="v7.3.0-rc2"
 
 # --------------------------------------------------------------------------------
 
 # OLM INSTALLATIONS - OPERATOR BUNDLE
-OPERATOR_BUNDLE_VERSION="v7.3.0-test25"
+OPERATOR_BUNDLE_VERSION="v7.3.0-rc2"
 REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
 REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:bff4d8a415944e656f61a1a43135f42b4af1d2b51a2c9e241b36e21468dba0a1"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:4dab33606ca607b554b59d16d0b3a6456a3532ced8d660bdbaf7ece3a9797d8b"
 
 # TOOL: ENTANDO CLI
 ENTANDO_CLI_VERSION="v7.2.1"
 
 # TOOL: BUNDLER
 REPO_ENTANDO_BUNDLER_ADDR="https://github.com/entando/entando-bundler"
-VER_ENTANDO_BUNDLER_REQ="v7.3.0-rc1"
-VER_ENTANDO_BUNDLER_DEF="v7.3.0-rc1"
+VER_ENTANDO_BUNDLER_REQ="v7.3.0-rc2"
+VER_ENTANDO_BUNDLER_DEF="v7.3.0-rc2"
 
 # TOOL: entando-bundle-cli
 REPO_ENTANDO_BUNDLE_CLI_ADDR="https://github.com/entando/entando-bundle-cli"
@@ -23,8 +23,8 @@ VER_ENTANDO_BUNDLE_CLI_REQ="1.2.0-rc1"
 VER_ENTANDO_BUNDLE_CLI_DEF="1.2.0-rc1"
 
 # TOOL: ECR
-VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.3.0-rc1"
-VER_GENERATOR_JHIPSTER_ENTANDO_DEF="v7.3.0-rc1"
+VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.3.0-rc2"
+VER_GENERATOR_JHIPSTER_ENTANDO_DEF="v7.3.0-rc2"
 VER_JHIPSTER_REQ="7.9.3"
 VER_JHIPSTER_DEF="7.9.3"
 
@@ -41,12 +41,12 @@ VER_NODE_REQ="14.*.*"
 VER_NODE_DEF="v14.20.0"
 
 # K3S
-VER_K3S_REQ="1.25.*"
+VER_K3S_REQ="1.26.9+k3s1"
 VER_K3S_DEF="1.26.9+k3s1"
 
 # OPENSHIFT OKD
-VER_OKD_REQ="4.12"
-VER_OKD_DEF="4.12"
+VER_OKD_REQ="4.13"
+VER_OKD_DEF="4.13"
 
 # --------------------------------------------------------------------------------
 

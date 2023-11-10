@@ -1,6 +1,6 @@
 entando: 
-  main: "v7.3.0-test25"
-  operator_bundle: "v7.3.0-test25"
+  main: "v7.3.0-rc2"
+  operator_bundle: "v7.3.0-rc2"
   entando_cli_version: "v7.2.1"
 
 dependencies:
@@ -14,17 +14,17 @@ dependencies:
       req_ver: "7.9.3"
       def_ver: "7.9.3"
   generator_jhipster_entando:
-      req_ver: "v7.3.0-rc1"
-      def_ver: "v7.3.0-rc1"
+      req_ver: "v7.3.0-rc2"
+      def_ver: "v7.3.0-rc2"
   entando_bundler:
-      req_ver: "v7.3.0-rc1"
-      def_ver: "v7.3.0-rc1"
+      req_ver: "v7.3.0-rc2"
+      def_ver: "v7.3.0-rc2"
   entando_bundle_cli:
       req_ver: "1.2.0-rc1"
       def_ver: "1.2.0-rc1"
   k3s:
-      req_ver: "1.25.*"
+      req_ver: "1.26.9+k3s1"
       def_ver: "1.26.9+k3s1"
   okd:
-      req_ver: "4.12"
-      def_ver: "4.12"
+      req_ver: "4.13"
+      def_ver: "4.13"
