@@ -18,13 +18,13 @@
   newTag: 7.3.0-rc2
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
-  newTag: 7.3.0-rc2
+  newTag: 7.3.0-rc2-fix-ENG-4970
 - name: registry.hub.docker.com/entando/entando-de-app-wildfly
   newName: registry.hub.docker.com/entando/entando-de-app-wildfly
-  newTag: 7.3.0-rc2
+  newTag: 7.3.0-rc2-fix-ENG-4970
 - name: registry.hub.docker.com/entando/entando-de-app-tomcat
   newName: registry.hub.docker.com/entando/entando-de-app-tomcat
-  newTag: 7.3.0-rc2
+  newTag: 7.3.0-rc2-fix-ENG-4970
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
   newTag: 7.3.0
