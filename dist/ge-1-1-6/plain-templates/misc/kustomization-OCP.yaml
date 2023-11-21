@@ -6,7 +6,7 @@
   digest: sha256:1143ab73187edba8bc449cf57a58f249a478a91cfd27e071b85ae0c1b2d32e2a
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  digest: sha256:846613e924540077c5f0ebbac2215a40818f819fa53f9f0815e6aa26543cda55
+  digest: sha256:2656afc1d02dbed73229e32c80669a8a51650bfe71f07b41dcccabf669034862
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   digest: sha256:a1ef5f92be800a97cf5baf89937aafe64bbd285514c4d8fec53f6800f8c4b31f

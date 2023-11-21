@@ -8,7 +8,7 @@ metadata:
     operatorframework.io/arch.arm64: supported
 spec:
   displayName: "Entando 7.3.0"
-  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:efcf2d56349541c42e1f442c2ca3f266f108d21da6c5bbdc80148ace9bc63844
+  image: registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:7ffbbfd13d8f8f8e90313f73377a9882cf912cf877108dc6e6d6f28f73e153c7
   sourceType: grpc
   updateStrategy:
     registryPoll:
