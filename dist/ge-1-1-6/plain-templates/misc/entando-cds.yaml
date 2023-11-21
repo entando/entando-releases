@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: YOUR-TENANT-ID-kc-secret
+  name: YOUR-TENANT-NAME-kc-secret
 type: Opaque
 stringData:
   KC_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nYOUR-PUBLIC-KEYCLOAK-KEY\n-----END PUBLIC KEY-----\n"
@@ -10,8 +10,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    deployment: YOUR-TENANT-ID-cds-deployment
-  name: YOUR-TENANT-ID-cds-pvc
+    deployment: YOUR-TENANT-NAME-cds-deployment
+  name: YOUR-TENANT-NAME-cds-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -24,9 +24,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: YOUR-TENANT-ID-cds-service
+  name: YOUR-TENANT-NAME-cds-service
   labels:
-    app: YOUR-TENANT-ID-cds-service
+    app: YOUR-TENANT-NAME-cds-service
 spec:
   ports:
     - port: 8080
@@ -38,22 +38,22 @@ spec:
       protocol: TCP
       targetPort: 8081
   selector:
-    app: YOUR-TENANT-ID-cds-deployment
+    app: YOUR-TENANT-NAME-cds-deployment
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: YOUR-TENANT-ID-cds-deployment
+  name: YOUR-TENANT-NAME-cds-deployment
   labels:
-    app: YOUR-TENANT-ID-cds-deployment
+    app: YOUR-TENANT-NAME-cds-deployment
 spec:
   selector:
     matchLabels:
-      app: YOUR-TENANT-ID-cds-deployment
+      app: YOUR-TENANT-NAME-cds-deployment
   template:
     metadata:
       labels:
-        app: YOUR-TENANT-ID-cds-deployment
+        app: YOUR-TENANT-NAME-cds-deployment
     spec:
       initContainers:
         - name: init-cds-data
@@ -87,7 +87,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: KC_PUBLIC_KEY
-                  name: YOUR-TENANT-ID-kc-secret
+                  name: YOUR-TENANT-NAME-kc-secret
             - name: CORS_ALLOWED_ORIGIN # # use for external CDS service
               value: All # enter your Entando app domain name
             - name: CORS_ALLOWED_ORIGIN_END_WITH # use for wildcard domain name
@@ -123,14 +123,14 @@ spec:
       volumes:
         - name: cds-data-volume
           persistentVolumeClaim:
-            claimName: YOUR-TENANT-ID-cds-pvc
+            claimName: YOUR-TENANT-NAME-cds-pvc
             readOnly: false
   replicas: 1
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: YOUR-TENANT-ID-cds-ingress
+  name: YOUR-TENANT-NAME-cds-ingress
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
@@ -147,14 +147,14 @@ spec:
         paths:
           - backend:
               service:
-                name: YOUR-TENANT-ID-cds-service
+                name: YOUR-TENANT-NAME-cds-service
                 port:
                   number: 8081
             pathType: Prefix
-            path: /YOUR-TENANT-ID
+            path: /YOUR-TENANT-NAME
           - backend:
               service:
-                name: YOUR-TENANT-ID-cds-service
+                name: YOUR-TENANT-NAME-cds-service
                 port:
                   number: 8080
             pathType: Prefix

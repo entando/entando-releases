@@ -1,12 +1,12 @@
 - name: registry.hub.docker.com/entando/entando-mysql-ubi
   newName: registry.hub.docker.com/entando/entando-mysql-ubi
-  newTag: 8.0.33-rc1
+  newTag: 8.0.33
 - name: registry.hub.docker.com/entando/entando-postgres-ubi
   newName: registry.hub.docker.com/entando/entando-postgres-ubi
-  newTag: v14.8-rc1
+  newTag: v14.8
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  newTag: 7.3.0-rc2
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   newTag: latest
@@ -15,16 +15,16 @@
   newTag: 6.0.5
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  newTag: 7.3.0-rc2
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
-  newTag: 7.3.0-rc2-fix-ENG-4970
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-de-app-wildfly
   newName: registry.hub.docker.com/entando/entando-de-app-wildfly
-  newTag: 7.3.0-rc2-fix-ENG-4970
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-de-app-tomcat
   newName: registry.hub.docker.com/entando/entando-de-app-tomcat
-  newTag: 7.3.0-rc2-fix-ENG-4970
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
   newTag: 7.3.0
@@ -54,19 +54,19 @@
   newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-k8s-service
   newName: registry.hub.docker.com/entando/entando-k8s-service
-  newTag: 7.3.0-rc2
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-process-driven-plugin
   newName: registry.hub.docker.com/entando/entando-process-driven-plugin
   newTag: 6.0.50-fix.1
 - name: registry.hub.docker.com/entando/entando-keycloak
   newName: registry.hub.docker.com/entando/entando-keycloak
-  newTag: 7.3.0-rc1
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-redhat-sso
   newName: registry.hub.docker.com/entando/entando-redhat-sso
-  newTag: 7.3.0-rc1
+  newTag: 7.3.0
 - name: registry.hub.docker.com/entando/entando-mysql-rocky
   newName: registry.hub.docker.com/entando/entando-mysql-rocky
-  newTag: 8.0.33-rc1
+  newTag: 8.0.33
 - name: registry.hub.docker.com/entando/entando-postgres-rocky
   newName: registry.hub.docker.com/entando/entando-postgres-rocky
-  newTag: v14.8-rc1
+  newTag: v14.8

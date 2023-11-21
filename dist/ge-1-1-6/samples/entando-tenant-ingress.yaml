@@ -9,11 +9,11 @@ metadata:
   labels:
     EntandoApp: YOUR-APP-NAME
     EntandoTenant: YOUR-TENANT-NAME
-  name: YOUR-TENANT-ID-YOUR-APP-NAME-ingress
+  name: YOUR-TENANT-NAME-YOUR-APP-NAME-ingress
 spec:
   ingressClassName: nginx
   rules:
-  - host: YOUR-TENANT-ID.YOUR-APP-NAME.YOUR-HOST-NAME
+  - host: YOUR-TENANT-NAME.YOUR-APP-NAME.YOUR-HOST-NAME
     http:
       paths:
       - backend:
