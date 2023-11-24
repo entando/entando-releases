@@ -1,6 +1,6 @@
 entando: 
-  main: "v7.3.0-testMP-2"
-  operator_bundle: "v7.3.0-testMP-2"
+  main: "v7.3.0"
+  operator_bundle: "v7.3.0"
   entando_cli_version: "v7.3.0"
 
 dependencies:
@@ -23,7 +23,7 @@ dependencies:
       req_ver: "v1.2.0"
       def_ver: "v1.2.0"
   k3s:
-      req_ver: "v1.26.10+k3s2"
+      req_ver: "1.26.*"
       def_ver: "v1.26.10+k3s2"
   okd:
       req_ver: "4.13"

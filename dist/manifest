@@ -1,13 +1,13 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.3.0-testMP-2"
+ENTANDO_RELEASE="v7.3.0"
 
 # --------------------------------------------------------------------------------
 
 # OLM INSTALLATIONS - OPERATOR BUNDLE
-OPERATOR_BUNDLE_VERSION="v7.3.0-testMP-2"
+OPERATOR_BUNDLE_VERSION="v7.3.0"
 REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
 REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:bceddaf2a56717fae1871b3111ef73b176fa87f5f591e53274519552a531a029"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:1a2367aa0ecdbbe03b9a3eed8986836aa546b59a130e9a364696042f1e237558"
 
 # TOOL: ENTANDO CLI
 ENTANDO_CLI_VERSION="v7.3.0"
@@ -41,7 +41,7 @@ VER_NODE_REQ="14.*.*"
 VER_NODE_DEF="v14.20.0"
 
 # K3S
-VER_K3S_REQ="v1.26.10+k3s2"
+VER_K3S_REQ="1.26.*"
 VER_K3S_DEF="v1.26.10+k3s2"
 
 # OPENSHIFT OKD
