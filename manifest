@@ -10,7 +10,7 @@ REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
 OKD_CATALOG_IMAGE="registry.hub.docker.com/entando/entando-k8s-index@sha256:ab17ab3906a5eb0e3312631e2951da64b321420762dfda17e4ebbfc6089dfa04"
 
 # TOOL: ENTANDO CLI
-ENTANDO_CLI_VERSION="v7.3.0"
+ENTANDO_CLI_VERSION="v7.3.2-fix3"
 
 # TOOL: BUNDLER
 REPO_ENTANDO_BUNDLER_ADDR="https://github.com/entando/entando-bundler"
@@ -19,8 +19,8 @@ VER_ENTANDO_BUNDLER_DEF="v7.3.0"
 
 # TOOL: entando-bundle-cli
 REPO_ENTANDO_BUNDLE_CLI_ADDR="https://github.com/entando/entando-bundle-cli"
-VER_ENTANDO_BUNDLE_CLI_REQ="v1.2.0"
-VER_ENTANDO_BUNDLE_CLI_DEF="v1.2.0"
+VER_ENTANDO_BUNDLE_CLI_REQ="v1.2.1"
+VER_ENTANDO_BUNDLE_CLI_DEF="v1.2.1"
 
 # TOOL: ECR
 VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.3.0"
@@ -41,8 +41,8 @@ VER_NODE_REQ="14.*.*"
 VER_NODE_DEF="v14.20.0"
 
 # K3S
-VER_K3S_REQ="1.26.*"
-VER_K3S_DEF="v1.26.10+k3s2"
+VER_K3S_REQ="1.32.*"
+VER_K3S_DEF="v1.32.10+k3s1"
 
 # OPENSHIFT OKD
 VER_OKD_REQ="4.13"
