@@ -1,12 +1,12 @@
 - name: registry.hub.docker.com/entando/entando-mysql-ubi
   newName: registry.hub.docker.com/entando/entando-mysql-ubi
-  digest: sha256:9af1569799dcd85699fce8cbc53b6f778267a98405bbd042f55be7faef728b5d
+  digest: sha256:1ec3d943f63b855b3caca61d35e39ad9cd6b42543c7a6732028f78c497a3c3a7
 - name: registry.hub.docker.com/entando/entando-postgres-ubi
   newName: registry.hub.docker.com/entando/entando-postgres-ubi
-  digest: sha256:1143ab73187edba8bc449cf57a58f249a478a91cfd27e071b85ae0c1b2d32e2a
+  digest: sha256:d09b7d940614b408f6b7f6e880a75b9fea4f3f0ce2dcccd6b55189ecf5c1e3db
 - name: registry.hub.docker.com/entando/app-builder
   newName: registry.hub.docker.com/entando/app-builder
-  digest: sha256:2656afc1d02dbed73229e32c80669a8a51650bfe71f07b41dcccabf669034862
+  digest: sha256:4ce12c7277ba7fb4a3111538512ddd1d39bc7f3b7d17b26f6fe4021ec21b547f
 - name: registry.hub.docker.com/entando/busybox
   newName: registry.hub.docker.com/entando/busybox
   digest: sha256:a1ef5f92be800a97cf5baf89937aafe64bbd285514c4d8fec53f6800f8c4b31f
@@ -15,22 +15,22 @@
   digest: sha256:3ff5425ca1b27c609614879bf1c8a25df4e6c0c560caa683d272eccd6090cee6
 - name: registry.hub.docker.com/entando/entando-component-manager
   newName: registry.hub.docker.com/entando/entando-component-manager
-  digest: sha256:8167f58ae9faf8be3ed478c8888f2e3f1219b3524d70620e01ceed8950d543ce
+  digest: sha256:f7ac841dd526844dd6d07c73ae35a2c03294a5d2edf8403ff1c587b3f946ab09
 - name: registry.hub.docker.com/entando/entando-de-app-eap
   newName: registry.hub.docker.com/entando/entando-de-app-eap
-  digest: sha256:f3e2c103445f7d21f4f2e53032e14bea6389cecca8ea4b6a181fba569e985401
+  digest: sha256:05901d8560c372b6616df9db83b6e2d481681a7fd34568ec7a96513de41d7496
 - name: registry.hub.docker.com/entando/entando-de-app-wildfly
   newName: registry.hub.docker.com/entando/entando-de-app-wildfly
-  digest: sha256:dcf5d4e67189e4b810bd78e31953ce4dbe897d442feb2754fec8b29934221269
+  digest: sha256:6afb110660ba0e175c5c5d2bb2de987cea14227c6db2bb36f06ef520242408dc
 - name: registry.hub.docker.com/entando/entando-de-app-tomcat
   newName: registry.hub.docker.com/entando/entando-de-app-tomcat
-  digest: sha256:2734dfae019b5e514d5c0cee3fec50850bd1ec7515628998fde6e1832e098273
+  digest: sha256:d20dff3e25d11bddf23c6ac7a08d45c0745c3ac9f2be18fb7b4654264b99414f
 - name: registry.hub.docker.com/entando/entando-k8s-app-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-controller
-  digest: sha256:ef1a6cba29ada42b465b4ae7542dae8571f8c4b0c209cb68604dff9539ef86eb
+  digest: sha256:2784239a7d62a2cd98b3b3c0ac22e9efc5758ea00764fff2e099cf2ed6219102
 - name: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
   newName: registry.hub.docker.com/entando/entando-k8s-app-plugin-link-controller
-  digest: sha256:16d8a4cf2cbf55d9d743dda36763f6d9dd84b88312027f6cd9962d48c2587078
+  digest: sha256:28e732a0da2ac74cae470423f6aafb025ffd1d8821cea3668445fc098720858a
 - name: registry.hub.docker.com/entando/entando-k8s-cluster-infrastructure-controller
   newName: registry.hub.docker.com/entando/entando-k8s-cluster-infrastructure-controller
   digest: sha256:86dbea6696349d7b2393e12bacef4d1acec2dd3f8551e397fa26c92706a18dd3
@@ -39,34 +39,34 @@
   digest: sha256:4bc6797bb41b3e407b64530c3cff7a78f3fc2c22863caad9c606ccd650310b61
 - name: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
   newName: registry.hub.docker.com/entando/entando-k8s-controller-coordinator
-  digest: sha256:332ef068ed21cb43aaa38dfde655d8ecf637a467952ac77330e5a26c642381a2
+  digest: sha256:1d4a90618a13be7c191d9bc296294f697a8972dbf9a55e9a76a714350e89db5d
 - name: registry.hub.docker.com/entando/entando-k8s-database-service-controller
   newName: registry.hub.docker.com/entando/entando-k8s-database-service-controller
-  digest: sha256:2b04bcf75e5c3f662c7cad51e7a770d9706ffef02b7167603a98cdaa40ddb52d
+  digest: sha256:9ca7d91f73882257c1efb2fd775b65e398599a177b2c4094d81c82bb1cedabf2
 - name: registry.hub.docker.com/entando/entando-k8s-dbjob
   newName: registry.hub.docker.com/entando/entando-k8s-dbjob
-  digest: sha256:27fb97213726408615190eddaace0f1f50d11fb877080b69475032d4cec6ca04
+  digest: sha256:d7e8582ea8146aeca0f66b0149be712f749123cec984c7cad2534569b8b0c171
 - name: registry.hub.docker.com/entando/entando-k8s-keycloak-controller
   newName: registry.hub.docker.com/entando/entando-k8s-keycloak-controller
-  digest: sha256:33a9ce7ce8eaab0923e0af3107ba6a40068d10f597042f27dbbffeb4ee6ce041
+  digest: sha256:3d2c90b246013e64640c33637c3847049f327ab02c35719f7ccbe26b42f7a9d7
 - name: registry.hub.docker.com/entando/entando-k8s-plugin-controller
   newName: registry.hub.docker.com/entando/entando-k8s-plugin-controller
-  digest: sha256:d28ef449f1cb7aad32c3e846f4cc52b0c69296a966c177bac9171e2f53baca03
+  digest: sha256:eca9b3f39cf4e24ad7485f506610bd8d1a63dc19aab8f70de876f2387fc0c8e0
 - name: registry.hub.docker.com/entando/entando-k8s-service
   newName: registry.hub.docker.com/entando/entando-k8s-service
-  digest: sha256:42af4d77c95201a2f9325c412b0d434dd2da023094757d432424e3b3af66a138
+  digest: sha256:1ef8042ea5cafec2807c322363a82bf17f349c13cda7a600763533e3ec869db3
 - name: registry.hub.docker.com/entando/entando-process-driven-plugin
   newName: registry.hub.docker.com/entando/entando-process-driven-plugin
   digest: sha256:18db1afb892393c1dcf7c36e5a4bbd1d6bc60029014094178ce1acb5dd1f68a4
 - name: registry.hub.docker.com/entando/entando-keycloak
   newName: registry.hub.docker.com/entando/entando-keycloak
-  digest: sha256:cab6cded577c41a187bfc4981a5d59421be14b0067d63a9ad952d02c72532894
+  digest: sha256:e1e01bcafd0b850106a7897a81e32966147f72bcbeb26c1b91c7c0650ca2fbea
 - name: registry.hub.docker.com/entando/entando-redhat-sso
   newName: registry.hub.docker.com/entando/entando-redhat-sso
-  digest: sha256:3b663d67e54b34818f55dcb30a7d7a4d55e91c9bbfa6cdb2860756db88195aae
+  digest: sha256:e8c9e9e193a6dbc9ea171497b5b6768f442f31e465d67e961eb7553bdcaddf18
 - name: registry.hub.docker.com/entando/entando-mysql-rocky
   newName: registry.hub.docker.com/entando/entando-mysql-rocky
-  digest: sha256:e9d8cbd7b5bbf2982b5167e1a45866d2348a00d98dbeb2effeaf5d26179e4685
+  digest: sha256:f944e3cc69c9e30c7d59c9727610e28eec8152e26518c181ccf3de45306de490
 - name: registry.hub.docker.com/entando/entando-postgres-rocky
   newName: registry.hub.docker.com/entando/entando-postgres-rocky
-  digest: sha256:eef845b29cf889aa983d38e1c1e7b4412bfe3e3a500640cf9f7369b9e97ac702
+  digest: sha256:a1c47871c354f630047edbc45b93784ae4d5817e57f2a69223daf7141cfc84b3
