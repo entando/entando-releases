@@ -23,7 +23,7 @@ spec:
   replicas: 3
   solrImage:
     repository: entando/entando-solr
-    tag: "8"
+    tag: "8.11.4"
   solrJavaMem: -Xms2048M -Xmx2048M
   updateStrategy:
     method: StatefulSet
