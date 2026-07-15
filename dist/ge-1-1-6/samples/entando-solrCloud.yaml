@@ -33,7 +33,7 @@ spec:
       image:
         pullPolicy: IfNotPresent
         repository: pravega/zookeeper
-        tag: 0.2.13
+        tag: 0.2.15
       persistence:
         reclaimPolicy: Delete
         spec:
