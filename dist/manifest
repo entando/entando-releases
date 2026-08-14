@@ -1,30 +1,30 @@
 # ENTANDO VERSION
-ENTANDO_RELEASE="v7.3.0-test12"
+ENTANDO_RELEASE="v7.5.2"
 
 # --------------------------------------------------------------------------------
 
 # OLM INSTALLATIONS - OPERATOR BUNDLE
-OPERATOR_BUNDLE_VERSION="v7.3.0-test12"
+OPERATOR_BUNDLE_VERSION="v7.5.2"
 REPO_OPERATOR_BUNDLE_ADDR="https://github.com/entando-k8s/entando-k8s-operator-bundle.git"
 REPO_OPERATOR_BUNDLE_DIR="entando-k8s-operator-bundle"
-OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:84571434ce6a5ac7026555a1dbe90b1b35b7548596d687e9593e51d5272672de"
+OKD_CATALOG_IMAGE="registry.hub.docker.com/entandobuilduser/entando-k8s-index@sha256:c9cb91637d41e3a4c711a0b53bd000cf6e67bd46589785beb1d82a613835534c"
 
 # TOOL: ENTANDO CLI
-ENTANDO_CLI_VERSION="v7.2.1"
+ENTANDO_CLI_VERSION="v7.5.0"
 
 # TOOL: BUNDLER
 REPO_ENTANDO_BUNDLER_ADDR="https://github.com/entando/entando-bundler"
-VER_ENTANDO_BUNDLER_REQ="v7.1.2"
-VER_ENTANDO_BUNDLER_DEF="v7.1.2"
+VER_ENTANDO_BUNDLER_REQ="v7.3.0"
+VER_ENTANDO_BUNDLER_DEF="v7.3.0"
 
 # TOOL: entando-bundle-cli
 REPO_ENTANDO_BUNDLE_CLI_ADDR="https://github.com/entando/entando-bundle-cli"
-VER_ENTANDO_BUNDLE_CLI_REQ="v1.1.1"
-VER_ENTANDO_BUNDLE_CLI_DEF="v1.1.1"
+VER_ENTANDO_BUNDLE_CLI_REQ="v1.2.3"
+VER_ENTANDO_BUNDLE_CLI_DEF="v1.2.3"
 
 # TOOL: ECR
-VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.2.0"
-VER_GENERATOR_JHIPSTER_ENTANDO_DEF="v7.2.0"
+VER_GENERATOR_JHIPSTER_ENTANDO_REQ="v7.3.0"
+VER_GENERATOR_JHIPSTER_ENTANDO_DEF="v7.3.0"
 VER_JHIPSTER_REQ="7.9.3"
 VER_JHIPSTER_DEF="7.9.3"
 
@@ -33,20 +33,20 @@ VER_JHIPSTER_DEF="7.9.3"
 # OTHER DEPENDENCIES
 
 # JDK
-VER_JDK_REQ="11.*.*"
-VER_JDK_DEF="11.0.17"
+VER_JDK_REQ="17.*.*"
+VER_JDK_DEF="17.0.18"
 
 # NODE
 VER_NODE_REQ="14.*.*"
 VER_NODE_DEF="v14.20.0"
 
 # K3S
-VER_K3S_REQ="1.23.*"
-VER_K3S_DEF="v1.23.16+k3s1"
+VER_K3S_REQ="1.26.*"
+VER_K3S_DEF="v1.32.13+k3s1"
 
 # OPENSHIFT OKD
-VER_OKD_REQ="4.11"
-VER_OKD_DEF="4.11"
+VER_OKD_REQ="4.13"
+VER_OKD_DEF="4.18"
 
 # --------------------------------------------------------------------------------
 
