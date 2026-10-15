@@ -55,14 +55,4 @@ clone() {
   fi
 }
 
-CURRENT_HELM_VERSION=$(helm version --client --short)
-if [[ "$CURRENT_HELM_VERSION" =~ ^2\..* ]] || [[ "$CURRENT_HELM_VERSION" =~ ^v2\..* ]]; then
-  HELM_VERSION_MAJOR=2
-elif [[ "$CURRENT_HELM_VERSION" =~ ^3\..* ]] || [[ "$CURRENT_HELM_VERSION" =~ ^v3\..* ]]; then
-  HELM_VERSION_MAJOR=3
-else
-  echo "> FATAL: Found helm version $CURRENT_HELM_VERSION but only versions 2 and 3 are supported" 1>&2
-  exit 1
-fi
-
 SAMPLE_TMP_DIR="samples"
