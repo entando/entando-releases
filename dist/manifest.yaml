@@ -1,6 +1,6 @@
 entando: 
-  main: "v7.5.2"
-  operator_bundle: "v7.5.2"
+  main: "v7.5.3-test"
+  operator_bundle: "ESB-1285"
   entando_cli_version: "v7.5.0"
 
 dependencies:
