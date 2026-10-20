@@ -12,8 +12,6 @@ rm -rf "$T"
 # PREREQ
 mkdir -p "$T"
 
-echo "> Found helm version $HELM_VERSION_MAJOR ($CURRENT_HELM_VERSION) $ => OK"
-
 # -- REPOS
 
 (
