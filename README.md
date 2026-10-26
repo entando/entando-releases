@@ -26,5 +26,5 @@ Coordination repository for the Entando releases
 **PUBLISH:**
 
 - `Set a release tag`
-- `Generate a github release`
+- `Generate a github release` (notes: `script/release-notes.sh <tag> > notes.md`)
 - `Remember to use release braches`
