@@ -1,12 +1,12 @@
 entando: 
-  main: "v7.5.3"
-  operator_bundle: "v7.5.3"
-  entando_cli_version: "v7.5.0"
+  main: "v7.5.4"
+  operator_bundle: "v7.5.4"
+  entando_cli_version: "v7.5.1"
 
 dependencies:
   jdk:
       req_ver: "17.*.*"
-      def_ver: "17.0.18"
+      def_ver: "17.0.21.1"
   node:
       req_ver: "14.*.*"
       def_ver: "v14.20.0"
@@ -20,11 +20,11 @@ dependencies:
       req_ver: "v7.3.0"
       def_ver: "v7.3.0"
   entando_bundle_cli:
-      req_ver: "v1.2.3"
-      def_ver: "v1.2.3"
+      req_ver: "v1.2.4"
+      def_ver: "v1.2.4"
   k3s:
       req_ver: "1.26.*"
-      def_ver: "v1.32.13+k3s1"
+      def_ver: "v1.36.6+k3s1"
   okd:
       req_ver: "4.13"
       def_ver: "4.18"
